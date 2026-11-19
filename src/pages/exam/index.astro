@@ -1,0 +1,21 @@
+---
+// /exam — Exam Overview, rendered from working-vault/Exam Context/Exam Overview.md (Phase 6).
+import DocumentLayout from "../../layouts/DocumentLayout.astro";
+import RedactionNote from "../../components/RedactionNote.astro";
+import Toc from "../../components/Toc.astro";
+import DocBody from "../../components/DocBody.astro";
+import { loadDoc } from "../../lib/docs";
+
+const { route, Content, headings, hasFlag } = await loadDoc("/exam");
+---
+
+<DocumentLayout title={route.title} currentRoute="/exam" docTypeLabel="Examination Context">
+  {hasFlag && <RedactionNote />}
+  <Toc headings={headings} />
+  <DocBody title={route.title} group={route.navGroup}><Content /></DocBody>
+  <p>
+    <a href="/exam/lab-environment">Lab Environment &rarr;</a><br />
+    <a href="/exam/network">Network &amp; Connectivity &rarr;</a><br />
+    <a href="/timeline">Examination Timeline &rarr;</a>
+  </p>
+</DocumentLayout>

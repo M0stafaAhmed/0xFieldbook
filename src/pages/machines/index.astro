@@ -1,0 +1,30 @@
+---
+// /machines — generated index (no source Markdown file; Phase 4 content
+// model lists it as "machine-index (generated, no source file)").
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { MACHINES } from "../../data/navGroups";
+
+const difficultyTone = (d: string) => d.toLowerCase().replace(/\s+/g, "-");
+---
+
+<BaseLayout title="Machines" currentRoute="/machines">
+  <div class="content-container">
+    <h1>Machines</h1>
+    <p class="card-meta">Five examination machines, in difficulty order.</p>
+    <div class="card-grid">
+      {
+        MACHINES.map((m) => (
+          <a href={`/machines/${m.slug}`} class="card">
+            <span class="badge badge--filled" data-tone={difficultyTone(m.difficulty)}>
+              {m.difficulty}
+            </span>
+            <h2 style="margin-top: var(--space-3);">{m.id}</h2>
+            <p style="margin:0; color: var(--text-muted); font-size: var(--text-sm);">
+              User and root objectives completed; flags obtained and submitted
+            </p>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,591 @@
+@import "./tokens.css";
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-base);
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--accent-amber);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Visible focus on every interactive element, never suppressed. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* ---------- Skip link (accessibility) ---------- */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-surface-raised);
+  color: var(--text-primary);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  border: var(--border-width) solid var(--accent-cyan);
+}
+
+.skip-link:focus {
+  left: var(--space-4);
+  top: var(--space-4);
+}
+
+/* ---------- Typography ---------- */
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 0 0 var(--space-4) 0;
+}
+
+h1 {
+  font-size: var(--text-2xl);
+  line-height: var(--leading-2xl);
+}
+
+h2 {
+  font-size: var(--text-xl);
+  line-height: var(--leading-xl);
+}
+
+h3 {
+  font-size: var(--text-lg);
+  line-height: var(--leading-lg);
+}
+
+p {
+  margin: 0 0 var(--space-4) 0;
+}
+
+code,
+pre {
+  font-family: var(--font-mono);
+}
+
+code {
+  background: var(--bg-surface-raised);
+  padding: 0.15em 0.4em;
+  border-radius: var(--radius-sm);
+  font-size: 0.9em;
+}
+
+/* ---------- App shell layout ---------- */
+.app-shell {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  min-height: 100vh;
+}
+
+@media (max-width: 767px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+}
+
+.main-content {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-container {
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-5);
+}
+
+.prose-container {
+  max-width: var(--prose-max-width);
+}
+
+@media (max-width: 767px) {
+  .content-container {
+    padding: var(--space-5) var(--space-4);
+  }
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+  background: var(--bg-surface-raised);
+  border-right: var(--border-width) solid var(--border-subtle);
+  padding: var(--space-5) var(--space-3);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+@media (max-width: 767px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+.sidebar-brand {
+  display: block;
+  font-weight: 700;
+  font-size: var(--text-lg);
+  color: var(--text-primary);
+  padding: var(--space-2) var(--space-3);
+  margin-bottom: var(--space-5);
+  text-decoration: none;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-link {
+  display: block;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  border-left: 2px solid transparent;
+}
+
+.sidebar-link:hover {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.sidebar-link[aria-current="page"] {
+  color: var(--text-primary);
+  border-left-color: var(--accent-amber);
+  background: var(--bg-surface);
+  font-weight: 600;
+}
+
+.sidebar-group {
+  margin-bottom: var(--space-2);
+}
+
+.sidebar-group-label {
+  cursor: pointer;
+}
+
+.sidebar-group summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sidebar-group summary::-webkit-details-marker {
+  display: none;
+}
+
+.sidebar-group summary::after {
+  content: "\25BE";
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  transition: transform var(--transition-fast);
+}
+
+.sidebar-group[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.sidebar-group .sidebar-sublist {
+  padding-left: var(--space-3);
+  border-left: 1px solid var(--border-subtle);
+  margin-left: var(--space-3);
+}
+
+/* ---------- Top navigation ---------- */
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-5);
+  border-bottom: var(--border-width) solid var(--border-subtle);
+  background: var(--bg-base);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.top-nav-breadcrumbs {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.top-nav-breadcrumbs a {
+  color: var(--text-secondary);
+}
+
+.top-nav-breadcrumbs a:hover {
+  color: var(--accent-amber);
+}
+
+.top-nav-breadcrumbs .current {
+  color: var(--text-primary);
+}
+
+.top-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+.search-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  border: var(--border-width) solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  background: var(--bg-surface);
+}
+
+.search-link:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-cyan);
+  text-decoration: none;
+}
+
+/* ---------- Mobile navigation ("checkbox hack", no JS) ----------
+   A visually hidden checkbox drives two <label for="mobile-nav-toggle">
+   controls (the hamburger and the in-panel "Close") via a CSS sibling
+   selector. Both labels are natively focusable/activatable with the
+   keyboard (Tab + Space/Enter), so this needs no JavaScript and no ARIA
+   state management beyond what the native control already provides. */
+.mobile-nav-root {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .mobile-nav-root {
+    display: block;
+  }
+}
+
+.mobile-nav-checkbox {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mobile-nav-checkbox:focus-visible + .mobile-menu-toggle {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.mobile-menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  border: var(--border-width) solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  background: var(--bg-surface);
+  cursor: pointer;
+}
+
+.mobile-nav-checkbox:checked ~ .mobile-menu-toggle {
+  color: var(--text-primary);
+  border-color: var(--accent-cyan);
+}
+
+.mobile-nav {
+  display: none;
+}
+
+.mobile-nav-checkbox:checked ~ .mobile-nav {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: var(--bg-surface-raised);
+  overflow-y: auto;
+  padding: var(--space-5);
+}
+
+.mobile-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-nav-close {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  border: var(--border-width) solid var(--border-subtle);
+  color: var(--text-primary);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-5);
+  font-size: var(--text-sm);
+}
+
+/* ---------- Breadcrumbs (standalone, used atop long-form pages) ---------- */
+.breadcrumbs {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-5);
+}
+
+.breadcrumbs ol {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+}
+
+.breadcrumbs li::after {
+  content: "/";
+  margin-left: var(--space-2);
+  color: var(--border-strong);
+}
+
+.breadcrumbs li:last-child::after {
+  content: "";
+}
+
+.breadcrumbs .current {
+  color: var(--text-primary);
+}
+
+/* ---------- Cards (Machine / PoC) ---------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+
+@media (max-width: 1023px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  display: block;
+  background: var(--bg-surface);
+  border: var(--border-width) solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  color: var(--text-primary);
+}
+
+.card:hover {
+  border-color: var(--accent-amber);
+  text-decoration: none;
+}
+
+.card h3,
+.card h2 {
+  margin-bottom: var(--space-2);
+}
+
+.card h2 {
+  font-size: var(--text-lg);
+  line-height: var(--leading-lg);
+}
+
+.card-meta {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-3);
+}
+
+/* ---------- Status / difficulty badges ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-xs);
+  line-height: var(--leading-xs);
+  padding: 0.2em 0.6em;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.badge--filled {
+  color: var(--bg-base);
+}
+
+.badge--outline {
+  background: transparent;
+  border-color: currentColor;
+}
+
+.badge--neutral {
+  background: var(--bg-surface-raised);
+  color: var(--text-secondary);
+}
+
+.badge[data-tone="confirmed"] {
+  background: var(--status-confirmed);
+}
+.badge[data-tone="reported"] {
+  color: var(--status-reported);
+}
+.badge[data-tone="inferred"] {
+  color: var(--status-inferred);
+}
+.badge[data-tone="not-recorded"] {
+  color: var(--status-not-recorded);
+}
+.badge[data-tone="attempted"] {
+  background: var(--status-attempted);
+}
+.badge[data-tone="hypothesis"] {
+  background: var(--status-hypothesis);
+}
+.badge[data-tone="very-easy"] {
+  background: var(--difficulty-very-easy);
+}
+.badge[data-tone="easy"] {
+  background: var(--difficulty-easy);
+}
+.badge[data-tone="medium"] {
+  background: var(--difficulty-medium);
+}
+.badge[data-tone="hard"] {
+  background: var(--difficulty-hard);
+}
+.badge[data-tone="insane"] {
+  background: var(--difficulty-insane);
+}
+
+/* ---------- Callouts ---------- */
+.callout {
+  border-left: 3px solid var(--accent-cyan);
+  background: var(--bg-surface);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: var(--space-4) var(--space-5);
+  margin: var(--space-5) 0;
+}
+
+.callout-title {
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+}
+
+.callout[data-type="warning"] {
+  border-left-color: var(--status-attempted);
+}
+
+.callout[data-type="success"] {
+  border-left-color: var(--status-confirmed);
+}
+
+.callout[data-type="abstract"] {
+  border-left-color: var(--accent-cyan);
+}
+
+/* ---------- Code blocks ---------- */
+.code-block {
+  position: relative;
+  background: var(--bg-code);
+  border: var(--border-width) solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  margin: var(--space-5) 0;
+  overflow-x: auto;
+}
+
+.code-block pre {
+  margin: 0;
+  padding: var(--space-4);
+  font-size: var(--text-code);
+  line-height: var(--leading-code);
+  overflow-x: auto;
+}
+
+.code-block-lang {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-4);
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}
+
+/* ---------- Content placeholder (Phase 5 only) ---------- */
+.content-placeholder {
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  text-align: center;
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Motion (only applied when motion is allowed) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .sidebar-link,
+  .card,
+  .badge {
+    transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+  }
+}

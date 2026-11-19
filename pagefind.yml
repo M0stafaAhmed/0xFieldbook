@@ -1,0 +1,3 @@
+# Pagefind indexes the final, redacted dist/ HTML only. Only elements marked data-pagefind-body are indexed
+# (the rendered document bodies), so navigation, evidence panels and generated index pages are not.
+site: dist

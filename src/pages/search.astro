@@ -1,0 +1,14 @@
+---
+// /search — Pagefind-backed search (Phase 7). The index is generated after the Astro build from the
+// final, redacted HTML in dist/ (never from the vault); see package.json "build".
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SearchInterface from "../components/SearchInterface.astro";
+---
+
+<BaseLayout title="Search" currentRoute="/search">
+  <div class="content-container prose-container">
+    <h1>Search</h1>
+    <SearchInterface />
+    <noscript><p>Search needs JavaScript. Browse by section from the navigation instead.</p></noscript>
+  </div>
+</BaseLayout>

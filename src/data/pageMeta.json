@@ -1,0 +1,317 @@
+[
+  {
+    "route": "/",
+    "title": "Dashboard",
+    "subtitle": "IT GATE Academy OSCP-Style Examination",
+    "docType": "dashboard",
+    "machine": null
+  },
+  {
+    "route": "/exam",
+    "title": "Exam Overview",
+    "subtitle": null,
+    "docType": "exam-overview",
+    "machine": null
+  },
+  {
+    "route": "/exam/lab-environment",
+    "title": "Lab Environment",
+    "subtitle": null,
+    "docType": "technical-reference",
+    "machine": null
+  },
+  {
+    "route": "/exam/network",
+    "title": "Network & Connectivity",
+    "subtitle": null,
+    "docType": "technical-reference",
+    "machine": null
+  },
+  {
+    "route": "/timeline",
+    "title": "Examination Timeline",
+    "subtitle": null,
+    "docType": "exam-timeline",
+    "machine": null
+  },
+  {
+    "route": "/machines/ve-01",
+    "title": "VE-01 Overview",
+    "subtitle": "Very Easy",
+    "docType": "machine-overview",
+    "machine": "VE-01"
+  },
+  {
+    "route": "/machines/ve-01/user",
+    "title": "VE-01 — User Foothold",
+    "subtitle": "Very Easy",
+    "docType": "machine-phase",
+    "machine": "VE-01"
+  },
+  {
+    "route": "/machines/ve-01/root",
+    "title": "VE-01 — Root Privilege Escalation",
+    "subtitle": "Very Easy",
+    "docType": "machine-phase",
+    "machine": "VE-01"
+  },
+  {
+    "route": "/machines/ea-01",
+    "title": "EA-01 Overview",
+    "subtitle": "Easy",
+    "docType": "machine-overview",
+    "machine": "EA-01"
+  },
+  {
+    "route": "/machines/ea-01/user",
+    "title": "EA-01 — User Foothold",
+    "subtitle": "Easy",
+    "docType": "machine-phase",
+    "machine": "EA-01"
+  },
+  {
+    "route": "/machines/ea-01/root",
+    "title": "EA-01 — Root Privilege Escalation",
+    "subtitle": "Easy",
+    "docType": "machine-phase",
+    "machine": "EA-01"
+  },
+  {
+    "route": "/machines/me-01",
+    "title": "ME-01 Overview",
+    "subtitle": "Medium",
+    "docType": "machine-overview",
+    "machine": "ME-01"
+  },
+  {
+    "route": "/machines/me-01/user",
+    "title": "ME-01 — User Foothold",
+    "subtitle": "Medium",
+    "docType": "machine-phase",
+    "machine": "ME-01"
+  },
+  {
+    "route": "/machines/me-01/root",
+    "title": "ME-01 — Root Privilege Escalation",
+    "subtitle": "Medium",
+    "docType": "machine-phase",
+    "machine": "ME-01"
+  },
+  {
+    "route": "/machines/ha-01",
+    "title": "HA-01 Overview",
+    "subtitle": "Hard",
+    "docType": "machine-overview",
+    "machine": "HA-01"
+  },
+  {
+    "route": "/machines/ha-01/user",
+    "title": "HA-01 — User Foothold",
+    "subtitle": "Hard",
+    "docType": "machine-phase",
+    "machine": "HA-01"
+  },
+  {
+    "route": "/machines/ha-01/root",
+    "title": "HA-01 — Root Privilege Escalation",
+    "subtitle": "Hard",
+    "docType": "machine-phase",
+    "machine": "HA-01"
+  },
+  {
+    "route": "/machines/in-01",
+    "title": "IN-01 Overview",
+    "subtitle": "Insane",
+    "docType": "machine-overview",
+    "machine": "IN-01"
+  },
+  {
+    "route": "/machines/in-01/user",
+    "title": "IN-01 — User Foothold",
+    "subtitle": "Insane",
+    "docType": "machine-phase",
+    "machine": "IN-01"
+  },
+  {
+    "route": "/machines/in-01/root",
+    "title": "IN-01 — Root Privilege Escalation",
+    "subtitle": "Insane",
+    "docType": "machine-phase",
+    "machine": "IN-01"
+  },
+  {
+    "route": "/machines",
+    "title": "Machines",
+    "subtitle": null,
+    "docType": "machine-index (generated, no source file)",
+    "machine": null
+  },
+  {
+    "route": "/methodology/deserialization",
+    "title": "Deserialization",
+    "subtitle": null,
+    "docType": "methodology",
+    "machine": null
+  },
+  {
+    "route": "/methodology/evidence-collection",
+    "title": "Evidence Collection",
+    "subtitle": null,
+    "docType": "methodology",
+    "machine": null
+  },
+  {
+    "route": "/methodology/initial-access",
+    "title": "Initial Access",
+    "subtitle": null,
+    "docType": "methodology",
+    "machine": null
+  },
+  {
+    "route": "/methodology/linux-privilege-escalation",
+    "title": "Linux Privilege Escalation",
+    "subtitle": null,
+    "docType": "methodology",
+    "machine": null
+  },
+  {
+    "route": "/methodology/reconnaissance",
+    "title": "Reconnaissance",
+    "subtitle": null,
+    "docType": "methodology",
+    "machine": null
+  },
+  {
+    "route": "/methodology/ssrf",
+    "title": "SSRF",
+    "subtitle": null,
+    "docType": "methodology",
+    "machine": null
+  },
+  {
+    "route": "/methodology/web-enumeration",
+    "title": "Web Enumeration",
+    "subtitle": null,
+    "docType": "methodology",
+    "machine": null
+  },
+  {
+    "route": "/methodology",
+    "title": "Methodology",
+    "subtitle": null,
+    "docType": "methodology-index (generated, no source file)",
+    "machine": null
+  },
+  {
+    "route": "/lessons/fuzzing-strategy-and-false-leads",
+    "title": "Fuzzing Strategy and False Leads",
+    "subtitle": null,
+    "docType": "difficulty-lesson",
+    "machine": null
+  },
+  {
+    "route": "/lessons/http-client-and-connectivity-failures",
+    "title": "HTTP Client and Connectivity Failures",
+    "subtitle": null,
+    "docType": "difficulty-lesson",
+    "machine": null
+  },
+  {
+    "route": "/lessons/kali-path-and-zsh-issues",
+    "title": "Kali PATH and Zsh Issues",
+    "subtitle": null,
+    "docType": "difficulty-lesson",
+    "machine": null
+  },
+  {
+    "route": "/lessons/network-and-isp-restrictions",
+    "title": "Network and ISP Restrictions",
+    "subtitle": null,
+    "docType": "difficulty-lesson",
+    "machine": null
+  },
+  {
+    "route": "/lessons/tooling-and-workflow-mistakes",
+    "title": "Tooling and Workflow Mistakes",
+    "subtitle": null,
+    "docType": "difficulty-lesson",
+    "machine": null
+  },
+  {
+    "route": "/lessons/vpn-routing-and-reverse-shells",
+    "title": "VPN Routing and Reverse Shells",
+    "subtitle": null,
+    "docType": "difficulty-lesson",
+    "machine": null
+  },
+  {
+    "route": "/lessons",
+    "title": "Difficulties & Lessons",
+    "subtitle": null,
+    "docType": "lessons-index (generated, no source file)",
+    "machine": null
+  },
+  {
+    "route": "/poc-library/cap-setuid",
+    "title": "CAP_SETUID",
+    "subtitle": "validated",
+    "docType": "reusable-poc",
+    "machine": null
+  },
+  {
+    "route": "/poc-library/ld-preload",
+    "title": "LD_PRELOAD",
+    "subtitle": "validated",
+    "docType": "reusable-poc",
+    "machine": null
+  },
+  {
+    "route": "/poc-library/tar-wildcard-injection",
+    "title": "Tar Wildcard Injection",
+    "subtitle": "validated",
+    "docType": "reusable-poc",
+    "machine": null
+  },
+  {
+    "route": "/poc-library/python-pickle-rce",
+    "title": "Python Pickle RCE",
+    "subtitle": "validated",
+    "docType": "reusable-poc",
+    "machine": null
+  },
+  {
+    "route": "/poc-library/redis-persistence",
+    "title": "Redis Persistence",
+    "subtitle": "validated",
+    "docType": "reusable-poc",
+    "machine": null
+  },
+  {
+    "route": "/poc-library/ssrf-filter-bypass",
+    "title": "SSRF Filter Bypass",
+    "subtitle": "validated",
+    "docType": "reusable-poc",
+    "machine": null
+  },
+  {
+    "route": "/poc-library/scripts",
+    "title": "PoC Scripts Index",
+    "subtitle": "maintained",
+    "docType": "script-index",
+    "machine": null
+  },
+  {
+    "route": "/poc-library",
+    "title": "Reusable PoC Library",
+    "subtitle": null,
+    "docType": "poc-index (generated, no source file)",
+    "machine": null
+  },
+  {
+    "route": "/search",
+    "title": "Search",
+    "subtitle": null,
+    "docType": "search",
+    "machine": null
+  }
+]

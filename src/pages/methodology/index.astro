@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getGroupRoutes } from "../../data/routes";
+
+const items = getGroupRoutes("Methodology").filter((r) => r.route !== "/methodology");
+---
+
+<BaseLayout title="Methodology" currentRoute="/methodology">
+  <div class="content-container">
+    <h1>Methodology</h1>
+    <p class="card-meta">General techniques used across the examination, independent of any one machine.</p>
+    <div class="card-grid">
+      {
+        items.map((r) => (
+          <a href={r.route} class="card">
+            <h2>{r.title}</h2>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>

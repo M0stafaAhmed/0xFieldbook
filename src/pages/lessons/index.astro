@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getGroupRoutes } from "../../data/routes";
+
+const items = getGroupRoutes("Difficulties & Lessons").filter((r) => r.route !== "/lessons");
+---
+
+<BaseLayout title="Difficulties & Lessons" currentRoute="/lessons">
+  <div class="content-container">
+    <h1>Difficulties &amp; Lessons</h1>
+    <p class="card-meta">Problems encountered during the examination, including failed attempts.</p>
+    <div class="card-grid">
+      {
+        items.map((r) => (
+          <a href={r.route} class="card">
+            <h2>{r.title}</h2>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>

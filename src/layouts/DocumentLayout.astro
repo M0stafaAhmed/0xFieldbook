@@ -1,0 +1,26 @@
+---
+// Shared shell for single-document pages: methodology, lessons, PoC,
+// exam-context and index pages. Phase 4 component inventory:
+// "DocumentLayout". Content is a placeholder in Phase 5 — real document
+// bodies are integrated in Phase 6 (brief §10).
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  title: string;
+  subtitle?: string | null;
+  currentRoute: string;
+  docTypeLabel?: string;
+}
+const { title, subtitle, currentRoute, docTypeLabel } = Astro.props;
+---
+
+<BaseLayout title={title} currentRoute={currentRoute}>
+  <div class="content-container prose-container">
+    <header>
+      {docTypeLabel && <p class="card-meta">{docTypeLabel}</p>}
+      <h1>{title}</h1>
+      {subtitle && <p class="card-meta">{subtitle}</p>}
+    </header>
+    <slot />
+  </div>
+</BaseLayout>

@@ -1,0 +1,31 @@
+---
+// /machines/{slug} — machine Overview, rendered from the machine's Overview document (Phase 6).
+import MachineDossierLayout from "../../../layouts/MachineDossierLayout.astro";
+import EvidencePanel from "../../../components/EvidencePanel.astro";
+import RedactionNote from "../../../components/RedactionNote.astro";
+import RelatedLinks from "../../../components/RelatedLinks.astro";
+import Toc from "../../../components/Toc.astro";
+import DocBody from "../../../components/DocBody.astro";
+import { MACHINES } from "../../../data/navGroups";
+import { docsRelatedToMachine, evidenceItems, loadDoc } from "../../../lib/docs";
+
+export function getStaticPaths() {
+  return MACHINES.map((m) => ({ params: { machine: m.slug } }));
+}
+
+const { machine: slug } = Astro.params;
+const m = MACHINES.find((mm) => mm.slug === slug)!;
+const { route, Content, headings, hasFlag } = await loadDoc(`/machines/${slug}`);
+const evidence = (await evidenceItems()).filter((e) => e.machine === m.id);
+const pocs = (await docsRelatedToMachine(m.id, "Reusable PoC Library")).map((r) => ({ href: r.route, label: r.title }));
+const lessons = (await docsRelatedToMachine(m.id, "Difficulties & Lessons")).map((r) => ({ href: r.route, label: r.title }));
+---
+
+<MachineDossierLayout machineId={m.id} difficulty={m.difficulty} title={route.title} currentRoute={route.route} activePhase="overview">
+  <RedactionNote />
+  <EvidencePanel items={evidence} />
+  <Toc headings={headings} />
+  <DocBody title={route.title} group={route.navGroup} machines={[m.id]}><Content /></DocBody>
+  <RelatedLinks heading="Related reusable PoCs" links={pocs} />
+  <RelatedLinks heading="Related lessons" links={lessons} />
+</MachineDossierLayout>

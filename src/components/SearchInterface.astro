@@ -1,0 +1,146 @@
+---
+// /search UI over the static Pagefind index generated from the final, redacted build (`dist/pagefind/`).
+// Uses Pagefind's JS API with project markup so it follows the design system; no external service.
+const SUGGESTED = [
+  { href: "/", label: "Dashboard" },
+  { href: "/machines", label: "Machines" },
+  { href: "/poc-library", label: "Reusable PoC Library" },
+];
+---
+
+<section class="search-ui" data-search role="search" aria-label="Search the examination report">
+  <label for="site-search" class="search-label">Search machines, methodology, lessons and PoCs</label>
+  <input id="site-search" class="search-input" type="search" autocomplete="off" spellcheck="false" placeholder="Search the report" />
+  <p class="search-hint" id="search-hint">Press / to focus the search box, the Down arrow to move into the results, and Escape to return.</p>
+  <p class="search-status" data-search-status role="status" aria-live="polite">Type to search.</p>
+  <div class="search-results" data-search-results></div>
+  <div class="search-empty" data-search-empty hidden>
+    <p data-search-empty-msg></p>
+    <p>Try one of these instead:</p>
+    <ul>{SUGGESTED.map((s) => <li><a href={s.href}>{s.label}</a></li>)}</ul>
+  </div>
+</section>
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-search]");
+  if (root) {
+    const input = root.querySelector<HTMLInputElement>("#site-search")!;
+    const status = root.querySelector<HTMLElement>("[data-search-status]")!;
+    const out = root.querySelector<HTMLElement>("[data-search-results]")!;
+    const empty = root.querySelector<HTMLElement>("[data-search-empty]")!;
+    const emptyMsg = root.querySelector<HTMLElement>("[data-search-empty-msg]")!;
+    const GROUP_ORDER = ["Examination Context", "Machines", "Methodology", "Difficulties & Lessons", "Reusable PoC Library"];
+    let pagefind: any;
+    let token = 0;
+    let timer: number | undefined;
+
+    const load = async () => {
+      if (pagefind) return pagefind;
+      const url = new URL("/pagefind/pagefind.js", window.location.origin).href;
+      pagefind = await import(/* @vite-ignore */ url);
+      return pagefind;
+    };
+
+    // Pagefind returns excerpts as escaped text with <mark> around matches. Rebuild as DOM nodes
+    // (text + <mark> only) instead of trusting innerHTML.
+    const excerptNodes = (html: string): Node[] =>
+      html.split(/(<mark>|<\/mark>)/).reduce<{ nodes: Node[]; mark: boolean }>(
+        (acc, part) => {
+          if (part === "<mark>") acc.mark = true;
+          else if (part === "</mark>") acc.mark = false;
+          else if (part) {
+            const tmp = document.createElement("div");
+            tmp.innerHTML = part;
+            const text = document.createTextNode(tmp.textContent ?? "");
+            if (acc.mark) { const m = document.createElement("mark"); m.appendChild(text); acc.nodes.push(m); } else acc.nodes.push(text);
+          }
+          return acc;
+        },
+        { nodes: [], mark: false },
+      ).nodes;
+
+    const clear = () => { out.replaceChildren(); empty.hidden = true; };
+
+    const run = async (q: string) => {
+      const mine = ++token;
+      const query = q.trim();
+      const url = new URL(window.location.href);
+      if (query) url.searchParams.set("q", query); else url.searchParams.delete("q");
+      history.replaceState(null, "", url);
+      if (!query) { clear(); status.textContent = "Type to search."; return; }
+      status.textContent = "Searching…";
+      try {
+        const pf = await load();
+        const res = await pf.search(query);
+        const items = await Promise.all(res.results.slice(0, 40).map((r: any) => r.data()));
+        if (mine !== token) return;
+        clear();
+        if (!items.length) {
+          emptyMsg.textContent = `No results for “${query}”.`;
+          empty.hidden = false;
+          status.textContent = `No results for “${query}”.`;
+          return;
+        }
+        const groups = new Map<string, any[]>();
+        for (const it of items) {
+          const g = it.filters?.group?.[0] ?? "Other";
+          groups.set(g, [...(groups.get(g) ?? []), it]);
+        }
+        const names = [...groups.keys()].sort((a, b) => (GROUP_ORDER.indexOf(a) + 1 || 99) - (GROUP_ORDER.indexOf(b) + 1 || 99));
+        for (const name of names) {
+          const sec = document.createElement("section");
+          sec.className = "search-group";
+          const h = document.createElement("h2");
+          h.textContent = `${name} (${groups.get(name)!.length})`;
+          const ol = document.createElement("ol");
+          ol.className = "search-list";
+          for (const it of groups.get(name)!) {
+            const li = document.createElement("li");
+            li.className = "search-result";
+            const a = document.createElement("a");
+            a.href = it.url;
+            a.className = "search-result-title";
+            a.textContent = it.meta?.title ?? it.url;
+            const p = document.createElement("p");
+            p.className = "search-result-excerpt";
+            p.append(...excerptNodes(it.excerpt ?? ""));
+            li.append(a, p);
+            ol.append(li);
+          }
+          sec.append(h, ol);
+          out.append(sec);
+        }
+        status.textContent = `${items.length} result${items.length === 1 ? "" : "s"} for “${query}”.`;
+      } catch (err) {
+        if (mine !== token) return;
+        clear();
+        emptyMsg.textContent = "Search is unavailable: the search index could not be loaded.";
+        empty.hidden = false;
+        status.textContent = "Search is unavailable: the search index could not be loaded.";
+      }
+    };
+
+    input.addEventListener("input", () => { window.clearTimeout(timer); timer = window.setTimeout(() => run(input.value), 200); });
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") { window.clearTimeout(timer); run(input.value); }
+      else if (e.key === "ArrowDown") { const first = out.querySelector<HTMLAnchorElement>("a"); if (first) { e.preventDefault(); first.focus(); } }
+      else if (e.key === "Escape" && input.value) { input.value = ""; run(""); }
+    });
+    out.addEventListener("keydown", (e) => {
+      const links = [...out.querySelectorAll<HTMLAnchorElement>("a")];
+      const i = links.indexOf(document.activeElement as HTMLAnchorElement);
+      if (i < 0) return;
+      if (e.key === "ArrowDown") { e.preventDefault(); links[Math.min(i + 1, links.length - 1)].focus(); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); (i === 0 ? input : links[i - 1]).focus(); }
+      else if (e.key === "Escape") { e.preventDefault(); input.focus(); }
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "/" && !e.ctrlKey && !e.metaKey && !e.altKey && !(e.target instanceof HTMLInputElement) && !(e.target instanceof HTMLTextAreaElement)) {
+        e.preventDefault();
+        input.focus();
+      }
+    });
+    const initial = new URL(window.location.href).searchParams.get("q");
+    if (initial) { input.value = initial; run(initial); }
+  }
+</script>

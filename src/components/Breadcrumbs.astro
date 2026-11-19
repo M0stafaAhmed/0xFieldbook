@@ -1,0 +1,32 @@
+---
+// Breadcrumb trail built strictly from parentRoute relationships in
+// routes.ts (which itself comes from the route map), never hand-typed per
+// page, so it cannot describe a relationship the route map doesn't have.
+import { getBreadcrumbs } from "../data/routes";
+
+interface Props {
+  currentRoute: string;
+}
+const { currentRoute } = Astro.props;
+const trail = getBreadcrumbs(currentRoute);
+---
+
+{
+  trail.length > 1 && (
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        {trail.map((entry, i) => (
+          <li>
+            {i === trail.length - 1 ? (
+              <span class="current" aria-current="page">
+                {entry.title}
+              </span>
+            ) : (
+              <a href={entry.route}>{entry.route === "/" ? "Dashboard" : entry.title}</a>
+            )}
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )
+}

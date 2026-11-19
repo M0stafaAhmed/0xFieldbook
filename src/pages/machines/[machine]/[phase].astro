@@ -1,0 +1,35 @@
+---
+// /machines/{slug}/{user|root} — user foothold and root privilege escalation records (Phase 6).
+// Data-driven over 5 machines x 2 phases = 10 routes from a single file (Phase 4 §5.4).
+import MachineDossierLayout from "../../../layouts/MachineDossierLayout.astro";
+import EvidencePanel from "../../../components/EvidencePanel.astro";
+import RedactionNote from "../../../components/RedactionNote.astro";
+import Toc from "../../../components/Toc.astro";
+import DocBody from "../../../components/DocBody.astro";
+import { MACHINES } from "../../../data/navGroups";
+import { evidenceItems, loadDoc } from "../../../lib/docs";
+
+export function getStaticPaths() {
+  return MACHINES.flatMap((m) =>
+    (["user", "root"] as const).map((phase) => ({ params: { machine: m.slug, phase } }))
+  );
+}
+
+const { machine: slug, phase } = Astro.params;
+const m = MACHINES.find((mm) => mm.slug === slug)!;
+const { route, Content, headings, hasFlag } = await loadDoc(`/machines/${slug}/${phase}`);
+const evidence = (await evidenceItems()).filter((e) => e.machine === m.id && e.objective === phase);
+---
+
+<MachineDossierLayout
+  machineId={m.id}
+  difficulty={m.difficulty}
+  title={route.title}
+  currentRoute={route.route}
+  activePhase={phase as "user" | "root"}
+>
+  <RedactionNote />
+  <EvidencePanel items={evidence} />
+  <Toc headings={headings} />
+  <DocBody title={route.title} group={route.navGroup} machines={[m.id]}><Content /></DocBody>
+</MachineDossierLayout>

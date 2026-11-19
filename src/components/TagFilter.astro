@@ -1,0 +1,77 @@
+---
+// Tag filter for /poc-library (Phase 4 TagFilter). Tags come from each document's own frontmatter `tags`
+// (nothing invented). A tag carried by every entry cannot narrow the list, so it is not offered as a chip.
+// Without JavaScript every card is visible and the controls stay hidden.
+export interface FilterItem { href: string; title: string; subtitle?: string | null; tags: string[] }
+interface Props { items: FilterItem[] }
+const { items } = Astro.props;
+const counts = new Map<string, number>();
+for (const it of items) for (const t of new Set(it.tags)) counts.set(t, (counts.get(t) ?? 0) + 1);
+const universal = [...counts].filter(([, n]) => n === items.length).map(([t]) => t);
+const chips = [...counts].filter(([t]) => !universal.includes(t)).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+---
+
+<div class="tag-filter" data-tag-filter>
+  <details class="tag-filter-controls" data-tag-controls open hidden>
+    <summary>Filter by tag</summary>
+    <div class="chip-row" role="group" aria-label="Filter by tag">
+      {
+        chips.map(([t, n]) => (
+          <button type="button" class="tag-chip" data-tag={t} aria-pressed="false">{t} <span class="tag-count">({n})</span></button>
+        ))
+      }
+    </div>
+    <button type="button" class="tag-clear" data-tag-clear disabled>Clear filters</button>
+  </details>
+  <p class="filter-status" data-filter-status role="status" aria-live="polite">Showing all {items.length} entries</p>
+  <div class="card-grid" data-filter-grid>
+    {
+      items.map((it) => (
+        <a href={it.href} class="card" data-filter-card data-tags={[...new Set(it.tags)].join(",")}>
+          <h2>{it.title}</h2>
+          {it.subtitle && <p class="card-meta">{it.subtitle}</p>}
+          <p class="card-meta tag-list">{it.tags.filter((t) => !universal.includes(t)).join(" · ")}</p>
+        </a>
+      ))
+    }
+  </div>
+  <div class="filter-empty" data-filter-empty hidden>
+    <p>No entries match all of the selected tags.</p>
+    <button type="button" class="tag-clear" data-tag-clear>Clear filters</button>
+  </div>
+</div>
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-tag-filter]");
+  if (root) {
+    const controls = root.querySelector<HTMLDetailsElement>("[data-tag-controls]")!;
+    const chips = [...root.querySelectorAll<HTMLButtonElement>(".tag-chip")];
+    const cards = [...root.querySelectorAll<HTMLElement>("[data-filter-card]")];
+    const status = root.querySelector<HTMLElement>("[data-filter-status]")!;
+    const empty = root.querySelector<HTMLElement>("[data-filter-empty]")!;
+    const clears = [...root.querySelectorAll<HTMLButtonElement>("[data-tag-clear]")];
+    const selected = new Set<string>();
+
+    const render = () => {
+      let shown = 0;
+      for (const c of cards) {
+        const tags = (c.dataset.tags ?? "").split(",");
+        const match = [...selected].every((t) => tags.includes(t));
+        c.hidden = !match;
+        if (match) shown++;
+      }
+      for (const b of chips) b.setAttribute("aria-pressed", String(selected.has(b.dataset.tag!)));
+      for (const c of clears) c.disabled = selected.size === 0;
+      empty.hidden = shown !== 0;
+      status.textContent = selected.size === 0
+        ? `Showing all ${cards.length} entries`
+        : shown === 0
+          ? `No entries match: ${[...selected].join(", ")}`
+          : `Showing ${shown} of ${cards.length} entries tagged ${[...selected].join(" + ")}`;
+    };
+    controls.hidden = false;
+    if (window.matchMedia("(max-width: 767px)").matches) controls.open = false;
+    for (const b of chips) b.addEventListener("click", () => { const t = b.dataset.tag!; selected.has(t) ? selected.delete(t) : selected.add(t); render(); });
+    for (const c of clears) c.addEventListener("click", () => { selected.clear(); render(); chips[0]?.focus(); });
+  }
+</script>

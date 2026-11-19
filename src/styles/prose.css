@@ -1,0 +1,88 @@
+/* Rendered-document typography and content components (Phase 6).
+   Uses only the Phase 4 design tokens from tokens.css; nothing here changes document text. */
+
+.doc-body { overflow-wrap: anywhere; }
+.doc-body h2 { margin-top: var(--space-7); padding-top: var(--space-4); border-top: var(--border-width) solid var(--border-subtle); }
+.doc-body h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
+.doc-body h3 { margin-top: var(--space-6); }
+.doc-body h4, .doc-body h5 { margin-top: var(--space-5); }
+.doc-body ul, .doc-body ol { margin: 0 0 var(--space-4) 0; padding-left: var(--space-5); }
+.doc-body li { margin-bottom: var(--space-2); }
+.doc-body li > p { margin-bottom: var(--space-2); }
+.doc-body hr { border: 0; border-top: var(--border-width) solid var(--border-subtle); margin: var(--space-6) 0; }
+.doc-body blockquote { margin: 0 0 var(--space-4) 0; padding: var(--space-2) var(--space-4); border-left: 3px solid var(--border-strong); color: var(--text-secondary); }
+.doc-body img { max-width: 100%; height: auto; }
+
+/* Code: never re-wrapped; long lines scroll so commands stay copy-paste accurate. */
+.doc-body pre {
+  margin: 0 0 var(--space-4) 0;
+  padding: var(--space-3) var(--space-4);
+  overflow-x: auto;
+  white-space: pre;
+  overflow-wrap: normal;
+  border: var(--border-width) solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  font-size: var(--text-code);
+  line-height: var(--leading-code);
+  background-color: var(--bg-surface) !important;
+}
+.doc-body pre code { background: none; padding: 0; border-radius: 0; font-size: inherit; overflow-wrap: normal; }
+.doc-body pre:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-ring-offset); }
+
+/* Tables scroll inside their own wrapper. */
+.table-wrap { overflow-x: auto; margin: 0 0 var(--space-4) 0; border: var(--border-width) solid var(--border-subtle); border-radius: var(--radius-md); }
+.doc-body table { border-collapse: collapse; width: 100%; font-size: var(--text-sm); overflow-wrap: normal; }
+.doc-body th, .doc-body td { padding: var(--space-2) var(--space-3); text-align: left; vertical-align: top; border-bottom: var(--border-width) solid var(--border-subtle); }
+.doc-body th { background: var(--bg-surface-raised); color: var(--text-primary); white-space: nowrap; }
+.doc-body td { min-width: 6rem; overflow-wrap: anywhere; }
+.doc-body tr:last-child td { border-bottom: 0; }
+
+/* Supported raw HTML */
+.doc-body mark { background: color-mix(in srgb, var(--accent-amber) 28%, transparent); color: var(--text-primary); padding: 0 0.2em; border-radius: var(--radius-sm); }
+.doc-body ins { text-decoration: none; border-bottom: 1px solid var(--accent-cyan); }
+
+/* Document badges: the vault's own <badge color="..."> markup. Deliberately outlined and neutral:
+   they carry the document's wording, not a site-verified evidence state (see .evidence-panel). */
+.doc-badge { display: inline-block; font-size: var(--text-xs); line-height: var(--leading-xs); font-weight: 600; padding: 0.15em 0.6em; border-radius: var(--radius-sm); border: 1px solid var(--border-strong); color: var(--text-primary); background: transparent; }
+.doc-badge[data-doc-tone="success"] { border-color: var(--status-confirmed); }
+.doc-badge[data-doc-tone="warning"] { border-color: var(--status-reported); }
+.doc-badge[data-doc-tone="danger"] { border-color: var(--status-attempted); }
+
+/* Callouts */
+.callout { margin: 0 0 var(--space-4) 0; padding: var(--space-3) var(--space-4); border: var(--border-width) solid var(--border-strong); border-left-width: 4px; border-radius: var(--radius-md); background: var(--bg-surface); color: var(--text-primary); }
+.callout > :last-child { margin-bottom: 0; }
+.callout__title { font-weight: 700; margin: 0 0 var(--space-2) 0; }
+.callout--warning { border-left-color: var(--accent-amber); }
+.callout--success { border-left-color: var(--status-confirmed); }
+.callout--abstract { border-left-color: var(--accent-cyan); }
+
+/* Wikilinks */
+a.wikilink { text-decoration: underline; text-decoration-color: var(--border-strong); text-underline-offset: 2px; }
+a.wikilink:hover { text-decoration-color: var(--accent-amber); }
+
+/* On-this-page list */
+.toc { margin: 0 0 var(--space-5) 0; padding: var(--space-3) var(--space-4); border: var(--border-width) solid var(--border-subtle); border-radius: var(--radius-md); background: var(--bg-surface); font-size: var(--text-sm); }
+.toc summary { cursor: pointer; font-weight: 600; }
+.toc ol { margin: var(--space-3) 0 0 0; padding-left: var(--space-4); columns: 2 18rem; }
+.toc li { margin-bottom: var(--space-1); break-inside: avoid; }
+.toc .toc-l3 { margin-left: var(--space-3); color: var(--text-secondary); }
+
+/* Evidence panel and redaction note */
+.evidence-panel, .redaction-note { margin: 0 0 var(--space-5) 0; padding: var(--space-3) var(--space-4); border: var(--border-width) solid var(--border-strong); border-radius: var(--radius-md); background: var(--bg-surface); font-size: var(--text-sm); }
+.evidence-panel h2 { font-size: var(--text-base); margin: 0 0 var(--space-3) 0; }
+.evidence-list { list-style: none; margin: 0; padding: 0; }
+.evidence-list > li { margin: 0 0 var(--space-3) 0; padding-bottom: var(--space-3); border-bottom: var(--border-width) solid var(--border-subtle); }
+.evidence-list > li:last-child { border-bottom: 0; padding-bottom: 0; margin-bottom: 0; }
+.evidence-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+.evidence-obj { font-weight: 700; min-width: 4rem; }
+.evidence-expl { color: var(--text-secondary); }
+.evidence-nr { color: var(--status-not-recorded); font-weight: 600; }
+.evidence-quotes { margin: var(--space-2) 0 0 0; padding-left: var(--space-4); color: var(--text-secondary); }
+.evidence-quotes li { margin-bottom: var(--space-1); }
+.evidence-note { margin: var(--space-3) 0 0 0; color: var(--text-muted); font-size: var(--text-xs); }
+.redaction-note { color: var(--text-secondary); }
+.redaction-note p { margin: 0; }
+.related-links { margin: var(--space-6) 0 0 0; padding-top: var(--space-4); border-top: var(--border-width) solid var(--border-subtle); }
+.related-links h2 { font-size: var(--text-base); border: 0; margin: 0 0 var(--space-3) 0; padding: 0; }
+.related-links ul { margin: 0; padding-left: var(--space-5); }
+.chip-row { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-2); }

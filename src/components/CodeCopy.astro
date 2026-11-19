@@ -1,0 +1,58 @@
+---
+// Copy controls for published code blocks (Phase 4 CodeBlock / CopyCommandButton). Progressive enhancement:
+// without JavaScript the code blocks are unchanged. Copies the published (already redacted) text exactly.
+---
+
+<script>
+  const blocks = [...document.querySelectorAll<HTMLPreElement>(".doc-body pre")];
+  if (blocks.length) {
+    const live = document.createElement("div");
+    live.className = "sr-only";
+    live.setAttribute("role", "status");
+    live.setAttribute("aria-live", "polite");
+    document.body.append(live);
+
+    const fallbackCopy = (text: string): boolean => {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.append(ta);
+      ta.select();
+      let ok = false;
+      try { ok = document.execCommand("copy"); } catch { ok = false; }
+      ta.remove();
+      return ok;
+    };
+    const copy = async (text: string): Promise<boolean> => {
+      try {
+        if (navigator.clipboard?.writeText) { await navigator.clipboard.writeText(text); return true; }
+      } catch { /* fall through to the legacy path */ }
+      return fallbackCopy(text);
+    };
+
+    blocks.forEach((pre, i) => {
+      const wrap = document.createElement("div");
+      wrap.className = "code-block";
+      pre.parentNode!.insertBefore(wrap, pre);
+      wrap.append(pre);
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "code-copy";
+      btn.textContent = "Copy";
+      btn.setAttribute("aria-label", `Copy code block ${i + 1} of ${blocks.length} to the clipboard`);
+      let reset: number | undefined;
+      btn.addEventListener("click", async () => {
+        const text = (pre.querySelector("code") ?? pre).textContent ?? "";
+        const ok = await copy(text);
+        btn.textContent = ok ? "Copied" : "Copy failed";
+        btn.dataset.state = ok ? "copied" : "failed";
+        live.textContent = ok ? `Code block ${i + 1} copied to the clipboard.` : `Copy failed for code block ${i + 1}. Select the text and copy it manually.`;
+        window.clearTimeout(reset);
+        reset = window.setTimeout(() => { btn.textContent = "Copy"; delete btn.dataset.state; }, 2500);
+      });
+      wrap.append(btn);
+    });
+  }
+</script>

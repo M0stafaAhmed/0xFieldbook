@@ -1,0 +1,24 @@
+---
+// /timeline — Examination Timeline, rendered from working-vault/Exam Context/Exam Timeline.md (Phase 6).
+// Phase 7: the Timeline overview adds the certainty toggle; the document body below is unchanged.
+import DocumentLayout from "../layouts/DocumentLayout.astro";
+import EvidencePanel from "../components/EvidencePanel.astro";
+import RedactionNote from "../components/RedactionNote.astro";
+import Toc from "../components/Toc.astro";
+import Timeline from "../components/Timeline.astro";
+import { buildTimeline } from "../lib/timeline";
+import DocBody from "../components/DocBody.astro";
+import { evidenceItems, loadDoc } from "../lib/docs";
+
+const { route, entry, Content, headings, hasFlag } = await loadDoc("/timeline");
+const groups = buildTimeline(entry.body ?? "", (entry.data as any).machine_sequence as string[], headings);
+const evidence = await evidenceItems();
+---
+
+<DocumentLayout title={route.title} currentRoute="/timeline" docTypeLabel="Examination Timeline">
+  <RedactionNote />
+  <EvidencePanel items={evidence} heading="Flag completion by machine" showMachine={true} />
+  <Timeline groups={groups} evidence={evidence} />
+  <Toc headings={headings} />
+  <DocBody title={route.title} group={route.navGroup}><Content /></DocBody>
+</DocumentLayout>

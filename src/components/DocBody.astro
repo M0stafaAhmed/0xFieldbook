@@ -1,0 +1,14 @@
+---
+// Wrapper for a rendered vault document. Marks the Pagefind-indexed region (Phase 4 §6: only the
+// rendered document body is indexed, never the vault) and emits the title / group / machine filter
+// attributes from the same route and frontmatter data the page already uses.
+interface Props { title: string; group: string; machines?: string[] }
+const { title, group, machines = [] } = Astro.props;
+---
+
+<div class="doc-body" data-pagefind-body>
+  <span hidden data-pagefind-meta={`title:${title}`}></span>
+  <span hidden data-pagefind-filter={`group:${group}`}></span>
+  {machines.map((m) => <span hidden data-pagefind-filter={`machine:${m}`}></span>)}
+  <slot />
+</div>

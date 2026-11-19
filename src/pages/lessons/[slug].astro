@@ -1,0 +1,25 @@
+---
+import DocumentLayout from "../../layouts/DocumentLayout.astro";
+import RedactionNote from "../../components/RedactionNote.astro";
+import RelatedLinks from "../../components/RelatedLinks.astro";
+import Toc from "../../components/Toc.astro";
+import DocBody from "../../components/DocBody.astro";
+import { ROUTES } from "../../data/routes";
+import { MACHINES } from "../../data/navGroups";
+import { loadDoc, relatedMachineIds } from "../../lib/docs";
+
+export function getStaticPaths() {
+  return ROUTES.filter((r) => r.navGroup === "Difficulties & Lessons" && r.route !== "/lessons").map((r) => ({ params: { slug: r.route.split("/").pop() } }));
+}
+
+const { slug } = Astro.params;
+const { route, entry, Content, headings, hasFlag } = await loadDoc(`/lessons/${slug}`);
+const machines = relatedMachineIds(entry).map((id) => MACHINES.find((m) => m.id === id)).filter(Boolean).map((m) => ({ href: `/machines/${m!.slug}`, label: `${m!.id} (${m!.difficulty})` }));
+---
+
+<DocumentLayout title={route.title}  currentRoute={route.route} docTypeLabel="Difficulties & Lessons">
+  {hasFlag && <RedactionNote />}
+  <Toc headings={headings} />
+  <DocBody title={route.title} group={route.navGroup} machines={relatedMachineIds(entry)}><Content /></DocBody>
+  <RelatedLinks heading="Related machines" links={machines} />
+</DocumentLayout>

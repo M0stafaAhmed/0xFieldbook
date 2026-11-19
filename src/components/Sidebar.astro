@@ -1,0 +1,87 @@
+---
+// Persistent desktop sidebar (Phase 4 component inventory: "Sidebar").
+// Expand/collapse for each group uses native <details>/<summary>, so the
+// navigation is fully keyboard-accessible and works with JavaScript
+// disabled, per Phase 5 §4/§5 ("avoid introducing JavaScript solely to
+// open or close navigation").
+import { NAV_GROUPS, MACHINES } from "../data/navGroups";
+import { getGroupRoutes } from "../data/routes";
+
+interface Props {
+  currentRoute: string;
+}
+const { currentRoute } = Astro.props;
+
+function isActive(route: string) {
+  return route === currentRoute;
+}
+
+function isGroupActive(groupKey: string) {
+  return getGroupRoutes(groupKey).some((r) => r.route === currentRoute);
+}
+---
+
+<aside class="sidebar" aria-label="Primary navigation">
+  <a href="/" class="sidebar-brand">OSCP Exam PoC</a>
+  <nav aria-label="Content sections">
+    <ul>
+      {
+        NAV_GROUPS.map((group) => (
+          <li class="sidebar-group-item">
+            {group.expandable ? (
+              <details class="sidebar-group" open={isGroupActive(group.key)}>
+                <summary>
+                  <span class="sidebar-link sidebar-group-label">{group.label}</span>
+                </summary>
+                <ul class="sidebar-sublist">
+                  <li>
+                    <a
+                      href={group.indexRoute}
+                      class="sidebar-link"
+                      aria-current={isActive(group.indexRoute) ? "page" : undefined}
+                    >
+                      Overview
+                    </a>
+                  </li>
+                  {group.key === "Machines"
+                    ? MACHINES.map((m) => (
+                        <li>
+                          <a
+                            href={`/machines/${m.slug}`}
+                            class="sidebar-link"
+                            aria-current={isActive(`/machines/${m.slug}`) ? "page" : undefined}
+                          >
+                            {m.id}
+                          </a>
+                        </li>
+                      ))
+                    : getGroupRoutes(group.key)
+                        .filter((r) => r.route !== group.indexRoute)
+                        .map((r) => (
+                          <li>
+                            <a
+                              href={r.route}
+                              class="sidebar-link"
+                              aria-current={isActive(r.route) ? "page" : undefined}
+                            >
+                              {r.title}
+                            </a>
+                          </li>
+                        ))}
+                </ul>
+              </details>
+            ) : (
+              <a
+                href={group.indexRoute}
+                class="sidebar-link"
+                aria-current={isActive(group.indexRoute) ? "page" : undefined}
+              >
+                {group.label}
+              </a>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</aside>

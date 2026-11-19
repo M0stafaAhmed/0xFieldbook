@@ -1,0 +1,90 @@
+---
+// Timeline overview (Phase 4 "Timeline" + "TimelineCertaintyToggle"). Static by default: every entry is
+// visible without JavaScript. The one script only shows/hides entries classified "undated".
+import type { TimelineGroup } from "../lib/timeline";
+import type { EvidenceItem } from "../lib/evidence";
+import { stateTone } from "../lib/evidence";
+import { MACHINES } from "../data/navGroups";
+
+interface Props { groups: TimelineGroup[]; evidence: EvidenceItem[] }
+const { groups, evidence } = Astro.props;
+const total = groups.reduce((n, g) => n + g.entries.length, 0);
+const MARK = { exact: "◆ Exact", approximate: "◐ Approximate", undated: "○ Undated" } as const;
+const MEANING = {
+  exact: "a timestamp is preserved in the record",
+  approximate: "the record says timing is unavailable or inferred",
+  undated: "the record preserves order only, no timestamp",
+} as const;
+---
+
+<section class="timeline" data-timeline aria-labelledby="timeline-overview">
+  <h2 id="timeline-overview">Timeline overview</h2>
+  <p class="timeline-note">
+    Machines follow the recorded examination sequence; entries follow document order, the only order the record preserves.
+    Timestamps are shown only where the record preserves them. No time is inferred or added for any entry.
+  </p>
+  <ul class="tl-legend" aria-label="Timing certainty legend">
+    {(Object.keys(MARK) as (keyof typeof MARK)[]).map((k) => <li><strong>{MARK[k]}</strong>: {MEANING[k]}</li>)}
+  </ul>
+  <div class="tl-controls">
+    <button type="button" class="tl-toggle" data-tl-toggle aria-pressed="false" hidden>Hide undated entries</button>
+    <span class="tl-status" data-tl-status role="status" aria-live="polite">Showing all {total} entries</span>
+  </div>
+  <ol class="tl-groups">
+    {
+      groups.map((g) => {
+        const m = MACHINES.find((x) => x.id === g.machine);
+        const ev = evidence.filter((e) => e.machine === g.machine);
+        return (
+          <li class="tl-group" data-tl-group>
+            <h3 class="tl-group-title">
+              {m ? <a href={`/machines/${m.slug}`}>{g.machine}</a> : g.machine}
+              <span class="card-meta"> {g.heading.replace(/^\S+-\d+ — /, "")}</span>
+            </h3>
+            <div class="chip-row" aria-label={`${g.machine} flag completion`}>
+              {ev.map((e) => (
+                <span class="badge badge--filled" data-tone={stateTone(e.state)}>
+                  {e.objective === "user" ? "User" : "Root"}: ✓ Obtained
+                </span>
+              ))}
+            </div>
+            <ol class="tl-entries">
+              {g.entries.map((en) => (
+                <li class="tl-entry" data-tl-entry data-certainty={en.certainty}>
+                  <span class="tl-marker" data-certainty={en.certainty}>{MARK[en.certainty]}</span>
+                  <a href={`#${en.anchor}`}>{en.number} {en.label}</a>
+                  {en.timestamps.length > 0 && <span class="tl-stamps"> Recorded timestamp{en.timestamps.length > 1 ? "s" : ""}: {en.timestamps.join(", ")}</span>}
+                </li>
+              ))}
+            </ol>
+            <p class="tl-group-empty" data-tl-empty hidden>No dated entries are recorded for this machine.</p>
+          </li>
+        );
+      })
+    }
+  </ol>
+</section>
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-timeline]");
+  const btn = root?.querySelector<HTMLButtonElement>("[data-tl-toggle]");
+  const status = root?.querySelector<HTMLElement>("[data-tl-status]");
+  if (root && btn && status) {
+    const entries = [...root.querySelectorAll<HTMLElement>("[data-tl-entry]")];
+    const groups = [...root.querySelectorAll<HTMLElement>("[data-tl-group]")];
+    const apply = (hideUndated: boolean) => {
+      for (const e of entries) e.hidden = hideUndated && e.dataset.certainty === "undated";
+      for (const g of groups) {
+        const none = !g.querySelector("[data-tl-entry]:not([hidden])");
+        g.querySelector<HTMLElement>("[data-tl-empty]")!.hidden = !none;
+      }
+      const shown = entries.filter((e) => !e.hidden).length;
+      btn.setAttribute("aria-pressed", String(hideUndated));
+      status.textContent = hideUndated
+        ? `Showing ${shown} of ${entries.length} entries; ${entries.length - shown} undated entries hidden`
+        : `Showing all ${entries.length} entries`;
+    };
+    btn.hidden = false;
+    btn.addEventListener("click", () => apply(btn.getAttribute("aria-pressed") !== "true"));
+  }
+</script>

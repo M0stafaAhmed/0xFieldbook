@@ -1,0 +1,49 @@
+---
+// Shared shell for every route: sidebar + top nav + main content region.
+// Phase 4 component inventory: "BaseLayout". Semantic landmarks (header,
+// nav, main, footer) and a skip link are present on every page that uses
+// this layout, satisfying Phase 5 §8 accessibility requirements.
+import "../styles/global.css";
+import "../styles/prose.css";
+import "../styles/interactive.css";
+import CodeCopy from "../components/CodeCopy.astro";
+import Sidebar from "../components/Sidebar.astro";
+import TopNav from "../components/TopNav.astro";
+
+interface Props {
+  title: string;
+  currentRoute: string;
+}
+const { title, currentRoute } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} · OSCP Exam PoC</title>
+    <meta
+      name="description"
+      content="OSCP-style examination report: machines, methodology, reusable proof-of-concept techniques and evidence."
+    />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div class="app-shell">
+      <Sidebar currentRoute={currentRoute} />
+      <div class="main-content">
+        <TopNav currentRoute={currentRoute} />
+        <main id="main-content" tabindex="-1">
+          <slot />
+        </main>
+        <footer class="content-container" style="padding-top: 0;">
+          <p style="color: var(--text-muted); font-size: var(--text-xs);">
+            OSCP-Exam-PoC — static examination report. Built with Astro.
+          </p>
+        </footer>
+      </div>
+    </div>
+    <CodeCopy />
+  </body>
+</html>

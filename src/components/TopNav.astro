@@ -1,0 +1,25 @@
+---
+// Sticky top bar: breadcrumb trail (truncated on small screens via CSS,
+// not JS), a static link to the search placeholder, and the mobile menu
+// toggle (rendered by MobileNav itself, included here so it sits in the
+// same visual row as the rest of the top-bar actions).
+import Breadcrumbs from "./Breadcrumbs.astro";
+import MobileNav from "./MobileNav.astro";
+
+interface Props {
+  currentRoute: string;
+}
+const { currentRoute } = Astro.props;
+---
+
+<header class="top-nav">
+  <div class="top-nav-breadcrumbs">
+    <Breadcrumbs currentRoute={currentRoute} />
+  </div>
+  <div class="top-nav-actions">
+    <a href="/search" class="search-link" aria-label="Search the examination report">
+      <span aria-hidden="true">&#128269;</span> Search
+    </a>
+    <MobileNav currentRoute={currentRoute} />
+  </div>
+</header>

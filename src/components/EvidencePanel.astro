@@ -1,0 +1,29 @@
+---
+import type { EvidenceItem } from "../lib/evidence";
+import { stateTone } from "../lib/evidence";
+interface Props { items: EvidenceItem[]; heading?: string; showMachine?: boolean }
+const { items, heading = "Flag completion", showMachine = false } = Astro.props;
+---
+
+<section class="evidence-panel" aria-label={heading}>
+  <h2>{heading}</h2>
+  <ul class="evidence-list">
+    {
+      items.map((it) => (
+        <li>
+          <div class="evidence-row">
+            <span class="evidence-obj">{showMachine ? `${it.machine} ${it.objective}` : it.objective === "user" ? "User flag" : "Root flag"}</span>
+            <span class="badge badge--filled" data-tone={stateTone(it.state)}>
+              ✓ {it.label}
+            </span>
+            <span class="evidence-expl">{it.explanation}</span>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+  <p class="evidence-note">
+    All ten flag outcomes are confirmed by the examination participant. Public flag
+    values are masked as <code>IT{"{"}FLAG-SECRET{"}"}</code>.
+  </p>
+</section>

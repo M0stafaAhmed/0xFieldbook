@@ -1,0 +1,121 @@
+{
+ "document_types": {
+  "dashboard": [
+   "type",
+   "project",
+   "status",
+   "updated",
+   "exam",
+   "machine_count",
+   "tags"
+  ],
+  "exam-overview": [
+   "type",
+   "project",
+   "status",
+   "documentation",
+   "created",
+   "updated",
+   "tags"
+  ],
+  "exam-timeline": [
+   "type",
+   "project",
+   "status",
+   "updated",
+   "exam",
+   "machine_count",
+   "machine_sequence",
+   "tags"
+  ],
+  "technical-reference": [
+   "type",
+   "project",
+   "category",
+   "status",
+   "created",
+   "updated",
+   "tags"
+  ],
+  "machine-overview": [
+   "type",
+   "project",
+   "machine",
+   "difficulty",
+   "platform",
+   "status",
+   "initial_user",
+   "final_user",
+   "initial_access",
+   "privilege_escalation",
+   "services",
+   "target",
+   "http_port",
+   "ssh_port",
+   "user_access",
+   "root_access",
+   "user_flag_submitted",
+   "root_flag_submitted",
+   "tags"
+  ],
+  "machine-phase": [
+   "type",
+   "project",
+   "machine",
+   "difficulty",
+   "phase",
+   "status",
+   "platform",
+   "initial_user",
+   "final_user",
+   "privilege_escalation",
+   "vulnerable_binary",
+   "target_binary",
+   "technique",
+   "flag_path",
+   "root_flag_path",
+   "flag_submitted",
+   "root_flag_submitted",
+   "user_flag_status",
+   "root_flag_status",
+   "tags"
+  ],
+  "methodology": [
+   "type",
+   "project",
+   "status",
+   "updated",
+   "tags"
+  ],
+  "difficulty-lesson": [
+   "type",
+   "project",
+   "status",
+   "updated",
+   "related_machines",
+   "tags"
+  ],
+  "reusable-poc": [
+   "type",
+   "project",
+   "status",
+   "updated",
+   "related_machines",
+   "tags"
+  ],
+  "script-index": [
+   "type",
+   "project",
+   "status",
+   "updated",
+   "related_machines",
+   "tags"
+  ]
+ },
+ "excluded_from_render": {
+  "Dashboard.md": [
+   "## 7. Obsidian Navigation (Obsidian-app-specific link list, superseded by site navigation)",
+   "## 8. Using Obsidian Effectively (Obsidian-app-specific feature table, not applicable to a website)"
+  ]
+ }
+}

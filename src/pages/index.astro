@@ -1,0 +1,78 @@
+---
+// Home / command center (Phase 5 §7, completed in Phase 6). Per the Phase 6 decision on R1, the
+// Obsidian Dashboard document is not reproduced as a page: this route is the site's own entry point,
+// built from routes, content collections, and the examination participant's explicit
+// completion confirmation. Raw output preservation is not used to infer completion.
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { MACHINES } from "../data/navGroups";
+import { getGroupRoutes } from "../data/routes";
+import { evidenceItems } from "../lib/docs";
+import { stateTone } from "../lib/evidence";
+
+const evidence = await evidenceItems();
+const counts = [
+  { label: "Methodology", href: "/methodology", n: getGroupRoutes("Methodology").length - 1 },
+  { label: "Difficulties & Lessons", href: "/lessons", n: getGroupRoutes("Difficulties & Lessons").length - 1 },
+  { label: "Reusable PoC Library", href: "/poc-library", n: getGroupRoutes("Reusable PoC Library").length - 1 },
+  { label: "Examination Context", href: "/exam", n: getGroupRoutes("Examination Context").length },
+];
+---
+
+<BaseLayout title="Dashboard" currentRoute="/">
+  <div class="content-container">
+    <header style="margin-bottom: var(--space-6);">
+      <p class="card-meta">IT GATE Academy OSCP-Style Examination</p>
+      <h1>OSCP Exam — Penetration Testing &amp; PoC Vault</h1>
+      <p>
+        This report documents {MACHINES.length} examination machines, the techniques used against them, and the lessons recorded along the way.
+        Each machine has an Overview, a User record and a Root record. All user and root flags were obtained and submitted, as confirmed by the examination participant.
+      </p>
+    </header>
+
+    <section aria-labelledby="machines-heading" style="margin-bottom: var(--space-7);">
+      <h2 id="machines-heading">Machines</h2>
+      <div class="card-grid">
+        {
+          MACHINES.map((m) => {
+            const rows = evidence.filter((e) => e.machine === m.id);
+            return (
+              <a href={`/machines/${m.slug}`} class="card">
+                <h3>{m.id}</h3>
+                <p class="card-meta">{m.difficulty}</p>
+                <div class="chip-row" aria-label={`${m.id} flag completion`}>
+                  {rows.map((e) => (
+                    <span class="badge badge--filled" data-tone={stateTone(e.state)}>
+                      {e.objective === "user" ? "User" : "Root"}: ✓ Obtained
+                    </span>
+                  ))}
+                </div>
+              </a>
+            );
+          })
+        }
+      </div>
+    </section>
+
+    <section aria-labelledby="explore-heading" style="margin-bottom: var(--space-7);">
+      <h2 id="explore-heading">Explore</h2>
+      <div class="card-grid">
+        {
+          counts.map((c) => (
+            <a href={c.href} class="card">
+              <h3>{c.label}</h3>
+              <p class="card-meta">{c.n} documents</p>
+            </a>
+          ))
+        }
+        <a href="/timeline" class="card">
+          <h3>Examination Timeline</h3>
+          <p class="card-meta">Machine order and status</p>
+        </a>
+      </div>
+    </section>
+
+    <p class="card-meta">
+      All ten user/root flags are marked obtained and submitted based on participant confirmation. Published flag values use IT{FLAG-SECRET}.
+    </p>
+  </div>
+</BaseLayout>

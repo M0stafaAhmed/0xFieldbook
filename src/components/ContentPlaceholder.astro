@@ -1,0 +1,16 @@
+---
+// Restrained placeholder for a route whose document body has not been
+// integrated yet (Phase 5 §6: "use a restrained message... avoid lorem
+// ipsum and invented technical content"). Removed once Phase 6 renders
+// the real Markdown body in its place.
+interface Props {
+  label?: string;
+}
+const { label = "Document content" } = Astro.props;
+---
+
+<div class="content-placeholder" role="note">
+  <p style="margin:0;">
+    {label} will be integrated in Phase 6 (Content Integration).
+  </p>
+</div>

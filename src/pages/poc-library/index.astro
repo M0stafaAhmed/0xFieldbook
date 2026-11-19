@@ -1,0 +1,26 @@
+---
+// /poc-library — generated index with tag filtering (Phase 4 §3.5, Phase 7). Cards and tags come from the
+// 6 PoCs and the scripts index; tags are each document's own frontmatter tags.
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import TagFilter from "../../components/TagFilter.astro";
+import { getGroupRoutes } from "../../data/routes";
+import { vaultBySource } from "../../lib/docs";
+
+const vault = await vaultBySource();
+const items = getGroupRoutes("Reusable PoC Library")
+  .filter((r) => r.route !== "/poc-library")
+  .map((r) => ({
+    href: r.route,
+    title: r.title,
+    subtitle: r.subtitle,
+    tags: ((vault.get(r.source!)?.data as any)?.tags as string[] | undefined) ?? [],
+  }));
+---
+
+<BaseLayout title="Reusable PoC Library" currentRoute="/poc-library">
+  <div class="content-container">
+    <h1>Reusable PoC Library</h1>
+    <p class="card-meta">Proof-of-concept techniques validated during the examination, reusable across machines.</p>
+    <TagFilter items={items} />
+  </div>
+</BaseLayout>
