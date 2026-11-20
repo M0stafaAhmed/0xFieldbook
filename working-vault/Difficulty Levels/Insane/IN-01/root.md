@@ -44,39 +44,10 @@ See [[Difficulty Levels/Insane/IN-01/user]] for the complete initial-access chai
 
 The successful privilege-escalation path was:
 
-```
-web — UID 1000
-       |
-       v
-sudo -l
-       |
-       v
-NOPASSWD: /usr/local/bin/healthcheck
-       |
-       v
-env_keep+=LD_PRELOAD
-       |
-       v
-Create malicious C source
-       |
-       v
-Compile source into shared library (.so)
-       |
-       v
-sudo with LD_PRELOAD
-       |
-       v
-Shared-library constructor executes as root
-       |
-       v
-UID=0 / EUID=0
-       |
-       v
-Read /root/root.txt
-       |
-       v
-ROOT FLAG RETRIEVED
-```
+<figure class="attack-chain-figure attack-chain-figure--compact">
+  <img src="/diagrams/in-01-root-objective-flowchart.svg" alt="Compact eleven-step privilege escalation flowchart with arrows: web UID 1000, sudo enumeration, NOPASSWD healthcheck, preserved LD_PRELOAD, malicious C source, compilation as a shared library, sudo LD_PRELOAD execution, root constructor, captured UID and EUID 0, reading /root/root.txt and root flag retrieval." width="440" height="1191" loading="lazy" decoding="async" />
+  <figcaption>All 11 original Objective steps preserved in a compact, arrow-connected flowchart. The captured identity output and flag retrieval confirm root code execution, <strong>not an interactive root shell</strong>.</figcaption>
+</figure>
 
 ## 2. Initial Privilege-Escalation Context
 
@@ -819,46 +790,13 @@ The flag was returned directly through the in-band HTTP execution response.
 
 ## 9. Attack Chain Summary
 
-```
-Initial access as web
-        |
-        v
-Enumerate sudo privileges
-        |
-        v
-Discover NOPASSWD healthcheck
-        |
-        v
-Discover env_keep+=LD_PRELOAD
-        |
-        v
-Inspect /usr/local/bin/healthcheck
-        |
-        v
-Identify dynamically linked ELF executable
-        |
-        v
-Confirm GCC availability
-        |
-        v
-Create /tmp/in01_preload.c
-        |
-        v
-Compile /tmp/in01_preload.so
-        |
-        v
-sudo -n LD_PRELOAD=/tmp/in01_preload.so \
-    /usr/local/bin/healthcheck
-        |
-        v
-Constructor executes as UID 0 / EUID 0
-        |
-        v
-Read /root/root.txt
-        |
-        v
-ROOT FLAG RETRIEVED
-```
+<figure class="attack-chain-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/in-01-root-attack-chain-mobile.svg" />
+    <img src="/diagrams/in-01-root-attack-chain.svg" alt="Detailed thirteen-step IN-01 root attack chain: web foothold, sudo enumeration, NOPASSWD healthcheck, env_keep LD_PRELOAD, root-owned healthcheck and dynamically linked ELF inspection, GCC detection, /tmp/in01_preload.c source creation, compilation to /tmp/in01_preload.so, sudo -n LD_PRELOAD=/tmp/in01_preload.so /usr/local/bin/healthcheck, captured root UID and EUID, root.txt retrieval and flag completion." width="760" height="2338" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>All 13 original stages remain in order, with technical context for the <code>sudo</code> permission, ELF loader and shared-library constructor. The source records <code>UID=0 EUID=0 GID=0 EGID=0</code> and the root flag in the HTTP response; no interactive root shell or temporary-file cleanup was verified.</figcaption>
+</figure>
 
 ## 10. Difficulties Encountered
 
