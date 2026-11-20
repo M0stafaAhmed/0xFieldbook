@@ -88,50 +88,13 @@ The objective was completed successfully.
 
 ## 3. Attack Chain
 
-```
-Web Application
-      |
-      v
-File Upload Vulnerability
-      |
-      v
-Uploaded PHP File
-      |
-      v
-PHP Command Execution
-      |
-      |  Execution context: www-data
-      |
-      v
-Enumerate /home
-      |
-      v
-Identify user
-      |
-      v
-Read /home/user/user.txt
-      |
-      v
-Submit User Flag
-      |
-      v
-Sudo Enumeration
-      |
-      v
-www-data may execute /usr/bin/find as root
-      |
-      v
-GNU find -exec Privilege Escalation
-      |
-      v
-Effective UID = 0
-      |
-      v
-Read /root/root.txt
-      |
-      v
-Submit Root Flag
-```
+<figure class="attack-chain-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/ve-01-attack-chain-mobile.svg" />
+    <img src="/diagrams/ve-01-attack-chain.svg" alt="VE-01 attack chain: a web file-upload vulnerability, uploaded PHP command execution as www-data, user flag submission, sudo /usr/bin/find -exec privilege escalation to UID 0, and root flag submission." width="760" height="1070" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>VE-01 attack path. User and root flag outcomes are participant-confirmed; raw flag values are not published.</figcaption>
+</figure>
 
 ## 4. Reconnaissance Summary
 

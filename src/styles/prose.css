@@ -86,3 +86,9 @@ a.wikilink:hover { text-decoration-color: var(--accent-amber); }
 .related-links h2 { font-size: var(--text-base); border: 0; margin: 0 0 var(--space-3) 0; padding: 0; }
 .related-links ul { margin: 0; padding-left: var(--space-5); }
 .chip-row { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-2); }
+
+/* Responsive, accessible SVG attack-chain figures rendered from vault Markdown. */
+.doc-body .attack-chain-figure { margin: var(--space-5) 0 var(--space-6); }
+.doc-body .attack-chain-figure picture { display: block; }
+.doc-body .attack-chain-figure img { display: block; width: 100%; height: auto; border-radius: var(--radius-lg); }
+.doc-body .attack-chain-figure figcaption { margin-top: var(--space-2); color: var(--text-secondary); font-size: var(--text-sm); line-height: var(--leading-sm); }

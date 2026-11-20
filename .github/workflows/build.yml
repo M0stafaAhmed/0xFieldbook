@@ -18,3 +18,8 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm run build
+      - name: Verify VE-01 attack-chain diagram
+        run: |
+          test -s dist/diagrams/ve-01-attack-chain.svg
+          test -s dist/diagrams/ve-01-attack-chain-mobile.svg
+          grep -q 've-01-attack-chain.svg' dist/machines/ve-01/index.html
