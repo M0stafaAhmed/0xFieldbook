@@ -43,3 +43,11 @@ jobs:
           grep -q 'Enumerate sqlite_master' dist/diagrams/ea-01-attack-chain.svg
           grep -q 'Discover SUID' dist/diagrams/ea-01-attack-chain-mobile.svg
           grep -q 'Read /root/root.txt' dist/diagrams/ea-01-attack-chain.svg
+      - name: Verify EA-01 user attack-chain diagram
+        run: |
+          test -s dist/diagrams/ea-01-user-attack-chain.svg
+          test -s dist/diagrams/ea-01-user-attack-chain-mobile.svg
+          grep -q 'ea-01-user-attack-chain.svg' dist/machines/ea-01/user/index.html
+          grep -q 'MySQL Enumeration Fails' dist/diagrams/ea-01-user-attack-chain.svg
+          grep -q 'Query sqlite_master' dist/diagrams/ea-01-user-attack-chain.svg
+          grep -q 'Submit User Flag' dist/diagrams/ea-01-user-attack-chain-mobile.svg

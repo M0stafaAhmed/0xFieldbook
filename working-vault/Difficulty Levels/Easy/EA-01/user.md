@@ -286,48 +286,13 @@ IT{FLAG-SECRET}
 
 ## 7. Attack Chain Summary
 
-```
-HTTP Search Application
-          |
-          v
-Identify q Parameter
-          |
-          v
-Observe Two-Column Output
-          |
-          v
-Test UNION SQL Injection
-          |
-          v
-MySQL Enumeration Fails
-          |
-          v
-Switch to SQLite
-          |
-          v
-Query sqlite_master
-          |
-          v
-Identify users Table
-          |
-          v
-Extract username and password
-          |
-          v
-Identify robert Credential
-          |
-          v
-SSH Authentication
-          |
-          v
-Access as robert
-          |
-          v
-Read user.txt
-          |
-          v
-Submit User Flag
-```
+<figure class="attack-chain-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/ea-01-user-attack-chain-mobile.svg" />
+    <img src="/diagrams/ea-01-user-attack-chain.svg" alt="EA-01 user-level attack chain with 14 original stages: HTTP Search Application, q parameter, two result columns, UNION SQL injection, failed MySQL enumeration, switch to SQLite, sqlite_master, users table, credential extraction, robert credential, SSH authentication, access as robert, reading user.txt and submitting the user flag." width="760" height="2031" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>All 14 documented stages preserved, including the failed MySQL queries and SQLite pivot. Sensitive credential and flag values are not repeated in this diagram; the user objective is participant-confirmed.</figcaption>
+</figure>
 
 ## 8. Technical Findings
 
