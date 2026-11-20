@@ -38,36 +38,10 @@ flag_submitted: true
 
 The successful initial-access chain was:
 
-```
-Public Link Preview Application
-        |
-        v
-/fetch?url=
-        |
-        v
-SSRF
-        |
-        v
-Loopback Filter Bypass — 127.1
-        |
-        v
-Internal Admin API — 127.1:9000
-        |
-        v
-/admin/exec
-        |
-        v
-data Parameter
-        |
-        v
-Base64-Encoded Python Pickle
-        |
-        v
-Remote Command Execution
-        |
-        v
-web — UID 1000
-```
+<figure class="attack-chain-figure attack-chain-figure--compact">
+  <img src="/diagrams/in-01-user-objective-flowchart.svg" alt="Compact ten-step flowchart with downward arrows: Public Link Preview Application, /fetch?url=, SSRF, loopback filter bypass via 127.1, internal Admin API at 127.1:9000, /admin/exec, data parameter, Base64-encoded Python Pickle, remote command execution and web UID 1000." width="440" height="1011" loading="lazy" decoding="async" />
+  <figcaption>Ten connected stages, retaining the original Objective flow. The foothold used in-band HTTP command execution as <code>web</code>, not an interactive SSH session.</figcaption>
+</figure>
 
 The target did not require an interactive SSH session for initial access. The successful foothold was established through command execution returned directly in the HTTP response.
 
@@ -1132,63 +1106,13 @@ The key distinction:
 
 ## 12. Initial Access Attack Chain Summary
 
-```
-1. Enumerate assigned HTTP and SSH services
-             |
-             v
-2. Fingerprint public Gunicorn application
-             |
-             v
-3. Confirm server-side fetching through /fetch
-             |
-             v
-4. Test canonical loopback addresses
-             |
-             v
-5. Identify alternative loopback representations
-             |
-             v
-6. Confirm 127.1 reaches internal connection stage
-             |
-             v
-7. Discover internal services through port enumeration
-             |
-             v
-8. Identify internal Admin API on port 9000
-             |
-             v
-9. Fuzz API routes
-             |
-             v
-10. Discover /admin/exec
-             |
-             v
-11. Fuzz request parameters
-             |
-             v
-12. Identify data parameter
-             |
-             v
-13. Identify Base64 decoding and Pickle deserialization
-             |
-             v
-14. Craft malicious Pickle object
-             |
-             v
-15. Confirm command execution as web
-             |
-             v
-16. Attempt reverse shell
-             |
-             v
-17. Callback unsuccessful
-             |
-             v
-18. Continue using in-band command execution
-             |
-             v
-19. Issue user.txt retrieval command
-```
+<figure class="attack-chain-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/in-01-user-attack-chain-mobile.svg" />
+    <img src="/diagrams/in-01-user-attack-chain.svg" alt="Detailed 19-stage IN-01 user attack chain: HTTP and SSH reconnaissance, Gunicorn, /fetch SSRF, alternative loopback 127.1, internal Admin API port 9000, route and parameter fuzzing, Base64/Pickle deserialization, malicious Pickle command execution as web, unsuccessful reverse-shell callbacks, continuing in-band RCE, and user.txt retrieval command." width="760" height="2809" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>All 19 original stages are preserved with source-backed details. Both reverse-shell callbacks were unsuccessful; their exact cause was not established. In-band RCE remained functional, and user flag submission is participant-confirmed.</figcaption>
+</figure>
 
 ## 13. Lessons Learned
 

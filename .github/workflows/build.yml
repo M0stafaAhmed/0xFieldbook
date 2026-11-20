@@ -160,3 +160,24 @@ jobs:
       - name: Verify IN-01 SVG XML structure
         run: |
           python3 -c "import xml.etree.ElementTree as ET; from pathlib import Path; a=list(Path('dist/diagrams').glob('in-01-attack-chain*.svg')); assert len(a)==2, len(a); [ET.parse(p) for p in a]"
+      - name: Verify IN-01 User objective flowchart and attack chain
+        run: |
+          test -s dist/diagrams/in-01-user-objective-flowchart.svg
+          test -s dist/diagrams/in-01-user-attack-chain.svg
+          test -s dist/diagrams/in-01-user-attack-chain-mobile.svg
+          grep -Fq 'in-01-user-objective-flowchart.svg' dist/machines/in-01/user/index.html
+          grep -Fq 'in-01-user-attack-chain.svg' dist/machines/in-01/user/index.html
+          grep -Fq 'in-01-user-attack-chain-mobile.svg' dist/machines/in-01/user/index.html
+          grep -Fq 'attack-chain-figure--compact' dist/machines/in-01/user/index.html
+          test "$(grep -o '<circle cx="52"' dist/diagrams/in-01-user-objective-flowchart.svg | wc -l)" -eq 10
+          test "$(grep -o '<path d="M220 ' dist/diagrams/in-01-user-objective-flowchart.svg | wc -l)" -eq 9
+          test "$(grep -o '<circle cx="' dist/diagrams/in-01-user-attack-chain.svg | wc -l)" -eq 19
+          test "$(grep -o '<circle cx="' dist/diagrams/in-01-user-attack-chain-mobile.svg | wc -l)" -eq 19
+          grep -Fq 'Internal Admin API — 127.1:9000' dist/diagrams/in-01-user-objective-flowchart.svg
+          grep -Fq 'Identify Base64 decoding and Pickle deserialization' dist/diagrams/in-01-user-attack-chain.svg
+          grep -Fq 'Callback unsuccessful' dist/diagrams/in-01-user-attack-chain.svg
+          grep -Fq 'Cause unverified' dist/diagrams/in-01-user-attack-chain-mobile.svg
+          grep -Fq 'max-width: 440px' src/styles/prose.css
+      - name: Verify IN-01 User SVG XML structure
+        run: |
+          python3 -c "import xml.etree.ElementTree as ET; from pathlib import Path; xs=list(Path('dist/diagrams').glob('in-01-user-*.svg')); assert len(xs)==3, len(xs); [ET.parse(p) for p in xs]"
