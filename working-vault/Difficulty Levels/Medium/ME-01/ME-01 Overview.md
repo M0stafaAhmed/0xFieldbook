@@ -104,57 +104,13 @@ The flag was successfully submitted.
 
 ## 3. Attack Chain
 
-```
-IT GATE File Service
-          |
-          v
-/api/download?file=
-          |
-          v
-Path Traversal
-          |
-          v
-Arbitrary File Read
-          |
-          v
-Identify svc Account
-          |
-          v
-Read Application Source
-          |
-          v
-Discover config.py
-          |
-          v
-Recover API_KEY
-          |
-          v
-Authenticate to /api/ping
-          |
-          v
-OS Command Injection
-          |
-          v
-Remote Command Execution as svc
-          |
-          v
-Linux Privilege Enumeration
-          |
-          v
-Discover pyadmin cap_setuid=ep
-          |
-          v
-Python os.setuid(0)
-          |
-          v
-UID = 0 / EUID = 0
-          |
-          v
-Read /root/root.txt
-          |
-          v
-Submit Root Flag
-```
+<figure class="attack-chain-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/me-01-attack-chain-mobile.svg" />
+    <img src="/diagrams/me-01-attack-chain.svg" alt="ME-01 complete seventeen-stage attack chain: IT GATE File Service, /api/download path traversal and arbitrary file read, svc account, source disclosure, config.py API key retrieval, authenticated /api/ping command injection, RCE as svc, Linux capability enumeration, pyadmin cap_setuid=ep, Python os.setuid(0), captured UID and EUID 0 inside the container, root flag retrieval and submission." width="760" height="2511" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>All 17 original stages preserved, including API-key recovery and <code>CAP_SETUID</code> escalation. The user flag was retrieved through arbitrary file read at <code>/home/svc/user.txt</code>. Captured UID/EUID 0 confirms root privileges in the application container, <strong>not a host escape</strong>; flag values are redacted.</figcaption>
+</figure>
 
 ## 4. Reconnaissance Summary
 

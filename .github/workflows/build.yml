@@ -61,3 +61,13 @@ jobs:
           grep -q 'Read /root/root.txt' dist/diagrams/ea-01-root-attack-chain.svg
           grep -q 'Raw session response not saved' dist/diagrams/ea-01-root-attack-chain-mobile.svg
           grep -q 'EA-01 Completed' dist/diagrams/ea-01-root-attack-chain-mobile.svg
+      - name: Verify ME-01 overview attack-chain diagram
+        run: |
+          test -s dist/diagrams/me-01-attack-chain.svg
+          test -s dist/diagrams/me-01-attack-chain-mobile.svg
+          grep -q 'me-01-attack-chain.svg' dist/machines/me-01/index.html
+          grep -q 'Discover pyadmin cap_setuid=ep' dist/diagrams/me-01-attack-chain.svg
+          grep -q 'Python os.setuid(0)' dist/diagrams/me-01-attack-chain.svg
+          grep -q 'UID = 0 / EUID = 0' dist/diagrams/me-01-attack-chain.svg
+          grep -q 'Read /root/root.txt' dist/diagrams/me-01-attack-chain-mobile.svg
+          grep -q 'No host escape' dist/diagrams/me-01-attack-chain-mobile.svg
