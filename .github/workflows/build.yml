@@ -51,3 +51,13 @@ jobs:
           grep -q 'MySQL Enumeration Fails' dist/diagrams/ea-01-user-attack-chain.svg
           grep -q 'Query sqlite_master' dist/diagrams/ea-01-user-attack-chain.svg
           grep -q 'Submit User Flag' dist/diagrams/ea-01-user-attack-chain-mobile.svg
+      - name: Verify EA-01 root privilege-escalation diagram
+        run: |
+          test -s dist/diagrams/ea-01-root-attack-chain.svg
+          test -s dist/diagrams/ea-01-root-attack-chain-mobile.svg
+          grep -q 'ea-01-root-attack-chain.svg' dist/machines/ea-01/root/index.html
+          grep -q 'sudo Not Installed' dist/diagrams/ea-01-root-attack-chain.svg
+          grep -q 'Root-Owned SUID Permission' dist/diagrams/ea-01-root-attack-chain.svg
+          grep -q 'Read /root/root.txt' dist/diagrams/ea-01-root-attack-chain.svg
+          grep -q 'Raw session response not saved' dist/diagrams/ea-01-root-attack-chain-mobile.svg
+          grep -q 'EA-01 Completed' dist/diagrams/ea-01-root-attack-chain-mobile.svg

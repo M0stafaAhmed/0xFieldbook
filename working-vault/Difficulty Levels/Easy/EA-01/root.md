@@ -337,45 +337,13 @@ No flag value should be guessed or reconstructed.
 
 ## 9. Complete Privilege Escalation Chain
 
-```
-SSH Access as robert
-        |
-        v
-Identity and Group Enumeration
-        |
-        v
-sudo -l
-        |
-        v
-sudo Not Installed
-        |
-        v
-SUID Enumeration
-        |
-        v
-Discover /usr/bin/find
-        |
-        v
-Root-Owned SUID Permission
-        |
-        v
-Execute find with -exec
-        |
-        v
-Launch /bin/sh -p
-        |
-        v
-Effective UID = 0
-        |
-        v
-Read /root/root.txt
-        |
-        v
-Submit Root Flag
-        |
-        v
-EA-01 Completed
-```
+<figure class="attack-chain-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/ea-01-root-attack-chain-mobile.svg" />
+    <img src="/diagrams/ea-01-root-attack-chain.svg" alt="Thirteen-stage EA-01 privilege escalation: SSH access as robert, identity and group enumeration, sudo -l and its absence, SUID enumeration, discovery of root-owned SUID /usr/bin/find, execution with find -exec and /bin/sh -p, expected effective UID 0, reading /root/root.txt, root flag submission, and completion. Raw privilege-verification output was not retained." width="760" height="1933" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>All 13 original steps are retained. EA-01 uses a <strong>root-owned SUID</strong> GNU find binary, not sudo. The <code>euid=0(root)</code> result is expected rather than captured; completion of the root objective is participant-confirmed. The exact exploitation command remains in section 7.</figcaption>
+</figure>
 
 ## 10. Root-Cause Assessment
 
