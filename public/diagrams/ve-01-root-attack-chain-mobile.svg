@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="380" height="1962" viewBox="0 0 380 1962" role="img" aria-labelledby="ve-root-title ve-root-desc">
+  <title id="ve-root-title">VE-01 root privilege escalation — eleven documented steps</title>
+  <desc id="ve-root-desc">PHP command execution as www-data, sudo -l, NOPASSWD find permission, GNU find -exec behavior, privileged find execution, /bin/sh -p, expected effective root UID without preserved raw response, root flag retrieval from /root/root.txt, submission, and VE-01 completion.</desc>
+  <rect x="8" y="8" width="364" height="1946" rx="18" fill="#1c1f26" stroke="#3a3f4a"/>
+  <g font-family="Inter, Segoe UI, Arial, sans-serif">
+    <text x="25" y="43" font-size="13" fill="#d4922a" font-weight="700" letter-spacing="1.7">VE-01 / ROOT ESCALATION</text>
+ <text x="25" y="82" font-size="25" fill="#e8e9ec" font-weight="700">From www-data to root</text>
+ <text x="25" y="108" font-size="13" fill="#9aa0ad">11 preserved steps · Privilege escalation</text>
+ <line x1="25" y1="128" x2="355" y2="128" stroke="#3a3f4a"/>
+    <line x1="35" y1="238" x2="35" y2="361" stroke="#4b5565" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round"/>
+<line x1="35" y1="397" x2="35" y2="520" stroke="#4b5565" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round"/>
+<line x1="35" y1="556" x2="35" y2="679" stroke="#4b5565" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round"/>
+<line x1="35" y1="715" x2="35" y2="838" stroke="#4b5565" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round"/>
+<line x1="35" y1="874" x2="35" y2="997" stroke="#4b5565" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round"/>
+<line x1="35" y1="1033" x2="35" y2="1156" stroke="#4b5565" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round"/>
+<line x1="35" y1="1192" x2="35" y2="1315" stroke="#4b5565" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round"/>
+<line x1="35" y1="1351" x2="35" y2="1474" stroke="#4b5565" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round"/>
+<line x1="35" y1="1510" x2="35" y2="1633" stroke="#4b5565" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round"/>
+<line x1="35" y1="1669" x2="35" y2="1792" stroke="#4b5565" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round"/>
+    <g>
+    <rect x="61" y="150" width="300" height="140" rx="12" fill="#242832" stroke="#3a3f4a"/>
+    <rect x="61" y="166" width="4" height="108" rx="2" fill="#4fb3bf"/>
+    <circle cx="35" cy="220" r="16" stroke="#4fb3bf" stroke-width="2" fill="#1c1f26"/>
+    <text x="35" y="224.5" font-size="13" text-anchor="middle" fill="#e8e9ec" font-weight="700">01</text>
+    <text x="78" y="174" font-size="10.2" font-weight="700" letter-spacing="1" fill="#4fb3bf">EXISTING FOOTHOLD</text>
+    <text x="78" y="211" font-size="18" font-weight="650" fill="#e8e9ec">PHP Command Execution</text>
+    <text x="78" y="255" font-size="12.7" fill="#aeb5c1">OS commands via uploaded PHP</text>
+  <text x="78" y="275" font-size="12.7" fill="#aeb5c1">Existing command-execution channel</text>
+  </g>
+<g>
+    <rect x="61" y="309" width="300" height="140" rx="12" fill="#242832" stroke="#3a3f4a"/>
+    <rect x="61" y="325" width="4" height="108" rx="2" fill="#4fb3bf"/>
+    <circle cx="35" cy="379" r="16" stroke="#4fb3bf" stroke-width="2" fill="#1c1f26"/>
+    <text x="35" y="383.5" font-size="13" text-anchor="middle" fill="#e8e9ec" font-weight="700">02</text>
+    <text x="78" y="333" font-size="10.2" font-weight="700" letter-spacing="1" fill="#4fb3bf">EXECUTION CONTEXT</text>
+    <text x="78" y="370" font-size="18" font-weight="650" fill="#e8e9ec">Execution as www-data</text>
+    <text x="78" y="414" font-size="12.7" fill="#aeb5c1">Web server execution account</text>
+  <text x="78" y="434" font-size="12.7" fill="#aeb5c1">Identity: www-data</text>
+  </g>
+<g>
+    <rect x="61" y="468" width="300" height="140" rx="12" fill="#242832" stroke="#3a3f4a"/>
+    <rect x="61" y="484" width="4" height="108" rx="2" fill="#d4922a"/>
+    <circle cx="35" cy="538" r="16" stroke="#d4922a" stroke-width="2" fill="#1c1f26"/>
+    <text x="35" y="542.5" font-size="13" text-anchor="middle" fill="#e8e9ec" font-weight="700">03</text>
+    <text x="78" y="492" font-size="10.2" font-weight="700" letter-spacing="1" fill="#d4922a">PRIVILEGE ENUMERATION</text>
+    <text x="78" y="529" font-size="18" font-weight="650" fill="#e8e9ec">sudo -l</text>
+    <text x="78" y="573" font-size="12.7" fill="#aeb5c1">Enumerate permitted sudo commands</text>
+  <text x="78" y="593" font-size="12.7" fill="#aeb5c1">Through the PHP endpoint</text>
+  </g>
+<g>
+    <rect x="61" y="627" width="300" height="140" rx="12" fill="#242832" stroke="#3a3f4a"/>
+    <rect x="61" y="643" width="4" height="108" rx="2" fill="#d4922a"/>
+    <circle cx="35" cy="697" r="16" stroke="#d4922a" stroke-width="2" fill="#1c1f26"/>
+    <text x="35" y="701.5" font-size="13" text-anchor="middle" fill="#e8e9ec" font-weight="700">04</text>
+    <text x="78" y="651" font-size="10.2" font-weight="700" letter-spacing="1" fill="#d4922a">MISCONFIGURATION</text>
+    <text x="78" y="678" font-size="17.2" font-weight="650" fill="#e8e9ec">Discover NOPASSWD:</text>
+<text x="78" y="700" font-size="17.2" font-weight="650" fill="#e8e9ec">/usr/bin/find</text>
+    <text x="78" y="732" font-size="12.7" fill="#aeb5c1">www-data may run find as root</text>
+  <text x="78" y="752" font-size="12.7" fill="#aeb5c1">No password required</text>
+  </g>
+<g>
+    <rect x="61" y="786" width="300" height="140" rx="12" fill="#242832" stroke="#3a3f4a"/>
+    <rect x="61" y="802" width="4" height="108" rx="2" fill="#d4922a"/>
+    <circle cx="35" cy="856" r="16" stroke="#d4922a" stroke-width="2" fill="#1c1f26"/>
+    <text x="35" y="860.5" font-size="13" text-anchor="middle" fill="#e8e9ec" font-weight="700">05</text>
+    <text x="78" y="810" font-size="10.2" font-weight="700" letter-spacing="1" fill="#d4922a">ESCALATION PRIMITIVE</text>
+    <text x="78" y="837" font-size="17.2" font-weight="650" fill="#e8e9ec">Identify GNU find</text>
+<text x="78" y="859" font-size="17.2" font-weight="650" fill="#e8e9ec">-exec functionality</text>
+    <text x="78" y="891" font-size="12.7" fill="#aeb5c1">find&apos;s -exec launches a program</text>
+  <text x="78" y="911" font-size="12.7" fill="#aeb5c1">It inherits the sudo root context</text>
+  </g>
+<g>
+    <rect x="61" y="945" width="300" height="140" rx="12" fill="#242832" stroke="#3a3f4a"/>
+    <rect x="61" y="961" width="4" height="108" rx="2" fill="#d4922a"/>
+    <circle cx="35" cy="1015" r="16" stroke="#d4922a" stroke-width="2" fill="#1c1f26"/>
+    <text x="35" y="1019.5" font-size="13" text-anchor="middle" fill="#e8e9ec" font-weight="700">06</text>
+    <text x="78" y="969" font-size="10.2" font-weight="700" letter-spacing="1" fill="#d4922a">PRIVILEGED EXECUTION</text>
+    <text x="78" y="1006" font-size="18" font-weight="650" fill="#e8e9ec">Execute find through sudo</text>
+    <text x="78" y="1050" font-size="12.7" fill="#aeb5c1">Run sudo /usr/bin/find with -exec</text>
+  <text x="78" y="1070" font-size="12.7" fill="#aeb5c1">Recorded payload also uses -quit</text>
+  </g>
+<g>
+    <rect x="61" y="1104" width="300" height="140" rx="12" fill="#242832" stroke="#3a3f4a"/>
+    <rect x="61" y="1120" width="4" height="108" rx="2" fill="#d4922a"/>
+    <circle cx="35" cy="1174" r="16" stroke="#d4922a" stroke-width="2" fill="#1c1f26"/>
+    <text x="35" y="1178.5" font-size="13" text-anchor="middle" fill="#e8e9ec" font-weight="700">07</text>
+    <text x="78" y="1128" font-size="10.2" font-weight="700" letter-spacing="1" fill="#d4922a">SHELL EXECUTION</text>
+    <text x="78" y="1165" font-size="18" font-weight="650" fill="#e8e9ec">Launch /bin/sh -p</text>
+    <text x="78" y="1209" font-size="12.7" fill="#aeb5c1">find -exec launches /bin/sh -p</text>
+  <text x="78" y="1229" font-size="12.7" fill="#aeb5c1">Preserves effective root identity</text>
+  </g>
+<g>
+    <rect x="61" y="1263" width="300" height="140" rx="12" fill="#242832" stroke="#3a3f4a"/>
+    <rect x="61" y="1279" width="4" height="108" rx="2" fill="#c9a85a"/>
+    <circle cx="35" cy="1333" r="16" stroke="#c9a85a" stroke-width="2" fill="#1c1f26"/>
+    <text x="35" y="1337.5" font-size="13" text-anchor="middle" fill="#e8e9ec" font-weight="700">08</text>
+    <text x="78" y="1287" font-size="10.2" font-weight="700" letter-spacing="1" fill="#c9a85a">EXPECTED PRIVILEGE EVIDENCE</text>
+    <text x="78" y="1324" font-size="18" font-weight="650" fill="#e8e9ec">Effective UID = 0</text>
+    <text x="78" y="1368" font-size="12.7" fill="#aeb5c1">Expected: euid=0(root)</text>
+  <text x="78" y="1388" font-size="12.7" fill="#aeb5c1">Raw output was not retained</text>
+  </g>
+<g>
+    <rect x="61" y="1422" width="300" height="140" rx="12" fill="#242832" stroke="#3a3f4a"/>
+    <rect x="61" y="1438" width="4" height="108" rx="2" fill="#4fae6c"/>
+    <circle cx="35" cy="1492" r="16" stroke="#4fae6c" stroke-width="2" fill="#1c1f26"/>
+    <text x="35" y="1496.5" font-size="13" text-anchor="middle" fill="#e8e9ec" font-weight="700">09</text>
+    <text x="78" y="1446" font-size="10.2" font-weight="700" letter-spacing="1" fill="#4fae6c">FLAG RETRIEVAL</text>
+    <text x="78" y="1483" font-size="18" font-weight="650" fill="#e8e9ec">Read /root/root.txt</text>
+    <text x="78" y="1527" font-size="12.7" fill="#aeb5c1">Read root flag in elevated context</text>
+  <text x="78" y="1547" font-size="12.7" fill="#aeb5c1">Path: /root/root.txt</text>
+  </g>
+<g>
+    <rect x="61" y="1581" width="300" height="140" rx="12" fill="#242832" stroke="#3a3f4a"/>
+    <rect x="61" y="1597" width="4" height="108" rx="2" fill="#4fae6c"/>
+    <circle cx="35" cy="1651" r="16" stroke="#4fae6c" stroke-width="2" fill="#1c1f26"/>
+    <text x="35" y="1655.5" font-size="13" text-anchor="middle" fill="#e8e9ec" font-weight="700">10</text>
+    <text x="78" y="1605" font-size="10.2" font-weight="700" letter-spacing="1" fill="#4fae6c">SUBMISSION</text>
+    <text x="78" y="1642" font-size="18" font-weight="650" fill="#e8e9ec">Submit Root Flag</text>
+    <text x="78" y="1686" font-size="12.7" fill="#aeb5c1">Submit the retrieved root flag</text>
+  <text x="78" y="1706" font-size="12.7" fill="#aeb5c1">Completion participant-confirmed</text>
+  </g>
+<g>
+    <rect x="61" y="1740" width="300" height="140" rx="12" fill="#242832" stroke="#3a3f4a"/>
+    <rect x="61" y="1756" width="4" height="108" rx="2" fill="#4fae6c"/>
+    <circle cx="35" cy="1810" r="16" stroke="#4fae6c" stroke-width="2" fill="#1c1f26"/>
+    <text x="35" y="1814.5" font-size="13" text-anchor="middle" fill="#e8e9ec" font-weight="700">11</text>
+    <text x="78" y="1764" font-size="10.2" font-weight="700" letter-spacing="1" fill="#4fae6c">ROOT OBJECTIVE</text>
+    <text x="78" y="1801" font-size="18" font-weight="650" fill="#e8e9ec">VE-01 Completed</text>
+    <text x="78" y="1845" font-size="12.7" fill="#aeb5c1">User and root objectives complete</text>
+  <text x="78" y="1865" font-size="12.7" fill="#aeb5c1">Raw flag content not published</text>
+  </g>
+    <text x="25" y="1928" font-size="11" fill="#8b93a1">Expected euid ≠ captured output · Flags redacted</text>
+  </g>
+</svg>

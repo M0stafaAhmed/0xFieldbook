@@ -219,39 +219,13 @@ No flag value should be reconstructed or guessed.
 
 ## 6. Complete Privilege Escalation Chain
 
-```
-PHP Command Execution
-        |
-        v
-Execution as www-data
-        |
-        v
-sudo -l
-        |
-        v
-Discover NOPASSWD: /usr/bin/find
-        |
-        v
-Identify GNU find -exec functionality
-        |
-        v
-Execute find through sudo
-        |
-        v
-Launch /bin/sh -p
-        |
-        v
-Effective UID = 0
-        |
-        v
-Read /root/root.txt
-        |
-        v
-Submit Root Flag
-        |
-        v
-VE-01 Completed
-```
+<figure class="attack-chain-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/ve-01-root-attack-chain-mobile.svg" />
+    <img src="/diagrams/ve-01-root-attack-chain.svg" alt="VE-01 eleven-stage root privilege-escalation chain: PHP command execution as www-data, sudo -l, NOPASSWD /usr/bin/find, GNU find -exec, sudo find, /bin/sh -p, expected effective UID 0, retrieval of /root/root.txt, root flag submission and VE-01 completion. The raw privileged command response was not retained." width="760" height="1758" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>All 11 original steps preserved. The <code>euid=0(root)</code> output is expected rather than captured; see section 4 for the exact recorded payload. Root flag submission is participant-confirmed.</figcaption>
+</figure>
 
 ## 7. Root-Cause Assessment
 
