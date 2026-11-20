@@ -130,4 +130,16 @@ jobs:
           grep -Fq 'Read /root/root.txt' dist/diagrams/ha-01-privilege-escalation-chain.svg
       - name: Verify HA-01 SVG XML structure
         run: |
-          python3 -c "import xml.etree.ElementTree as ET; from pathlib import Path; diagrams=list(Path('dist/diagrams').glob('ha-01-*.svg')); assert len(diagrams) == 6, len(diagrams); [ET.parse(p) for p in diagrams]"
+          python3 -c "import xml.etree.ElementTree as ET; from pathlib import Path; diagrams=list(Path('dist/diagrams').glob('ha-01-*.svg')); assert len(diagrams) == 8, len(diagrams); [ET.parse(p) for p in diagrams]"
+      - name: Verify HA-01 root attack-chain diagram
+        run: |
+          test -s dist/diagrams/ha-01-root-attack-chain.svg
+          test -s dist/diagrams/ha-01-root-attack-chain-mobile.svg
+          grep -Fq 'ha-01-root-attack-chain.svg' dist/machines/ha-01/root/index.html
+          test "$(grep -o '<circle cx="' dist/diagrams/ha-01-root-attack-chain.svg | wc -l)" -eq 13
+          test "$(grep -o '<circle cx="' dist/diagrams/ha-01-root-attack-chain-mobile.svg | wc -l)" -eq 13
+          grep -Fq 'Discover devops-writable /opt/maint/spool' dist/diagrams/ha-01-root-attack-chain.svg
+          grep -Fq 'Create malicious --checkpoint filenames' dist/diagrams/ha-01-root-attack-chain.svg
+          grep -Fq 'Root cron executes tar with injected options' dist/diagrams/ha-01-root-attack-chain.svg
+          grep -Fq '/opt/maint/spool/root.txt' dist/diagrams/ha-01-root-attack-chain-mobile.svg
+          grep -Fq 'No interactive root shell documented' dist/diagrams/ha-01-root-attack-chain-mobile.svg

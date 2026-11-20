@@ -321,45 +321,13 @@ The root flag was successfully retrieved.
 
 ## 6. Attack Chain Summary
 
-```
-SSH access as devops
-        |
-        v
-Enumerate local privilege-escalation paths
-        |
-        v
-Discover /etc/cron.d/maint
-        |
-        v
-Identify root cron job running every minute
-        |
-        v
-Inspect /opt/maint/backup.sh
-        |
-        v
-Identify tar wildcard expansion
-        |
-        v
-Discover devops-writable /opt/maint/spool
-        |
-        v
-Create root-flag.sh
-        |
-        v
-Create malicious --checkpoint filenames
-        |
-        v
-Root cron executes tar with injected options
-        |
-        v
-/root/root.txt copied to spool directory
-        |
-        v
-Read /opt/maint/spool/root.txt
-        |
-        v
-ROOT FLAG RETRIEVED
-```
+<figure class="attack-chain-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/ha-01-root-attack-chain-mobile.svg" />
+    <img src="/diagrams/ha-01-root-attack-chain.svg" alt="HA-01 full 13-step root attack chain: SSH as devops, privilege enumeration, discovery of root cron maintenance, inspection of backup.sh, wildcard injection in GNU tar, devops-writable spool directory, root-flag.sh creation, checkpoint option filenames, root cron execution, root flag copied and retrieved from spool. No interactive root shell was confirmed." width="760" height="2422" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>All 13 original steps preserved. The detailed command sequence—including <code>--checkpoint=1</code>, <code>--checkpoint-action=exec=sh root-flag.sh</code>, and copying <code>/root/root.txt</code> to <code>/opt/maint/spool/root.txt</code>—remains in section 5. This demonstrates root command execution and flag retrieval, <strong>not a captured interactive root shell</strong>.</figcaption>
+</figure>
 
 ## 7. Evidence Registry
 
