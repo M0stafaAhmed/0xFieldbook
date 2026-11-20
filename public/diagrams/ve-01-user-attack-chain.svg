@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 1445" width="760" height="1445" role="img" aria-labelledby="ve-user-title ve-user-description">
+  <title id="ve-user-title">VE-01 user-level attack chain — 10 documented steps</title>
+  <desc id="ve-user-description">HTTP application, file upload vulnerability, PHP command execution, command endpoint /uploads/file.php?cmd=, web server account www-data, home directory enumeration, discovery of /home/user, reading /home/user/user.txt, submitting user flag, and participant-confirmed user-level objective completion.</desc>
+  <rect x="8" y="8" width="744" height="1429" rx="18" fill="#1c1f26" stroke="#3a3f4a"/>
+  <g font-family="Inter, Segoe UI, Arial, sans-serif">
+    <text x="39" y="49" font-size="14" fill="#d4922a" letter-spacing="2.5" font-weight="700">VE-01  /  USER ACCESS</text>
+ <text x="39" y="96" fill="#e8e9ec" font-size="34" font-weight="700">Initial access to user flag</text>
+ <text x="39" y="128" fill="#9aa0ad" font-size="17">Ten documented steps, from the web application to submission</text>
+ <line x1="35" y1="149" x2="725" y2="149" stroke="#3a3f4a"/>
+    <line x1="79" y1="243.5" x2="79" y2="320.5" stroke="#4b5565" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round" />
+<line x1="79" y1="364.5" x2="79" y2="441.5" stroke="#4b5565" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round" />
+<line x1="79" y1="485.5" x2="79" y2="562.5" stroke="#4b5565" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round" />
+<line x1="79" y1="606.5" x2="79" y2="683.5" stroke="#4b5565" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round" />
+<line x1="79" y1="727.5" x2="79" y2="804.5" stroke="#4b5565" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round" />
+<line x1="79" y1="848.5" x2="79" y2="925.5" stroke="#4b5565" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round" />
+<line x1="79" y1="969.5" x2="79" y2="1046.5" stroke="#4b5565" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round" />
+<line x1="79" y1="1090.5" x2="79" y2="1167.5" stroke="#4b5565" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round" />
+<line x1="79" y1="1211.5" x2="79" y2="1288.5" stroke="#4b5565" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round" />
+    <g>
+    <rect x="122" y="171" width="608" height="101" rx="12" fill="#242832" stroke="#3a3f4a" />
+    <rect x="122" y="186" width="4" height="71" rx="2" fill="#4fb3bf" />
+    <circle cx="79" cy="221.5" r="20" stroke="#4fb3bf" stroke-width="2" fill="#1c1f26" />
+    <text x="79" y="227" text-anchor="middle" fill="#e8e9ec" font-size="16" font-weight="700">01</text>
+    <text x="146" y="194" font-size="11.8" font-weight="700" letter-spacing="1.2" fill="#4fb3bf">ENTRY POINT</text>
+    <text x="146" y="224" font-size="21" font-weight="650" fill="#e8e9ec">HTTP Application</text>
+    <text x="146" y="251" fill="#aeb5c1" font-size="15.8">Reach the assigned web service</text>
+  </g>
+<g>
+    <rect x="122" y="292" width="608" height="101" rx="12" fill="#242832" stroke="#3a3f4a" />
+    <rect x="122" y="307" width="4" height="71" rx="2" fill="#4fb3bf" />
+    <circle cx="79" cy="342.5" r="20" stroke="#4fb3bf" stroke-width="2" fill="#1c1f26" />
+    <text x="79" y="348" text-anchor="middle" fill="#e8e9ec" font-size="16" font-weight="700">02</text>
+    <text x="146" y="315" font-size="11.8" font-weight="700" letter-spacing="1.2" fill="#4fb3bf">INITIAL ACCESS</text>
+    <text x="146" y="345" font-size="21" font-weight="650" fill="#e8e9ec">File Upload Vulnerability</text>
+    <text x="146" y="372" fill="#aeb5c1" font-size="15.8">Identify the application&apos;s vulnerable upload surface</text>
+  </g>
+<g>
+    <rect x="122" y="413" width="608" height="101" rx="12" fill="#242832" stroke="#3a3f4a" />
+    <rect x="122" y="428" width="4" height="71" rx="2" fill="#4fb3bf" />
+    <circle cx="79" cy="463.5" r="20" stroke="#4fb3bf" stroke-width="2" fill="#1c1f26" />
+    <text x="79" y="469" text-anchor="middle" fill="#e8e9ec" font-size="16" font-weight="700">03</text>
+    <text x="146" y="436" font-size="11.8" font-weight="700" letter-spacing="1.2" fill="#4fb3bf">EXECUTION</text>
+    <text x="146" y="466" font-size="21" font-weight="650" fill="#e8e9ec">PHP Command Execution</text>
+    <text x="146" y="493" fill="#aeb5c1" font-size="15.8">Uploaded PHP is interpreted and executes OS commands</text>
+  </g>
+<g>
+    <rect x="122" y="534" width="608" height="101" rx="12" fill="#242832" stroke="#3a3f4a" />
+    <rect x="122" y="549" width="4" height="71" rx="2" fill="#4fb3bf" />
+    <circle cx="79" cy="584.5" r="20" stroke="#4fb3bf" stroke-width="2" fill="#1c1f26" />
+    <text x="79" y="590" text-anchor="middle" fill="#e8e9ec" font-size="16" font-weight="700">04</text>
+    <text x="146" y="557" font-size="11.8" font-weight="700" letter-spacing="1.2" fill="#4fb3bf">COMMAND ENDPOINT</text>
+    <text x="146" y="587" font-size="21" font-weight="650" fill="#e8e9ec">/uploads/file.php?cmd=</text>
+    <text x="146" y="614" fill="#aeb5c1" font-size="15.8">Use the cmd parameter; pwd confirms execution</text>
+  </g>
+<g>
+    <rect x="122" y="655" width="608" height="101" rx="12" fill="#242832" stroke="#3a3f4a" />
+    <rect x="122" y="670" width="4" height="71" rx="2" fill="#d4922a" />
+    <circle cx="79" cy="705.5" r="20" stroke="#d4922a" stroke-width="2" fill="#1c1f26" />
+    <text x="79" y="711" text-anchor="middle" fill="#e8e9ec" font-size="16" font-weight="700">05</text>
+    <text x="146" y="678" font-size="11.8" font-weight="700" letter-spacing="1.2" fill="#d4922a">ACCESS CONTEXT</text>
+    <text x="146" y="708" font-size="21" font-weight="650" fill="#e8e9ec">Execution as www-data</text>
+    <text x="146" y="735" fill="#aeb5c1" font-size="15.8">Commands run under the web-server account</text>
+  </g>
+<g>
+    <rect x="122" y="776" width="608" height="101" rx="12" fill="#242832" stroke="#3a3f4a" />
+    <rect x="122" y="791" width="4" height="71" rx="2" fill="#d4922a" />
+    <circle cx="79" cy="826.5" r="20" stroke="#d4922a" stroke-width="2" fill="#1c1f26" />
+    <text x="79" y="832" text-anchor="middle" fill="#e8e9ec" font-size="16" font-weight="700">06</text>
+    <text x="146" y="799" font-size="11.8" font-weight="700" letter-spacing="1.2" fill="#d4922a">ENUMERATION</text>
+    <text x="146" y="829" font-size="21" font-weight="650" fill="#e8e9ec">Enumerate /home</text>
+    <text x="146" y="856" fill="#aeb5c1" font-size="15.8">Run ls -la /home through the PHP endpoint</text>
+  </g>
+<g>
+    <rect x="122" y="897" width="608" height="101" rx="12" fill="#242832" stroke="#3a3f4a" />
+    <rect x="122" y="912" width="4" height="71" rx="2" fill="#d4922a" />
+    <circle cx="79" cy="947.5" r="20" stroke="#d4922a" stroke-width="2" fill="#1c1f26" />
+    <text x="79" y="953" text-anchor="middle" fill="#e8e9ec" font-size="16" font-weight="700">07</text>
+    <text x="146" y="920" font-size="11.8" font-weight="700" letter-spacing="1.2" fill="#d4922a">IDENTIFICATION</text>
+    <text x="146" y="950" font-size="21" font-weight="650" fill="#e8e9ec">Identify /home/user</text>
+    <text x="146" y="977" fill="#aeb5c1" font-size="15.8">Find the user directory; traversal is permitted</text>
+  </g>
+<g>
+    <rect x="122" y="1018" width="608" height="101" rx="12" fill="#242832" stroke="#3a3f4a" />
+    <rect x="122" y="1033" width="4" height="71" rx="2" fill="#4fae6c" />
+    <circle cx="79" cy="1068.5" r="20" stroke="#4fae6c" stroke-width="2" fill="#1c1f26" />
+    <text x="79" y="1074" text-anchor="middle" fill="#e8e9ec" font-size="16" font-weight="700">08</text>
+    <text x="146" y="1041" font-size="11.8" font-weight="700" letter-spacing="1.2" fill="#4fae6c">FLAG RETRIEVAL</text>
+    <text x="146" y="1071" font-size="21" font-weight="650" fill="#e8e9ec">Read /home/user/user.txt</text>
+    <text x="146" y="1098" fill="#aeb5c1" font-size="15.8">Run cat /home/user/user.txt to retrieve the flag</text>
+  </g>
+<g>
+    <rect x="122" y="1139" width="608" height="101" rx="12" fill="#242832" stroke="#3a3f4a" />
+    <rect x="122" y="1154" width="4" height="71" rx="2" fill="#4fae6c" />
+    <circle cx="79" cy="1189.5" r="20" stroke="#4fae6c" stroke-width="2" fill="#1c1f26" />
+    <text x="79" y="1195" text-anchor="middle" fill="#e8e9ec" font-size="16" font-weight="700">09</text>
+    <text x="146" y="1162" font-size="11.8" font-weight="700" letter-spacing="1.2" fill="#4fae6c">SUBMISSION</text>
+    <text x="146" y="1192" font-size="21" font-weight="650" fill="#e8e9ec">Submit User Flag</text>
+    <text x="146" y="1219" fill="#aeb5c1" font-size="15.8">Submit the retrieved flag to the exam platform</text>
+  </g>
+<g>
+    <rect x="122" y="1260" width="608" height="101" rx="12" fill="#242832" stroke="#3a3f4a" />
+    <rect x="122" y="1275" width="4" height="71" rx="2" fill="#4fae6c" />
+    <circle cx="79" cy="1310.5" r="20" stroke="#4fae6c" stroke-width="2" fill="#1c1f26" />
+    <text x="79" y="1316" text-anchor="middle" fill="#e8e9ec" font-size="16" font-weight="700">10</text>
+    <text x="146" y="1283" font-size="11.8" font-weight="700" letter-spacing="1.2" fill="#4fae6c">USER OBJECTIVE</text>
+    <text x="146" y="1313" font-size="21" font-weight="650" fill="#e8e9ec">User-Level Objective Completed</text>
+    <text x="146" y="1340" fill="#aeb5c1" font-size="15.8">Participant-confirmed result; flag value withheld</text>
+  </g>
+    <text x="39" y="1412" font-size="14" fill="#8b93a1">Public flag values redacted · Completion participant-confirmed</text>
+  </g>
+</svg>

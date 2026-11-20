@@ -207,36 +207,13 @@ Do not substitute a guessed flag value.
 
 ## 6. Attack Chain Summary
 
-```
-HTTP Application
-       |
-       v
-File Upload Vulnerability
-       |
-       v
-PHP Command Execution
-       |
-       v
-/uploads/file.php?cmd=
-       |
-       v
-Execution as www-data
-       |
-       v
-Enumerate /home
-       |
-       v
-Identify /home/user
-       |
-       v
-Read /home/user/user.txt
-       |
-       v
-Submit User Flag
-       |
-       v
-User-Level Objective Completed
-```
+<figure class="attack-chain-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/ve-01-user-attack-chain-mobile.svg" />
+    <img src="/diagrams/ve-01-user-attack-chain.svg" alt="VE-01 user-level attack chain in ten steps: HTTP application, vulnerable file upload, PHP command execution, /uploads/file.php?cmd= endpoint, execution as www-data, enumerate /home, identify /home/user, read /home/user/user.txt, submit user flag, and complete the user objective." width="760" height="1445" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>All ten original user-level steps preserved. Flag submission is participant-confirmed; the flag value remains redacted.</figcaption>
+</figure>
 
 ## 7. Evidence Register
 
