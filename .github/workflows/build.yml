@@ -35,3 +35,11 @@ jobs:
           grep -q 've-01-root-attack-chain.svg' dist/machines/ve-01/root/index.html
           grep -q 'Effective UID = 0' dist/diagrams/ve-01-root-attack-chain.svg
           grep -q 'Read /root/root.txt' dist/diagrams/ve-01-root-attack-chain-mobile.svg
+      - name: Verify EA-01 overview attack-chain diagram
+        run: |
+          test -s dist/diagrams/ea-01-attack-chain.svg
+          test -s dist/diagrams/ea-01-attack-chain-mobile.svg
+          grep -q 'ea-01-attack-chain.svg' dist/machines/ea-01/index.html
+          grep -q 'Enumerate sqlite_master' dist/diagrams/ea-01-attack-chain.svg
+          grep -q 'Discover SUID' dist/diagrams/ea-01-attack-chain-mobile.svg
+          grep -q 'Read /root/root.txt' dist/diagrams/ea-01-attack-chain.svg

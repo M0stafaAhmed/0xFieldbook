@@ -74,57 +74,13 @@ The objective was completed through SUID-based privilege escalation using GNU `f
 
 ## 3. Attack Chain
 
-```
-HTTP Search Application
-          |
-          v
-SQL Injection
-          |
-          v
-UNION-Based SQL Injection
-          |
-          v
-Identify SQLite Backend
-          |
-          v
-Enumerate sqlite_master
-          |
-          v
-Discover users Table
-          |
-          v
-Extract Credentials
-          |
-          v
-SSH Authentication
-          |
-          v
-Access as robert
-          |
-          v
-Read user.txt
-          |
-          v
-Submit User Flag
-          |
-          v
-Enumerate SUID Binaries
-          |
-          v
-Discover SUID /usr/bin/find
-          |
-          v
-GNU find -exec Privilege Escalation
-          |
-          v
-Effective UID = 0
-          |
-          v
-Read /root/root.txt
-          |
-          v
-Submit Root Flag
-```
+<figure class="attack-chain-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/ea-01-attack-chain-mobile.svg" />
+    <img src="/diagrams/ea-01-attack-chain.svg" alt="EA-01 full seventeen-step attack chain: HTTP search SQL injection, two-column UNION, SQLite and sqlite_master enumeration, users table and credentials, SSH access as robert, user flag, SUID binary enumeration, discovery of SUID /usr/bin/find, find -exec privilege escalation, expected effective root UID and root flag submission. EA-01 uses SUID find, not sudo; raw root verification output was not retained." width="760" height="2414" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>All 17 original stages preserved. EA-01 exploits the <strong>SUID</strong> bit on GNU find, not a sudo rule; the <code>euid=0(root)</code> output is expected rather than a captured response. User and root submissions are participant-confirmed; flag values remain redacted.</figcaption>
+</figure>
 
 ## 4. Reconnaissance Summary
 
