@@ -263,37 +263,13 @@ IT{FLAG-SECRET}
 
 ## 9. Final privilege-escalation chain
 
-```
-Authenticated command injection as svc
-                |
-                v
-Enumerate SUID binaries
-                |
-                v
-No unusual SUID finding
-                |
-                v
-Enumerate file capabilities
-                |
-                v
-/usr/local/bin/pyadmin cap_setuid=ep
-                |
-                v
-Execute Python through pyadmin
-                |
-                v
-os.setuid(0)
-                |
-                v
-Real UID = 0
-Effective UID = 0
-                |
-                v
-Read /root/root.txt
-                |
-                v
-Root flag submitted
-```
+<figure class="attack-chain-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/me-01-root-attack-chain-mobile.svg" />
+    <img src="/diagrams/me-01-root-attack-chain.svg" alt="ME-01 ten-stage root privilege-escalation chain: authenticated command injection as svc, SUID enumeration with no unusual findings, Linux file capabilities, /usr/local/bin/pyadmin cap_setuid=ep, Python execution and os.setuid(0), captured real UID 0 and effective UID 0, root flag retrieval and submission. Privilege was achieved inside the container, not on the host." width="760" height="1645" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>All 10 original connected stages are preserved, including both <strong>real UID = 0</strong> and <strong>effective UID = 0</strong>. The recorded <code>1000 1000 → 0 0</code> output confirms root access within the application container; no container escape or host-root access was demonstrated. Root flag submission is participant-confirmed.</figcaption>
+</figure>
 
 ### Confirmed versus unconfirmed scope
 

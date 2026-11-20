@@ -83,3 +83,15 @@ jobs:
           grep -q '/home/svc/user.txt' dist/diagrams/me-01-user-attack-chain-mobile.svg
           test "$(grep -o '<circle cx="' dist/diagrams/me-01-user-attack-chain.svg | wc -l)" -eq 15
           test "$(grep -o '<circle cx="' dist/diagrams/me-01-user-attack-chain-mobile.svg | wc -l)" -eq 15
+      - name: Verify ME-01 root privilege-escalation diagram
+        run: |
+          test -s dist/diagrams/me-01-root-attack-chain.svg
+          test -s dist/diagrams/me-01-root-attack-chain-mobile.svg
+          grep -q 'me-01-root-attack-chain.svg' dist/machines/me-01/root/index.html
+          grep -q '/usr/local/bin/pyadmin cap_setuid=ep' dist/diagrams/me-01-root-attack-chain.svg
+          grep -q 'Real UID = 0' dist/diagrams/me-01-root-attack-chain.svg
+          grep -q 'Effective UID = 0' dist/diagrams/me-01-root-attack-chain-mobile.svg
+          grep -q 'No container escape or host-root proof' dist/diagrams/me-01-root-attack-chain-mobile.svg
+          grep -q 'Read /root/root.txt' dist/diagrams/me-01-root-attack-chain.svg
+          test "$(grep -o '<circle cx="' dist/diagrams/me-01-root-attack-chain.svg | wc -l)" -eq 10
+          test "$(grep -o '<circle cx="' dist/diagrams/me-01-root-attack-chain-mobile.svg | wc -l)" -eq 10
