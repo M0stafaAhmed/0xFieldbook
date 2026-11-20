@@ -95,3 +95,39 @@ jobs:
           grep -q 'Read /root/root.txt' dist/diagrams/me-01-root-attack-chain.svg
           test "$(grep -o '<circle cx="' dist/diagrams/me-01-root-attack-chain.svg | wc -l)" -eq 10
           test "$(grep -o '<circle cx="' dist/diagrams/me-01-root-attack-chain-mobile.svg | wc -l)" -eq 10
+      - name: Verify HA-01 overview summary diagram
+        run: |
+          test -s dist/diagrams/ha-01-attack-chain.svg
+          test -s dist/diagrams/ha-01-attack-chain-mobile.svg
+          grep -q 'ha-01-attack-chain.svg' dist/machines/ha-01/index.html
+          test "$(grep -o '<circle cx="' dist/diagrams/ha-01-attack-chain.svg | wc -l)" -eq 11
+          test "$(grep -o '<circle cx="' dist/diagrams/ha-01-attack-chain-mobile.svg | wc -l)" -eq 11
+          grep -Fq 'Unauthenticated Redis' dist/diagrams/ha-01-attack-chain.svg
+          grep -Fq 'Redis administrative access' dist/diagrams/ha-01-attack-chain.svg
+          grep -Fq 'Find root cron job' dist/diagrams/ha-01-attack-chain.svg
+          grep -Fq 'GNU tar wildcard option injection' dist/diagrams/ha-01-attack-chain.svg
+      - name: Verify HA-01 initial access diagram
+        run: |
+          test -s dist/diagrams/ha-01-initial-access-chain.svg
+          test -s dist/diagrams/ha-01-initial-access-chain-mobile.svg
+          grep -q 'ha-01-initial-access-chain.svg' dist/machines/ha-01/index.html
+          test "$(grep -o '<circle cx="' dist/diagrams/ha-01-initial-access-chain.svg | wc -l)" -eq 7
+          test "$(grep -o '<circle cx="' dist/diagrams/ha-01-initial-access-chain-mobile.svg | wc -l)" -eq 7
+          grep -Fq 'Default ACL: nopass, +@all' dist/diagrams/ha-01-initial-access-chain.svg
+          grep -Fq 'Prove Redis can write to the directory' dist/diagrams/ha-01-initial-access-chain.svg
+          grep -Fq 'RDB snapshot written as authorized_keys' dist/diagrams/ha-01-initial-access-chain.svg
+          grep -Fq 'SSH authentication as devops' dist/diagrams/ha-01-initial-access-chain.svg
+      - name: Verify HA-01 privilege escalation diagram
+        run: |
+          test -s dist/diagrams/ha-01-privilege-escalation-chain.svg
+          test -s dist/diagrams/ha-01-privilege-escalation-chain-mobile.svg
+          grep -q 'ha-01-privilege-escalation-chain.svg' dist/machines/ha-01/index.html
+          test "$(grep -o '<circle cx="' dist/diagrams/ha-01-privilege-escalation-chain.svg | wc -l)" -eq 8
+          test "$(grep -o '<circle cx="' dist/diagrams/ha-01-privilege-escalation-chain-mobile.svg | wc -l)" -eq 8
+          grep -Fq 'No sudo, no useful SUID, no capabilities' dist/diagrams/ha-01-privilege-escalation-chain.svg
+          grep -Fq 'Discover /etc/cron.d/maint' dist/diagrams/ha-01-privilege-escalation-chain.svg
+          grep -Fq 'Create tar checkpoint option filenames' dist/diagrams/ha-01-privilege-escalation-chain.svg
+          grep -Fq 'Read /root/root.txt' dist/diagrams/ha-01-privilege-escalation-chain.svg
+      - name: Verify HA-01 SVG XML structure
+        run: |
+          python3 -c "import xml.etree.ElementTree as ET; from pathlib import Path; diagrams=list(Path('dist/diagrams').glob('ha-01-*.svg')); assert len(diagrams) == 6, len(diagrams); [ET.parse(p) for p in diagrams]"

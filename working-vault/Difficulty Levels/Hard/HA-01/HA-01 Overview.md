@@ -42,39 +42,13 @@ Privilege escalation was then achieved through a root-owned cron job that execut
 
 **Final attack chain:**
 
-```
-Unauthenticated Redis
-        |
-        v
-Redis administrative access
-        |
-        v
-Identify /home/devops/.ssh
-        |
-        v
-Redis RDB persistence abuse
-        |
-        v
-Write SSH public key to authorized_keys
-        |
-        v
-SSH access as devops
-        |
-        v
-Enumerate privilege-escalation vectors
-        |
-        v
-Find root cron job
-        |
-        v
-GNU tar wildcard option injection
-        |
-        v
-Root command execution
-        |
-        v
-Retrieve /root/root.txt
-```
+<figure class="attack-chain-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/ha-01-attack-chain-mobile.svg" />
+    <img src="/diagrams/ha-01-attack-chain.svg" alt="HA-01 11 original summary stages; the SSH key write, cron privilege escalation and root flag evidence are preserved." width="760" height="1963" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>All 11 stages of the successful Redis → SSH → cron/tar path, with the original detailed chains below. Root command execution was established through flag retrieval; no interactive root shell was documented.</figcaption>
+</figure>
 
 ## 2. Target Information
 
@@ -520,54 +494,23 @@ The detailed exploitation commands and evidence belong in [[Difficulty Levels/Ha
 
 ### Initial access
 
-```
-Redis exposed without authentication
-        |
-        v
-Default ACL: nopass, +@all
-        |
-        v
-CONFIG SET and SAVE available
-        |
-        v
-Identify /home/devops/.ssh
-        |
-        v
-Prove Redis can write to the directory
-        |
-        v
-RDB snapshot written as authorized_keys
-        |
-        v
-SSH authentication as devops
-```
+<figure class="attack-chain-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/ha-01-initial-access-chain-mobile.svg" />
+    <img src="/diagrams/ha-01-initial-access-chain.svg" alt="HA-01 7 original Redis initial-access stages including ACL, filesystem write probe, RDB authorized_keys snapshot and SSH as devops." width="760" height="1339" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>All 7 original initial-access stages preserved. Redis could write a harmless RDB probe before the padded Ed25519 public key was persisted as <code>authorized_keys</code>; the private key remained on Kali.</figcaption>
+</figure>
 
 ### Privilege escalation
 
-```
-SSH session as devops
-        |
-        v
-No sudo, no useful SUID, no capabilities
-        |
-        v
-Discover /etc/cron.d/maint
-        |
-        v
-Root executes /opt/maint/backup.sh every minute
-        |
-        v
-Script archives writable spool with tar *
-        |
-        v
-Create tar checkpoint option filenames
-        |
-        v
-Root cron executes injected command
-        |
-        v
-Read /root/root.txt
-```
+<figure class="attack-chain-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/ha-01-privilege-escalation-chain-mobile.svg" />
+    <img src="/diagrams/ha-01-privilege-escalation-chain.svg" alt="HA-01 8 original root escalation stages including cron backup.sh, writable spool, GNU tar checkpoint option injection and root flag retrieval." width="760" height="1495" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>All 8 original privilege-escalation stages preserved. The root cron job executed the tar checkpoint-injection payload and copied the protected flag to <code>/opt/maint/spool/root.txt</code>. No interactive root shell was demonstrated.</figcaption>
+</figure>
 
 ## 9. Lessons Learned
 
