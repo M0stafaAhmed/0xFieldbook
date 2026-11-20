@@ -834,51 +834,13 @@ The service was executing injected commands as `svc`.
 
 ## 10. Attack Chain Summary
 
-```
-IT GATE File Service
-          |
-          v
-/api/download?file=
-          |
-          v
-Path Traversal
-          |
-          v
-Read /etc/passwd
-          |
-          v
-Identify svc (UID 1000)
-          |
-          v
-Read /proc/self/cmdline
-          |
-          v
-Identify /opt/svcapp/app.py
-          |
-          v
-Read Application Source
-          |
-          v
-Identify config.API_KEY
-          |
-          v
-Read ../config.py
-          |
-          v
-Recover API Key
-          |
-          v
-Authenticate X-API-Key
-          |
-          v
-/api/ping?host=
-          |
-          v
-OS Command Injection
-          |
-          v
-Remote Command Execution as svc
-```
+<figure class="attack-chain-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/me-01-user-attack-chain-mobile.svg" />
+    <img src="/diagrams/me-01-user-attack-chain.svg" alt="All 15 stages of ME-01 User: file service and /api/download path traversal, /etc/passwd account identification, /proc/self/cmdline and app.py disclosure, config.API_KEY discovery and configuration read, API key extraction, X-API-Key authentication, /api/ping host command injection and confirmed remote command execution as svc." width="760" height="2245" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>All 15 original steps are retained, including process inspection and configuration disclosure. The separate user-flag objective was completed through arbitrary file read of <code>/home/svc/user.txt</code> (participant-confirmed); no API-key or flag values are reproduced.</figcaption>
+</figure>
 
 ## 11. Technical Findings
 

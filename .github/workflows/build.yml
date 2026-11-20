@@ -71,3 +71,15 @@ jobs:
           grep -q 'UID = 0 / EUID = 0' dist/diagrams/me-01-attack-chain.svg
           grep -q 'Read /root/root.txt' dist/diagrams/me-01-attack-chain-mobile.svg
           grep -q 'No host escape' dist/diagrams/me-01-attack-chain-mobile.svg
+      - name: Verify ME-01 user attack-chain diagram
+        run: |
+          test -s dist/diagrams/me-01-user-attack-chain.svg
+          test -s dist/diagrams/me-01-user-attack-chain-mobile.svg
+          grep -q 'me-01-user-attack-chain.svg' dist/machines/me-01/user/index.html
+          grep -q 'Read /proc/self/cmdline' dist/diagrams/me-01-user-attack-chain.svg
+          grep -q 'Identify config.API_KEY' dist/diagrams/me-01-user-attack-chain.svg
+          grep -q 'Recover API Key' dist/diagrams/me-01-user-attack-chain.svg
+          grep -q 'Remote Command Execution as svc' dist/diagrams/me-01-user-attack-chain.svg
+          grep -q '/home/svc/user.txt' dist/diagrams/me-01-user-attack-chain-mobile.svg
+          test "$(grep -o '<circle cx="' dist/diagrams/me-01-user-attack-chain.svg | wc -l)" -eq 15
+          test "$(grep -o '<circle cx="' dist/diagrams/me-01-user-attack-chain-mobile.svg | wc -l)" -eq 15
