@@ -143,3 +143,20 @@ jobs:
           grep -Fq 'Root cron executes tar with injected options' dist/diagrams/ha-01-root-attack-chain.svg
           grep -Fq '/opt/maint/spool/root.txt' dist/diagrams/ha-01-root-attack-chain-mobile.svg
           grep -Fq 'No interactive root shell documented' dist/diagrams/ha-01-root-attack-chain-mobile.svg
+      - name: Verify IN-01 overview attack-chain diagram
+        run: |
+          test -s dist/diagrams/in-01-attack-chain.svg
+          test -s dist/diagrams/in-01-attack-chain-mobile.svg
+          grep -Fq 'in-01-attack-chain.svg' dist/machines/in-01/index.html
+          test "$(grep -o '<circle cx="' dist/diagrams/in-01-attack-chain.svg | wc -l)" -eq 21
+          test "$(grep -o '<circle cx="' dist/diagrams/in-01-attack-chain-mobile.svg | wc -l)" -eq 21
+          grep -Fq 'SSRF — Server-Side Request Forgery' dist/diagrams/in-01-attack-chain.svg
+          grep -Fq '127.1:9000' dist/diagrams/in-01-attack-chain.svg
+          grep -Fq 'Base64-Encoded Python Pickle' dist/diagrams/in-01-attack-chain.svg
+          grep -Fq 'NOPASSWD: /usr/local/bin/healthcheck' dist/diagrams/in-01-attack-chain.svg
+          grep -Fq 'env_keep += LD_PRELOAD' dist/diagrams/in-01-attack-chain.svg
+          grep -Fq 'UID=0 EUID=0 GID=0 EGID=0' dist/diagrams/in-01-attack-chain-mobile.svg
+          grep -Fq 'No interactive root shell was established' dist/diagrams/in-01-attack-chain-mobile.svg
+      - name: Verify IN-01 SVG XML structure
+        run: |
+          python3 -c "import xml.etree.ElementTree as ET; from pathlib import Path; a=list(Path('dist/diagrams').glob('in-01-attack-chain*.svg')); assert len(a)==2, len(a); [ET.parse(p) for p in a]"

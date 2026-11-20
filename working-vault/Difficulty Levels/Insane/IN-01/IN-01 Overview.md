@@ -86,69 +86,13 @@ The above port mappings refer to the final instance used for the successful expl
 
 The machine required chaining multiple weaknesses across separate application and operating-system layers.
 
-```
-External HTTP Application
-        |
-        v
-/fetch?url=https://example.com
-        |
-        v
-SSRF — Server-Side Request Forgery
-        |
-        v
-Loopback Filter Bypass
-        |
-        v
-127.1:9000
-        |
-        v
-Internal Admin API
-        |
-        v
-/admin/exec
-        |
-        v
-data Parameter
-        |
-        v
-Base64-Encoded Python Pickle
-        |
-        v
-Arbitrary Command Execution
-        |
-        v
-web (UID 1000)
-        |
-        v
-Privilege-Escalation Enumeration
-        |
-        v
-sudo -l
-        |
-        v
-NOPASSWD: /usr/local/bin/healthcheck
-        |
-        v
-env_keep += LD_PRELOAD
-        |
-        v
-Compile Malicious Shared Library
-        |
-        v
-sudo LD_PRELOAD=/tmp/in01_preload.so
-        |
-        v
-Shared-Library Constructor Executes as Root
-        |
-        v
-UID=0 / EUID=0
-        |
-        v
-Read /root/root.txt
-        |
-        v
-ROOT FLAG RETRIEVED
-```
+<figure class="attack-chain-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/in-01-attack-chain-mobile.svg" />
+    <img src="/diagrams/in-01-attack-chain.svg" alt="IN-01 complete 21-stage attack chain: external URL fetch and SSRF, 127.1 loopback filter bypass into internal port 9000, Admin API /admin/exec and data parameter, Base64-encoded Python Pickle deserialization, command execution as web UID 1000, sudo privilege enumeration, root NOPASSWD healthcheck and preserved LD_PRELOAD, compiled shared library constructor, captured root UID/EUID, and root flag retrieval." width="760" height="3778" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>All <strong>21 original attack-chain stages</strong> are retained. The user-flag retrieval command and participant-confirmed submission are documented in section 3.5. Captured <code>UID=0 EUID=0</code> output establishes root execution through the <code>LD_PRELOAD</code> constructor and retrieval of <code>/root/root.txt</code>; <strong>no interactive root shell was established</strong>. Detailed payloads and evidence remain below.</figcaption>
+</figure>
 
 The critical feature of this machine was the combination of an SSRF vulnerability, an internally exposed insecure deserialization endpoint, and a sudo environment misconfiguration.
 
