@@ -28,39 +28,13 @@ The result is SSH access to the target account.
 
 ### Attack chain
 
-```
-Unauthenticated Redis
-        |
-        v
-Redis administrative access
-        |
-        v
-Identify an existing Linux account
-        |
-        v
-Locate its .ssh directory
-        |
-        v
-Confirm Redis can write there
-        |
-        v
-Generate SSH key pair locally
-        |
-        v
-Configure Redis persistence
-        |
-        v
-Store newline-padded public key
-        |
-        v
-SAVE -> authorized_keys
-        |
-        v
-SSH authentication
-        |
-        v
-Linux user access
-```
+<figure class="poc-blueprint-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/poc-blueprint-redis-persistence-mobile.svg" />
+    <img src="/diagrams/poc-blueprint-redis-persistence.svg" alt="REDIS PERSISTENCE reusable exploitation blueprint: Unauthenticated Redis then Redis administrative access then Identify an existing Linux account then Locate its .ssh directory then Confirm Redis can write there then Generate SSH key pair locally then Configure Redis persistence then Store newline-padded public key then SAVE -&gt; authorized_keys then SSH authentication then Linux user access. . ." width="960" height="834" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>REDIS PERSISTENCE — technical exploitation blueprint, preserving the original sequence. Supporting commands and evidence remain in this page.</figcaption>
+</figure>
 
 ## 2. Requirements
 

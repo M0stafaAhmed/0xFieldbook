@@ -29,34 +29,13 @@ tags:
 
 ## Confirmed Attack Chain
 
-```
-Kali
-  |
-  | HTTP request
-  v
-Public application: /fetch?url=
-  |
-  | SSRF filter bypass using 127.1
-  v
-Internal API: 127.1:9000/admin/exec
-  |
-  | data=<Base64-encoded pickle>
-  v
-Base64 decoding
-  |
-  v
-Python pickle deserialization
-  |
-  | Malicious __reduce__ implementation
-  v
-eval() -> subprocess.run()
-  |
-  v
-Remote command execution as web
-  |
-  v
-Command output returned through HTTP
-```
+<figure class="poc-blueprint-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/poc-blueprint-python-pickle-rce-mobile.svg" />
+    <img src="/diagrams/poc-blueprint-python-pickle-rce.svg" alt="PYTHON PICKLE reusable exploitation blueprint: Kali then Public application: /fetch?url= then Internal API: 127.1:9000/admin/exec then Base64 decoding then Python pickle deserialization then eval() -&gt; subprocess.run() then Remote command execution as web then Command output returned through HTTP. . HTTP request; SSRF filter bypass using 127.1; data=&lt;Base64-encoded pickle&gt;; Malicious __reduce__ implementation." width="960" height="865" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>PYTHON PICKLE — technical exploitation blueprint, preserving the original sequence, and labeled HTTP/data-transfer edges. Supporting commands and evidence remain in this page.</figcaption>
+</figure>
 
 The SSRF filter bypass is documented separately in:
 

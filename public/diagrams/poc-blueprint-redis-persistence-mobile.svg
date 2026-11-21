@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="430" height="1728" viewBox="0 0 430 1728" role="img" aria-labelledby="poc-title poc-description">
+<title id="poc-title">REDIS PERSISTENCE — exploitation blueprint</title>
+<desc id="poc-description">Technical diagram of the original PoC stages: Unauthenticated Redis → Redis administrative access → Identify an existing Linux account → Locate its .ssh directory → Confirm Redis can write there → Generate SSH key pair locally → Configure Redis persistence → Store newline-padded public key → SAVE -&gt; authorized_keys → SSH authentication → Linux user access. . .</desc>
+<defs><linearGradient id="poc-bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#08121c"/><stop offset="1" stop-color="#0e2430"/></linearGradient><pattern id="poc-grid" width="22" height="22" patternUnits="userSpaceOnUse"><path d="M22 0H0V22" stroke="#91b2c4" stroke-opacity=".11" stroke-width=".8" fill="none"/></pattern></defs>
+<rect x="0" y="0" width="430" height="1728" rx="16" fill="url(#poc-bg)"/>
+<rect x="0" y="0" width="430" height="1728" rx="16" fill="url(#poc-grid)"/>
+<path d="M27 22 H403" stroke="#f68faa" stroke-width="3"/>
+<text x="26" y="51" font-family="Consolas,monospace" font-size="11" font-weight="700" fill="#f68faa" letter-spacing="2.2">0XFIELD / REUSABLE TECHNIQUE</text>
+<text x="26" y="88" font-family="Arial,sans-serif" font-size="26" font-weight="800" fill="#eef7fa">REDIS PERSISTENCE</text>
+<text x="26" y="111" font-family="Consolas,monospace" font-size="10.8" fill="#b8cad3">11 TECHNICAL MODULES  ·  DATAFLOW SCHEMATIC</text>
+<text x="26" y="136" font-family="Consolas,monospace" font-size="10" fill="#a1b5c1">SIGNAL  →  PREREQUISITE  →  EXECUTION  →  OBSERVED RESULT</text>
+<g id="pcb-traces" stroke="#f68faa" stroke-width="2.1" stroke-linecap="square" stroke-linejoin="round" fill="none">
+<path d="M215 260 V291" stroke-opacity=".8"/>
+<path d="M210 282 L215 291 L220 282" stroke-opacity=".95"/>
+<path d="M215 395 V426" stroke-opacity=".8"/>
+<path d="M210 417 L215 426 L220 417" stroke-opacity=".95"/>
+<path d="M215 530 V561" stroke-opacity=".8"/>
+<path d="M210 552 L215 561 L220 552" stroke-opacity=".95"/>
+<path d="M215 665 V696" stroke-opacity=".8"/>
+<path d="M210 687 L215 696 L220 687" stroke-opacity=".95"/>
+<path d="M215 800 V831" stroke-opacity=".8"/>
+<path d="M210 822 L215 831 L220 822" stroke-opacity=".95"/>
+<path d="M215 935 V966" stroke-opacity=".8"/>
+<path d="M210 957 L215 966 L220 957" stroke-opacity=".95"/>
+<path d="M215 1070 V1101" stroke-opacity=".8"/>
+<path d="M210 1092 L215 1101 L220 1092" stroke-opacity=".95"/>
+<path d="M215 1205 V1236" stroke-opacity=".8"/>
+<path d="M210 1227 L215 1236 L220 1227" stroke-opacity=".95"/>
+<path d="M215 1340 V1371" stroke-opacity=".8"/>
+<path d="M210 1362 L215 1371 L220 1362" stroke-opacity=".95"/>
+<path d="M215 1475 V1506" stroke-opacity=".8"/>
+<path d="M210 1497 L215 1506 L220 1497" stroke-opacity=".95"/>
+</g>
+<g id="module-01"><desc>Unauthenticated Redis</desc>
+<path d="M50 159 H380 L392 171 V248 L380 260 H50 L38 248 V171 Z" fill="#122a37" stroke="#527184" stroke-width="1.15"/>
+<path d="M52 164 H378" stroke="#f68faa" stroke-width="1.4" stroke-opacity=".65"/>
+<rect x="33" y="204.5" width="6" height="10" rx="1" fill="#f68faa" opacity=".8"/><rect x="391" y="204.5" width="6" height="10" rx="1" fill="#f68faa" opacity=".8"/>
+<text x="52" y="181" fill="#f68faa" font-family="Consolas,monospace" font-size="10" font-weight="700">N01</text>
+<text x="377" y="181" text-anchor="end" fill="#a6bdca" font-family="Consolas,monospace" font-size="9">ENTRY</text>
+<text x="52" y="202" fill="#edf7fa" font-family="Consolas,monospace" font-size="13.6" font-weight="600"><tspan x="52" dy="0">Unauthenticated Redis</tspan></text>
+</g>
+<g id="module-02"><desc>Redis administrative access</desc>
+<path d="M50 294 H380 L392 306 V383 L380 395 H50 L38 383 V306 Z" fill="#122a37" stroke="#527184" stroke-width="1.15"/>
+<path d="M52 299 H378" stroke="#f68faa" stroke-width="1.4" stroke-opacity=".65"/>
+<rect x="33" y="339.5" width="6" height="10" rx="1" fill="#f68faa" opacity=".8"/><rect x="391" y="339.5" width="6" height="10" rx="1" fill="#f68faa" opacity=".8"/>
+<text x="52" y="316" fill="#f68faa" font-family="Consolas,monospace" font-size="10" font-weight="700">N02</text>
+<text x="377" y="316" text-anchor="end" fill="#a6bdca" font-family="Consolas,monospace" font-size="9">ENTRY</text>
+<text x="52" y="337" fill="#edf7fa" font-family="Consolas,monospace" font-size="13.6" font-weight="600"><tspan x="52" dy="0">Redis administrative access</tspan></text>
+</g>
+<g id="module-03"><desc>Identify an existing Linux account</desc>
+<path d="M50 429 H380 L392 441 V518 L380 530 H50 L38 518 V441 Z" fill="#122a37" stroke="#527184" stroke-width="1.15"/>
+<path d="M52 434 H378" stroke="#f68faa" stroke-width="1.4" stroke-opacity=".65"/>
+<rect x="33" y="474.5" width="6" height="10" rx="1" fill="#f68faa" opacity=".8"/><rect x="391" y="474.5" width="6" height="10" rx="1" fill="#f68faa" opacity=".8"/>
+<text x="52" y="451" fill="#f68faa" font-family="Consolas,monospace" font-size="10" font-weight="700">N03</text>
+<text x="377" y="451" text-anchor="end" fill="#a6bdca" font-family="Consolas,monospace" font-size="9">ENTRY</text>
+<text x="52" y="472" fill="#edf7fa" font-family="Consolas,monospace" font-size="13.6" font-weight="600"><tspan x="52" dy="0">Identify an existing Linux account</tspan></text>
+</g>
+<g id="module-04"><desc>Locate its .ssh directory</desc>
+<path d="M50 564 H380 L392 576 V653 L380 665 H50 L38 653 V576 Z" fill="#122a37" stroke="#527184" stroke-width="1.15"/>
+<path d="M52 569 H378" stroke="#f68faa" stroke-width="1.4" stroke-opacity=".65"/>
+<rect x="33" y="609.5" width="6" height="10" rx="1" fill="#f68faa" opacity=".8"/><rect x="391" y="609.5" width="6" height="10" rx="1" fill="#f68faa" opacity=".8"/>
+<text x="52" y="586" fill="#f68faa" font-family="Consolas,monospace" font-size="10" font-weight="700">N04</text>
+<text x="377" y="586" text-anchor="end" fill="#a6bdca" font-family="Consolas,monospace" font-size="9">SURFACE</text>
+<text x="52" y="607" fill="#edf7fa" font-family="Consolas,monospace" font-size="13.6" font-weight="600"><tspan x="52" dy="0">Locate its .ssh directory</tspan></text>
+</g>
+<g id="module-05"><desc>Confirm Redis can write there</desc>
+<path d="M50 699 H380 L392 711 V788 L380 800 H50 L38 788 V711 Z" fill="#122a37" stroke="#527184" stroke-width="1.15"/>
+<path d="M52 704 H378" stroke="#f68faa" stroke-width="1.4" stroke-opacity=".65"/>
+<rect x="33" y="744.5" width="6" height="10" rx="1" fill="#f68faa" opacity=".8"/><rect x="391" y="744.5" width="6" height="10" rx="1" fill="#f68faa" opacity=".8"/>
+<text x="52" y="721" fill="#f68faa" font-family="Consolas,monospace" font-size="10" font-weight="700">N05</text>
+<text x="377" y="721" text-anchor="end" fill="#a6bdca" font-family="Consolas,monospace" font-size="9">SURFACE</text>
+<text x="52" y="742" fill="#edf7fa" font-family="Consolas,monospace" font-size="13.6" font-weight="600"><tspan x="52" dy="0">Confirm Redis can write there</tspan></text>
+</g>
+<g id="module-06"><desc>Generate SSH key pair locally</desc>
+<path d="M50 834 H380 L392 846 V923 L380 935 H50 L38 923 V846 Z" fill="#122a37" stroke="#527184" stroke-width="1.15"/>
+<path d="M52 839 H378" stroke="#f68faa" stroke-width="1.4" stroke-opacity=".65"/>
+<rect x="33" y="879.5" width="6" height="10" rx="1" fill="#f68faa" opacity=".8"/><rect x="391" y="879.5" width="6" height="10" rx="1" fill="#f68faa" opacity=".8"/>
+<text x="52" y="856" fill="#f68faa" font-family="Consolas,monospace" font-size="10" font-weight="700">N06</text>
+<text x="377" y="856" text-anchor="end" fill="#a6bdca" font-family="Consolas,monospace" font-size="9">SURFACE</text>
+<text x="52" y="877" fill="#edf7fa" font-family="Consolas,monospace" font-size="13.6" font-weight="600"><tspan x="52" dy="0">Generate SSH key pair locally</tspan></text>
+</g>
+<g id="module-07"><desc>Configure Redis persistence</desc>
+<path d="M50 969 H380 L392 981 V1058 L380 1070 H50 L38 1058 V981 Z" fill="#122a37" stroke="#527184" stroke-width="1.15"/>
+<path d="M52 974 H378" stroke="#f68faa" stroke-width="1.4" stroke-opacity=".65"/>
+<rect x="33" y="1014.5" width="6" height="10" rx="1" fill="#f68faa" opacity=".8"/><rect x="391" y="1014.5" width="6" height="10" rx="1" fill="#f68faa" opacity=".8"/>
+<text x="52" y="991" fill="#f68faa" font-family="Consolas,monospace" font-size="10" font-weight="700">N07</text>
+<text x="377" y="991" text-anchor="end" fill="#a6bdca" font-family="Consolas,monospace" font-size="9">EXPLOIT</text>
+<text x="52" y="1012" fill="#edf7fa" font-family="Consolas,monospace" font-size="13.6" font-weight="600"><tspan x="52" dy="0">Configure Redis persistence</tspan></text>
+</g>
+<g id="module-08"><desc>Store newline-padded public key</desc>
+<path d="M50 1104 H380 L392 1116 V1193 L380 1205 H50 L38 1193 V1116 Z" fill="#122a37" stroke="#527184" stroke-width="1.15"/>
+<path d="M52 1109 H378" stroke="#f68faa" stroke-width="1.4" stroke-opacity=".65"/>
+<rect x="33" y="1149.5" width="6" height="10" rx="1" fill="#f68faa" opacity=".8"/><rect x="391" y="1149.5" width="6" height="10" rx="1" fill="#f68faa" opacity=".8"/>
+<text x="52" y="1126" fill="#f68faa" font-family="Consolas,monospace" font-size="10" font-weight="700">N08</text>
+<text x="377" y="1126" text-anchor="end" fill="#a6bdca" font-family="Consolas,monospace" font-size="9">EXPLOIT</text>
+<text x="52" y="1147" fill="#edf7fa" font-family="Consolas,monospace" font-size="13.6" font-weight="600"><tspan x="52" dy="0">Store newline-padded public key</tspan></text>
+</g>
+<g id="module-09"><desc>SAVE -&gt; authorized_keys</desc>
+<path d="M50 1239 H380 L392 1251 V1328 L380 1340 H50 L38 1328 V1251 Z" fill="#122a37" stroke="#527184" stroke-width="1.15"/>
+<path d="M52 1244 H378" stroke="#f68faa" stroke-width="1.4" stroke-opacity=".65"/>
+<rect x="33" y="1284.5" width="6" height="10" rx="1" fill="#f68faa" opacity=".8"/><rect x="391" y="1284.5" width="6" height="10" rx="1" fill="#f68faa" opacity=".8"/>
+<text x="52" y="1261" fill="#f68faa" font-family="Consolas,monospace" font-size="10" font-weight="700">N09</text>
+<text x="377" y="1261" text-anchor="end" fill="#a6bdca" font-family="Consolas,monospace" font-size="9">EXPLOIT</text>
+<text x="52" y="1282" fill="#edf7fa" font-family="Consolas,monospace" font-size="13.6" font-weight="600"><tspan x="52" dy="0">SAVE -&gt; authorized_keys</tspan></text>
+</g>
+<g id="module-10"><desc>SSH authentication</desc>
+<path d="M50 1374 H380 L392 1386 V1463 L380 1475 H50 L38 1463 V1386 Z" fill="#122a37" stroke="#527184" stroke-width="1.15"/>
+<path d="M52 1379 H378" stroke="#f68faa" stroke-width="1.4" stroke-opacity=".65"/>
+<rect x="33" y="1419.5" width="6" height="10" rx="1" fill="#f68faa" opacity=".8"/><rect x="391" y="1419.5" width="6" height="10" rx="1" fill="#f68faa" opacity=".8"/>
+<text x="52" y="1396" fill="#f68faa" font-family="Consolas,monospace" font-size="10" font-weight="700">N10</text>
+<text x="377" y="1396" text-anchor="end" fill="#a6bdca" font-family="Consolas,monospace" font-size="9">RESULT</text>
+<text x="52" y="1417" fill="#edf7fa" font-family="Consolas,monospace" font-size="13.6" font-weight="600"><tspan x="52" dy="0">SSH authentication</tspan></text>
+</g>
+<g id="module-11"><desc>Linux user access</desc>
+<path d="M50 1509 H380 L392 1521 V1598 L380 1610 H50 L38 1598 V1521 Z" fill="#122a37" stroke="#527184" stroke-width="1.15"/>
+<path d="M52 1514 H378" stroke="#f68faa" stroke-width="1.4" stroke-opacity=".65"/>
+<rect x="33" y="1554.5" width="6" height="10" rx="1" fill="#f68faa" opacity=".8"/><rect x="391" y="1554.5" width="6" height="10" rx="1" fill="#f68faa" opacity=".8"/>
+<text x="52" y="1531" fill="#f68faa" font-family="Consolas,monospace" font-size="10" font-weight="700">N11</text>
+<text x="377" y="1531" text-anchor="end" fill="#a6bdca" font-family="Consolas,monospace" font-size="9">RESULT</text>
+<text x="52" y="1552" fill="#edf7fa" font-family="Consolas,monospace" font-size="13.6" font-weight="600"><tspan x="52" dy="0">Linux user access</tspan></text>
+</g>
+<path d="M28 1654H402" stroke="#89a3b4" stroke-opacity=".32"/>
+<text x="28" y="1677" font-size="10.2" fill="#b5c4ce" font-family="Consolas,monospace">SCHEMATIC / ORIGINAL EVIDENCE-BASED FLOW</text>
+<text x="28" y="1694" font-size="9.6" fill="#8ea7b6" font-family="Consolas,monospace">COMPANION COMMANDS &amp; QUALIFICATIONS REMAIN IN REPORT</text>
+</svg>

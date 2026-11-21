@@ -372,46 +372,13 @@ The exploitation payload and command-execution procedure belong in [[Reusable Po
 
 ## 7. Confirmed IN-01 Attack Chain
 
-```
-Public link-preview endpoint
-          |
-          v
-/fetch?url=
-          |
-          v
-Internal-address filter
-          |
-          v
-Non-canonical loopback representation
-127.1
-          |
-          v
-SSRF filter bypass
-          |
-          v
-Internal port discovery
-          |
-          v
-127.1:9000
-          |
-          v
-IT GATE internal admin API
-          |
-          v
-/admin/exec
-          |
-          v
-data parameter
-          |
-          v
-Base64 decoding
-          |
-          v
-Python Pickle deserialization
-          |
-          v
-Remote command execution as web
-```
+<figure class="poc-blueprint-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/poc-blueprint-ssrf-filter-bypass-mobile.svg" />
+    <img src="/diagrams/poc-blueprint-ssrf-filter-bypass.svg" alt="SSRF FILTER BYPASS reusable exploitation blueprint: Public link-preview endpoint then /fetch?url= then Internal-address filter then Non-canonical loopback representation 127.1 then SSRF filter bypass then Internal port discovery then 127.1:9000 then IT GATE internal admin API then /admin/exec then data parameter then Base64 decoding then Python Pickle deserialization then Remote command execution as web. . ." width="960" height="983" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>SSRF FILTER BYPASS — technical exploitation blueprint, preserving the original sequence. Supporting commands and evidence remain in this page.</figcaption>
+</figure>
 
 ## 8. Limitations and Failed Leads
 

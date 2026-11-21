@@ -229,3 +229,50 @@ jobs:
           assert page.count('class="exam-timeline-figure"') == 5
           print('5 timeline figures, 10 XML assets, 5 exact step counts, and ME-01 branch verified')
           PY
+
+      - name: Verify reusable PoC blueprint schematics
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          expected = {
+              'cap-setuid': 7,
+              'ld-preload': 9,
+              'tar-wildcard-injection': 13,
+              'python-pickle-rce': 8,
+              'redis-persistence': 11,
+              'ssrf-filter-bypass': 13,
+          }
+          for slug, count in expected.items():
+              html = Path(f'dist/poc-library/{slug}/index.html').read_text()
+              assert html.count('class="poc-blueprint-figure"') == 1, slug
+              for mobile in ('', '-mobile'):
+                  name = f'poc-blueprint-{slug}{mobile}.svg'
+                  assert name in html, (slug, name)
+                  p = Path('dist/diagrams') / name
+                  assert p.is_file() and p.stat().st_size > 900, p
+                  root = ET.parse(p).getroot()
+                  nodes = [n for n in root.iter() if n.attrib.get('id', '').startswith('module-')]
+                  assert len(nodes) == count, (slug, len(nodes), count)
+                  assert all(any(child.tag.endswith('desc') and child.text for child in n) for n in nodes), p
+                  all_text = '\n'.join(root.itertext())
+                  assert 'SCHEMATIC / ORIGINAL EVIDENCE-BASED FLOW' in all_text, p
+                  branches = [n for n in root.iter() if n.attrib.get('id') == 'branch-sudo-conditions']
+                  assert len(branches) == int(slug == 'ld-preload'), p
+                  if slug == 'ld-preload':
+                      assert 'NOPASSWD: /usr/local/bin/healthcheck' in all_text
+                      assert 'env_keep += LD_PRELOAD' in all_text
+                      assert 'sudo LD_PRELOAD=/tmp/in01_preload.so' in all_text
+                  edges = [n for n in root.iter() if n.attrib.get('id') == 'edge-annotations']
+                  assert len(edges) == int(slug == 'python-pickle-rce'), p
+                  if slug == 'python-pickle-rce':
+                      for label in ('HTTP request', 'SSRF filter bypass using 127.1', 'data=<Base64-encoded pickle>', 'Malicious __reduce__ implementation'):
+                          assert label in all_text, (p, label)
+                  if slug == 'ssrf-filter-bypass':
+                      assert '127.1:9000' in all_text
+                  if slug == 'redis-persistence':
+                      assert 'SAVE -> authorized_keys' in all_text
+                  if slug == 'tar-wildcard-injection':
+                      assert 'tar ... *' in all_text
+          print('6 PoC pages / 12 responsive SVG blueprints / 61 stages / sudo branches / Pickle edge signals PASS')
+          PY

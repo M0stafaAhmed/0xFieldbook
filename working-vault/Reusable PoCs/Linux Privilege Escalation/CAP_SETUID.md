@@ -36,27 +36,13 @@ Because Python exposes the `os.setuid()` function, the capability could be used 
 
 **Attack chain:**
 
-```
-Path Traversal
-    |
-    v
-API Key Disclosure
-    |
-    v
-Authenticated Command Injection
-    |
-    v
-Command Execution as svc (UID 1000)
-    |
-    v
-CAP_SETUID on pyadmin
-    |
-    v
-os.setuid(0)
-    |
-    v
-Root-Level File Read
-```
+<figure class="poc-blueprint-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/poc-blueprint-cap-setuid-mobile.svg" />
+    <img src="/diagrams/poc-blueprint-cap-setuid.svg" alt="CAP_SETUID reusable exploitation blueprint: Path Traversal then API Key Disclosure then Authenticated Command Injection then Command Execution as svc (UID 1000) then CAP_SETUID on pyadmin then os.setuid(0) then Root-Level File Read. . ." width="960" height="685" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>CAP_SETUID — technical exploitation blueprint, preserving the original sequence. Supporting commands and evidence remain in this page.</figcaption>
+</figure>
 
 ## 2. Vulnerability Details
 

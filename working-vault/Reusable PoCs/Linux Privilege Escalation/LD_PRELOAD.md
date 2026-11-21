@@ -40,38 +40,13 @@ This combination allows a custom shared library to be supplied when executing th
 
 ### Attack chain
 
-```
-web (UID 1000)
-    |
-    v
-sudo -l
-    |
-    +-- NOPASSWD: /usr/local/bin/healthcheck
-    |
-    +-- env_keep += LD_PRELOAD
-    |
-    v
-Create malicious C source
-    |
-    v
-Compile with GCC
-    |
-    v
-Generate shared library (.so)
-    |
-    v
-sudo LD_PRELOAD=/tmp/in01_preload.so \
-    /usr/local/bin/healthcheck
-    |
-    v
-Shared-library constructor executes
-    |
-    v
-UID = 0, EUID = 0
-    |
-    v
-Read /root/root.txt
-```
+<figure class="poc-blueprint-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/poc-blueprint-ld-preload-mobile.svg" />
+    <img src="/diagrams/poc-blueprint-ld-preload.svg" alt="LD_PRELOAD reusable exploitation blueprint: web (UID 1000) then sudo -l then Create malicious C source then Compile with GCC then Generate shared library (.so) then sudo LD_PRELOAD=/tmp/in01_preload.so \ /usr/local/bin/healthcheck then Shared-library constructor executes then UID = 0, EUID = 0 then Read /root/root.txt. NOPASSWD: /usr/local/bin/healthcheck. env_keep += LD_PRELOAD. ." width="960" height="833" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>LD_PRELOAD — technical exploitation blueprint, preserving the original sequence, both sudo prerequisites. Supporting commands and evidence remain in this page.</figcaption>
+</figure>
 
 ## 2. Enumeration and Discovery
 

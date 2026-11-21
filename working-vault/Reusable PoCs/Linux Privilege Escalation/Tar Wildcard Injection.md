@@ -42,46 +42,13 @@ The injected checkpoint action executed the supplied shell script with root priv
 
 ### Attack chain
 
-```
-devops
-   |
-   v
-Enumerate cron jobs
-   |
-   v
-Discover /etc/cron.d/maint
-   |
-   v
-Identify root execution of backup.sh
-   |
-   v
-Inspect backup.sh
-   |
-   v
-Discover unquoted wildcard:
-tar ... *
-   |
-   v
-Confirm spool directory is writable
-   |
-   v
-Create root-flag.sh
-   |
-   v
-Create maliciously named files
-   |
-   v
-Root cron executes backup.sh
-   |
-   v
-GNU tar interprets filenames as options
-   |
-   v
-Checkpoint action executes root-flag.sh
-   |
-   v
-Retrieve /root/root.txt
-```
+<figure class="poc-blueprint-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/poc-blueprint-tar-wildcard-injection-mobile.svg" />
+    <img src="/diagrams/poc-blueprint-tar-wildcard-injection.svg" alt="TAR WILDCARD reusable exploitation blueprint: devops then Enumerate cron jobs then Discover /etc/cron.d/maint then Identify root execution of backup.sh then Inspect backup.sh then Discover unquoted wildcard: tar ... * then Confirm spool directory is writable then Create root-flag.sh then Create maliciously named files then Root cron executes backup.sh then GNU tar interprets filenames as options then Checkpoint action executes root-flag.sh then Retrieve /root/root.txt. . ." width="960" height="983" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>TAR WILDCARD — technical exploitation blueprint, preserving the original sequence. Supporting commands and evidence remain in this page.</figcaption>
+</figure>
 
 ## 2. Reconnaissance and Discovery
 

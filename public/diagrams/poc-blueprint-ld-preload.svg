@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="833" viewBox="0 0 960 833" role="img" aria-labelledby="poc-title poc-description">
+<title id="poc-title">LD_PRELOAD — exploitation blueprint</title>
+<desc id="poc-description">Technical diagram of the original PoC stages: web (UID 1000) → sudo -l → Create malicious C source → Compile with GCC → Generate shared library (.so) → sudo LD_PRELOAD=/tmp/in01_preload.so \
+/usr/local/bin/healthcheck → Shared-library constructor executes → UID = 0, EUID = 0 → Read /root/root.txt. NOPASSWD: /usr/local/bin/healthcheck; env_keep += LD_PRELOAD. .</desc>
+<defs><linearGradient id="poc-bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#08121c"/><stop offset="1" stop-color="#0e2430"/></linearGradient><pattern id="poc-grid" width="22" height="22" patternUnits="userSpaceOnUse"><path d="M22 0H0V22" stroke="#91b2c4" stroke-opacity=".11" stroke-width=".8" fill="none"/></pattern></defs>
+<rect x="0" y="0" width="960" height="833" rx="16" fill="url(#poc-bg)"/>
+<rect x="0" y="0" width="960" height="833" rx="16" fill="url(#poc-grid)"/>
+<path d="M45 22 H915" stroke="#b5a1ff" stroke-width="3"/>
+<text x="46" y="51" font-family="Consolas,monospace" font-size="11" font-weight="700" fill="#b5a1ff" letter-spacing="2.2">0XFIELD / REUSABLE TECHNIQUE</text>
+<text x="46" y="88" font-family="Arial,sans-serif" font-size="32" font-weight="800" fill="#eef7fa">LD_PRELOAD</text>
+<text x="46" y="111" font-family="Consolas,monospace" font-size="12" fill="#b8cad3">9 TECHNICAL MODULES  ·  2 BRANCH CONDITIONS</text>
+<text x="46" y="136" font-family="Consolas,monospace" font-size="10" fill="#a1b5c1">SIGNAL  →  PREREQUISITE  →  EXECUTION  →  OBSERVED RESULT</text>
+<g id="pcb-traces" stroke="#b5a1ff" stroke-width="2.1" stroke-linecap="square" stroke-linejoin="round" fill="none">
+<path d="M306 218 H354" stroke-opacity=".8"/>
+<path d="M344 213 L354 218 L344 223" stroke-opacity=".95"/>
+<path d="M604 218 H652" stroke-opacity=".8"/>
+<path d="M642 213 L652 218 L642 223" stroke-opacity=".95"/>
+<path d="M777 269 V313" stroke-opacity=".8"/>
+<path d="M772 304 L777 313 L782 304" stroke-opacity=".95"/>
+<path d="M652 367 H604" stroke-opacity=".8"/>
+<path d="M614 362 L604 367 L614 372" stroke-opacity=".95"/>
+<path d="M354 367 H306" stroke-opacity=".8"/>
+<path d="M316 362 L306 367 L316 372" stroke-opacity=".95"/>
+<path d="M181 418 V462" stroke-opacity=".8"/>
+<path d="M176 453 L181 462 L186 453" stroke-opacity=".95"/>
+<path d="M306 516 H354" stroke-opacity=".8"/>
+<path d="M344 511 L354 516 L344 521" stroke-opacity=".95"/>
+<path d="M604 516 H652" stroke-opacity=".8"/>
+<path d="M642 511 L652 516 L642 521" stroke-opacity=".95"/>
+</g>
+<g id="module-01"><desc>web (UID 1000)</desc>
+<path d="M68 167 H294 L306 179 V257 L294 269 H68 L56 257 V179 Z" fill="#122a37" stroke="#527184" stroke-width="1.15"/>
+<path d="M70 172 H292" stroke="#b5a1ff" stroke-width="1.4" stroke-opacity=".65"/>
+<rect x="51" y="213" width="6" height="10" rx="1" fill="#b5a1ff" opacity=".8"/><rect x="305" y="213" width="6" height="10" rx="1" fill="#b5a1ff" opacity=".8"/>
+<text x="70" y="189" fill="#b5a1ff" font-family="Consolas,monospace" font-size="10" font-weight="700">N01</text>
+<text x="291" y="189" text-anchor="end" fill="#a6bdca" font-family="Consolas,monospace" font-size="9">ENTRY</text>
+<text x="70" y="210" fill="#edf7fa" font-family="Consolas,monospace" font-size="13.3" font-weight="600"><tspan x="70" dy="0">web (UID 1000)</tspan></text>
+</g>
+<g id="module-02"><desc>sudo -l</desc>
+<path d="M366 167 H592 L604 179 V257 L592 269 H366 L354 257 V179 Z" fill="#122a37" stroke="#527184" stroke-width="1.15"/>
+<path d="M368 172 H590" stroke="#b5a1ff" stroke-width="1.4" stroke-opacity=".65"/>
+<rect x="349" y="213" width="6" height="10" rx="1" fill="#b5a1ff" opacity=".8"/><rect x="603" y="213" width="6" height="10" rx="1" fill="#b5a1ff" opacity=".8"/>
+<text x="368" y="189" fill="#b5a1ff" font-family="Consolas,monospace" font-size="10" font-weight="700">N02</text>
+<text x="589" y="189" text-anchor="end" fill="#a6bdca" font-family="Consolas,monospace" font-size="9">ENTRY</text>
+<text x="368" y="210" fill="#edf7fa" font-family="Consolas,monospace" font-size="13.3" font-weight="600"><tspan x="368" dy="0">sudo -l</tspan></text>
+</g>
+<g id="module-03"><desc>Create malicious C source</desc>
+<path d="M664 167 H890 L902 179 V257 L890 269 H664 L652 257 V179 Z" fill="#122a37" stroke="#527184" stroke-width="1.15"/>
+<path d="M666 172 H888" stroke="#b5a1ff" stroke-width="1.4" stroke-opacity=".65"/>
+<rect x="647" y="213" width="6" height="10" rx="1" fill="#b5a1ff" opacity=".8"/><rect x="901" y="213" width="6" height="10" rx="1" fill="#b5a1ff" opacity=".8"/>
+<text x="666" y="189" fill="#b5a1ff" font-family="Consolas,monospace" font-size="10" font-weight="700">N03</text>
+<text x="887" y="189" text-anchor="end" fill="#a6bdca" font-family="Consolas,monospace" font-size="9">ENTRY</text>
+<text x="666" y="210" fill="#edf7fa" font-family="Consolas,monospace" font-size="13.3" font-weight="600"><tspan x="666" dy="0">Create malicious C source</tspan></text>
+</g>
+<g id="module-04"><desc>Compile with GCC</desc>
+<path d="M664 316 H890 L902 328 V406 L890 418 H664 L652 406 V328 Z" fill="#122a37" stroke="#527184" stroke-width="1.15"/>
+<path d="M666 321 H888" stroke="#b5a1ff" stroke-width="1.4" stroke-opacity=".65"/>
+<rect x="647" y="362" width="6" height="10" rx="1" fill="#b5a1ff" opacity=".8"/><rect x="901" y="362" width="6" height="10" rx="1" fill="#b5a1ff" opacity=".8"/>
+<text x="666" y="338" fill="#b5a1ff" font-family="Consolas,monospace" font-size="10" font-weight="700">N04</text>
+<text x="887" y="338" text-anchor="end" fill="#a6bdca" font-family="Consolas,monospace" font-size="9">SURFACE</text>
+<text x="666" y="359" fill="#edf7fa" font-family="Consolas,monospace" font-size="13.3" font-weight="600"><tspan x="666" dy="0">Compile with GCC</tspan></text>
+</g>
+<g id="module-05"><desc>Generate shared library (.so)</desc>
+<path d="M366 316 H592 L604 328 V406 L592 418 H366 L354 406 V328 Z" fill="#122a37" stroke="#527184" stroke-width="1.15"/>
+<path d="M368 321 H590" stroke="#b5a1ff" stroke-width="1.4" stroke-opacity=".65"/>
+<rect x="349" y="362" width="6" height="10" rx="1" fill="#b5a1ff" opacity=".8"/><rect x="603" y="362" width="6" height="10" rx="1" fill="#b5a1ff" opacity=".8"/>
+<text x="368" y="338" fill="#b5a1ff" font-family="Consolas,monospace" font-size="10" font-weight="700">N05</text>
+<text x="589" y="338" text-anchor="end" fill="#a6bdca" font-family="Consolas,monospace" font-size="9">SURFACE</text>
+<text x="368" y="359" fill="#edf7fa" font-family="Consolas,monospace" font-size="13.3" font-weight="600"><tspan x="368" dy="0">Generate shared library</tspan><tspan x="368" dy="17">(.so)</tspan></text>
+</g>
+<g id="module-06"><desc>sudo LD_PRELOAD=/tmp/in01_preload.so \
+/usr/local/bin/healthcheck</desc>
+<path d="M68 316 H294 L306 328 V406 L294 418 H68 L56 406 V328 Z" fill="#122a37" stroke="#527184" stroke-width="1.15"/>
+<path d="M70 321 H292" stroke="#b5a1ff" stroke-width="1.4" stroke-opacity=".65"/>
+<rect x="51" y="362" width="6" height="10" rx="1" fill="#b5a1ff" opacity=".8"/><rect x="305" y="362" width="6" height="10" rx="1" fill="#b5a1ff" opacity=".8"/>
+<text x="70" y="338" fill="#b5a1ff" font-family="Consolas,monospace" font-size="10" font-weight="700">N06</text>
+<text x="291" y="338" text-anchor="end" fill="#a6bdca" font-family="Consolas,monospace" font-size="9">EXPLOIT</text>
+<text x="70" y="359" fill="#edf7fa" font-family="Consolas,monospace" font-size="13.3" font-weight="600"><tspan x="70" dy="0">sudo LD_PRELOAD=/tmp/in01_pr</tspan><tspan x="70" dy="17">eload.so \</tspan><tspan x="70" dy="17">/usr/local/bin/healthcheck</tspan></text>
+</g>
+<g id="module-07"><desc>Shared-library constructor executes</desc>
+<path d="M68 465 H294 L306 477 V555 L294 567 H68 L56 555 V477 Z" fill="#122a37" stroke="#527184" stroke-width="1.15"/>
+<path d="M70 470 H292" stroke="#b5a1ff" stroke-width="1.4" stroke-opacity=".65"/>
+<rect x="51" y="511" width="6" height="10" rx="1" fill="#b5a1ff" opacity=".8"/><rect x="305" y="511" width="6" height="10" rx="1" fill="#b5a1ff" opacity=".8"/>
+<text x="70" y="487" fill="#b5a1ff" font-family="Consolas,monospace" font-size="10" font-weight="700">N07</text>
+<text x="291" y="487" text-anchor="end" fill="#a6bdca" font-family="Consolas,monospace" font-size="9">EXPLOIT</text>
+<text x="70" y="508" fill="#edf7fa" font-family="Consolas,monospace" font-size="13.3" font-weight="600"><tspan x="70" dy="0">Shared-library constructor</tspan><tspan x="70" dy="17">executes</tspan></text>
+</g>
+<g id="module-08"><desc>UID = 0, EUID = 0</desc>
+<path d="M366 465 H592 L604 477 V555 L592 567 H366 L354 555 V477 Z" fill="#122a37" stroke="#527184" stroke-width="1.15"/>
+<path d="M368 470 H590" stroke="#b5a1ff" stroke-width="1.4" stroke-opacity=".65"/>
+<rect x="349" y="511" width="6" height="10" rx="1" fill="#b5a1ff" opacity=".8"/><rect x="603" y="511" width="6" height="10" rx="1" fill="#b5a1ff" opacity=".8"/>
+<text x="368" y="487" fill="#b5a1ff" font-family="Consolas,monospace" font-size="10" font-weight="700">N08</text>
+<text x="589" y="487" text-anchor="end" fill="#a6bdca" font-family="Consolas,monospace" font-size="9">RESULT</text>
+<text x="368" y="508" fill="#edf7fa" font-family="Consolas,monospace" font-size="13.3" font-weight="600"><tspan x="368" dy="0">UID = 0, EUID = 0</tspan></text>
+</g>
+<g id="module-09"><desc>Read /root/root.txt</desc>
+<path d="M664 465 H890 L902 477 V555 L890 567 H664 L652 555 V477 Z" fill="#122a37" stroke="#527184" stroke-width="1.15"/>
+<path d="M666 470 H888" stroke="#b5a1ff" stroke-width="1.4" stroke-opacity=".65"/>
+<rect x="647" y="511" width="6" height="10" rx="1" fill="#b5a1ff" opacity=".8"/><rect x="901" y="511" width="6" height="10" rx="1" fill="#b5a1ff" opacity=".8"/>
+<text x="666" y="487" fill="#b5a1ff" font-family="Consolas,monospace" font-size="10" font-weight="700">N09</text>
+<text x="887" y="487" text-anchor="end" fill="#a6bdca" font-family="Consolas,monospace" font-size="9">RESULT</text>
+<text x="666" y="508" fill="#edf7fa" font-family="Consolas,monospace" font-size="13.3" font-weight="600"><tspan x="666" dy="0">Read /root/root.txt</tspan></text>
+</g>
+<g id="branch-sudo-conditions">
+<text x="54" y="607" fill="#ffd19b" font-family="Consolas,monospace" font-size="13" font-weight="700">B01 / B02 — SUDO -L PARALLEL FINDINGS</text>
+<path d="M66 627H454L464 637V691L454 701H66L56 691V637Z" fill="#1b2c36" stroke="#c39d80" stroke-width="1.3"/>
+<text x="68" y="648" fill="#ffd19b" font-size="10" font-family="Consolas,monospace">SUDO -L  /  B1</text>
+<text x="68" y="670" fill="#f6e4cc" font-size="12.5" font-family="Consolas,monospace"><tspan x="68" dy="0">NOPASSWD: /usr/local/bin/healthcheck</tspan></text>
+<path d="M507 627H895L905 637V691L895 701H507L497 691V637Z" fill="#1b2c36" stroke="#c39d80" stroke-width="1.3"/>
+<text x="509" y="648" fill="#ffd19b" font-size="10" font-family="Consolas,monospace">SUDO -L  /  B2</text>
+<text x="509" y="670" fill="#f6e4cc" font-size="12.5" font-family="Consolas,monospace"><tspan x="509" dy="0">env_keep += LD_PRELOAD</tspan></text>
+<path d="M480 603V619M260 619H700M260 619V627M700 619V627" stroke="#eac19b" stroke-dasharray="5 4" fill="none" stroke-width="1.5"/>
+<text x="57" y="723" fill="#b6c8cf" font-size="11.5" font-family="Consolas,monospace">BOTH SETTINGS ENABLE THE PRELOAD TECHNIQUE</text></g>
+<path d="M55 759H905" stroke="#89a3b4" stroke-opacity=".32"/>
+<text x="55" y="782" font-size="11.2" fill="#b5c4ce" font-family="Consolas,monospace">SCHEMATIC / ORIGINAL EVIDENCE-BASED FLOW</text>
+<text x="55" y="799" font-size="10.7" fill="#8ea7b6" font-family="Consolas,monospace">COMPANION COMMANDS &amp; QUALIFICATIONS REMAIN IN REPORT</text>
+</svg>
