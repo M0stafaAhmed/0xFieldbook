@@ -68,30 +68,13 @@ All five machines were investigated sequentially, not as independent exercises.
 
 **Attack chain:**
 
-```
-Public Web Application
-        |
-        v
-PHP File Upload
-        |
-        v
-PHP Command Execution
-        |
-        v
-www-data
-        |
-        v
-User Flag
-        |
-        v
-Sudo Misconfiguration
-        |
-        v
-find -exec
-        |
-        v
-Root
-```
+<figure class="exam-timeline-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/exam-timeline-ve-01-mobile.svg" />
+    <img src="/diagrams/exam-timeline-ve-01.svg" alt="VE-01 chronological attack sequence: Public Web Application; PHP File Upload; PHP Command Execution; www-data; User Flag; Sudo Misconfiguration; find -exec; Root." width="820" height="846" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>VE-01 — reconstructed attack sequence. Individual event timestamps are not established.</figcaption>
+</figure>
 
 ### 3.1 Initial Access
 
@@ -183,30 +166,13 @@ The important distinction is that the initial access and privilege-escalation ve
 
 **Attack chain:**
 
-```
-Public Web Application
-        |
-        v
-SQL Injection
-        |
-        v
-SQLite Enumeration
-        |
-        v
-Credential Discovery
-        |
-        v
-SSH as robert
-        |
-        v
-User Flag
-        |
-        v
-SUID find
-        |
-        v
-Root
-```
+<figure class="exam-timeline-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/exam-timeline-ea-01-mobile.svg" />
+    <img src="/diagrams/exam-timeline-ea-01.svg" alt="EA-01 chronological attack sequence: Public Web Application; SQL Injection; SQLite Enumeration; Credential Discovery; SSH as robert; User Flag; SUID find; Root." width="820" height="846" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>EA-01 — reconstructed attack sequence. Individual event timestamps are not established.</figcaption>
+</figure>
 
 ### 4.1 Initial Access
 
@@ -318,35 +284,13 @@ The escalation mechanism resembled VE-01 at the binary level, but the vulnerable
 
 **Attack chain:**
 
-```
-Public API
-    |
-    v
-Directory Traversal
-    |
-    v
-Application File Read
-    |
-    +-------> user.txt
-    |
-    v
-Application Source / Configuration Discovery
-    |
-    v
-API Key Recovery
-    |
-    v
-Command Injection
-    |
-    v
-svc
-    |
-    v
-CAP_SETUID on pyadmin
-    |
-    v
-Root
-```
+<figure class="exam-timeline-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/exam-timeline-me-01-mobile.svg" />
+    <img src="/diagrams/exam-timeline-me-01.svg" alt="ME-01 chronological attack sequence: Public API; Directory Traversal; Application File Read; Application Source / Configuration Discovery; API Key Recovery; Command Injection; svc; CAP_SETUID on pyadmin; Root; file read additionally branches to user.txt." width="820" height="930" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>ME-01 — reconstructed attack sequence, retaining the independent user-flag branch from Application File Read. Individual event timestamps are not established.</figcaption>
+</figure>
 
 ### 5.1 Initial Reconnaissance
 
@@ -505,33 +449,13 @@ The machine demonstrated the value of inspecting application source and configur
 
 **Attack chain:**
 
-```
-Unauthenticated Redis
-        |
-        v
-Redis Administrative Commands
-        |
-        v
-Filesystem Persistence
-        |
-        v
-SSH Public-Key Injection
-        |
-        v
-SSH as devops
-        |
-        v
-Local Privilege Enumeration
-        |
-        v
-Root Cron Job
-        |
-        v
-Tar Wildcard Injection
-        |
-        v
-Root
-```
+<figure class="exam-timeline-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/exam-timeline-ha-01-mobile.svg" />
+    <img src="/diagrams/exam-timeline-ha-01.svg" alt="HA-01 chronological attack sequence: Unauthenticated Redis; Redis Administrative Commands; Filesystem Persistence; SSH Public-Key Injection; SSH as devops; Local Privilege Enumeration; Root Cron Job; Tar Wildcard Injection; Root." width="820" height="930" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>HA-01 — reconstructed attack sequence. Individual event timestamps are not established.</figcaption>
+</figure>
 
 ### 6.1 Initial Reconnaissance
 
@@ -705,36 +629,13 @@ The privilege-escalation stage was also based on a concrete configuration flaw r
 
 **Attack chain:**
 
-```
-Public URL Preview
-        |
-        v
-SSRF
-        |
-        v
-Loopback Filter Bypass
-        |
-        v
-Internal Admin API :9000
-        |
-        v
-/admin/exec
-        |
-        v
-Python Pickle Deserialization
-        |
-        v
-Remote Code Execution as web
-        |
-        v
-Sudo Enumeration
-        |
-        v
-LD_PRELOAD Injection
-        |
-        v
-Root
-```
+<figure class="exam-timeline-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/exam-timeline-in-01-mobile.svg" />
+    <img src="/diagrams/exam-timeline-in-01.svg" alt="IN-01 chronological attack sequence: Public URL Preview; SSRF; Loopback Filter Bypass; Internal Admin API :9000; /admin/exec; Python Pickle Deserialization; Remote Code Execution as web; Sudo Enumeration; LD_PRELOAD Injection; Root." width="820" height="1014" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>IN-01 — reconstructed attack sequence. Individual event timestamps are not established.</figcaption>
+</figure>
 
 ### 7.1 Initial Reconnaissance
 

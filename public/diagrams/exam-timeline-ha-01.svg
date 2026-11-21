@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 930" width="820" height="930" role="img" aria-labelledby="title desc">
+<title id="title">HA-01 · Exam progression timeline</title>
+<desc id="desc">Unauthenticated Redis → Redis Administrative Commands → Filesystem Persistence → SSH Public-Key Injection → SSH as devops → Local Privilege Enumeration → Root Cron Job → Tar Wildcard Injection → Root. Sequence reconstructed; precise event timestamps not preserved.</desc>
+<defs><linearGradient id="night" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#081521"/><stop offset="1" stop-color="#132431"/></linearGradient><pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0 H0 V28" fill="none" stroke="#adc8d8" stroke-width=".7" stroke-opacity=".08"/></pattern></defs>
+<rect width="820" height="930" rx="18" fill="url(#night)"/><rect width="820" height="930" rx="18" fill="url(#grid)"/><rect width="820" height="5" rx="2.5" fill="#ffc07f"/>
+<text x="44" y="39" font-family="Consolas,monospace" font-size="11" font-weight="700" letter-spacing="2" fill="#ffc07f">FIELD NOTES / EXAM TIMELINE</text>
+<text x="44" y="90" font-family="Arial,sans-serif" font-size="46" font-weight="800" fill="#eef5fa">HA-01</text>
+<text x="44" y="117" font-family="Consolas,monospace" font-size="11" fill="#b1c7d3">CASE 04 / 05 · 9 STEPS</text>
+<path d="M410 146 V840" stroke="#ffc07f" stroke-width="3" opacity=".7" fill="none"/>
+<g id="phase-01">
+<line x1="347" x2="394" y1="146" y2="146" stroke="#ffc07f" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M410 130 L426 146 L410 162 L394 146 Z" fill="#1c3543" stroke="#ffc07f" stroke-width="2"/>
+<text x="410" y="150" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">01</text>
+<text x="63" y="140" font-family="Arial,sans-serif" font-size="18.2" font-weight="600" fill="#eef5fa"><tspan x="63" dy="0">Unauthenticated Redis</tspan></text>
+<path d="M63 176 H347" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<g id="phase-02">
+<path d="M405 212 L415 212 L410 221 Z" fill="#ffc07f"/>
+<line x1="426" x2="477" y1="230" y2="230" stroke="#ffc07f" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M410 214 L426 230 L410 246 L394 230 Z" fill="#1c3543" stroke="#ffc07f" stroke-width="2"/>
+<text x="410" y="234" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">02</text>
+<text x="489" y="215" font-family="Arial,sans-serif" font-size="18.2" font-weight="600" fill="#eef5fa"><tspan x="489" dy="0">Redis Administrative</tspan><tspan x="489" dy="22">Commands</tspan></text>
+<path d="M477 260 H761" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<g id="phase-03">
+<path d="M405 296 L415 296 L410 305 Z" fill="#ffc07f"/>
+<line x1="347" x2="394" y1="314" y2="314" stroke="#ffc07f" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M410 298 L426 314 L410 330 L394 314 Z" fill="#1c3543" stroke="#ffc07f" stroke-width="2"/>
+<text x="410" y="318" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">03</text>
+<text x="63" y="308" font-family="Arial,sans-serif" font-size="18.2" font-weight="600" fill="#eef5fa"><tspan x="63" dy="0">Filesystem Persistence</tspan></text>
+<path d="M63 344 H347" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<g id="phase-04">
+<path d="M405 380 L415 380 L410 389 Z" fill="#ffc07f"/>
+<line x1="426" x2="477" y1="398" y2="398" stroke="#ffc07f" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M410 382 L426 398 L410 414 L394 398 Z" fill="#1c3543" stroke="#ffc07f" stroke-width="2"/>
+<text x="410" y="402" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">04</text>
+<text x="489" y="392" font-family="Arial,sans-serif" font-size="18.2" font-weight="600" fill="#eef5fa"><tspan x="489" dy="0">SSH Public-Key Injection</tspan></text>
+<path d="M477 428 H761" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<g id="phase-05">
+<path d="M405 464 L415 464 L410 473 Z" fill="#ffc07f"/>
+<line x1="347" x2="394" y1="482" y2="482" stroke="#ffc07f" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M410 466 L426 482 L410 498 L394 482 Z" fill="#1c3543" stroke="#ffc07f" stroke-width="2"/>
+<text x="410" y="486" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">05</text>
+<text x="63" y="476" font-family="Arial,sans-serif" font-size="18.2" font-weight="600" fill="#eef5fa"><tspan x="63" dy="0">SSH as devops</tspan></text>
+<path d="M63 512 H347" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<g id="phase-06">
+<path d="M405 548 L415 548 L410 557 Z" fill="#ffc07f"/>
+<line x1="426" x2="477" y1="566" y2="566" stroke="#ffc07f" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M410 550 L426 566 L410 582 L394 566 Z" fill="#1c3543" stroke="#ffc07f" stroke-width="2"/>
+<text x="410" y="570" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">06</text>
+<text x="489" y="560" font-family="Arial,sans-serif" font-size="18.2" font-weight="600" fill="#eef5fa"><tspan x="489" dy="0">Local Privilege Enumeration</tspan></text>
+<path d="M477 596 H761" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<g id="phase-07">
+<path d="M405 632 L415 632 L410 641 Z" fill="#ffc07f"/>
+<line x1="347" x2="394" y1="650" y2="650" stroke="#ffc07f" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M410 634 L426 650 L410 666 L394 650 Z" fill="#1c3543" stroke="#ffc07f" stroke-width="2"/>
+<text x="410" y="654" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">07</text>
+<text x="63" y="644" font-family="Arial,sans-serif" font-size="18.2" font-weight="600" fill="#eef5fa"><tspan x="63" dy="0">Root Cron Job</tspan></text>
+<path d="M63 680 H347" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<g id="phase-08">
+<path d="M405 716 L415 716 L410 725 Z" fill="#ffc07f"/>
+<line x1="426" x2="477" y1="734" y2="734" stroke="#ffc07f" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M410 718 L426 734 L410 750 L394 734 Z" fill="#1c3543" stroke="#ffc07f" stroke-width="2"/>
+<text x="410" y="738" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">08</text>
+<text x="489" y="728" font-family="Arial,sans-serif" font-size="18.2" font-weight="600" fill="#eef5fa"><tspan x="489" dy="0">Tar Wildcard Injection</tspan></text>
+<path d="M477 764 H761" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<g id="phase-09">
+<path d="M405 800 L415 800 L410 809 Z" fill="#ffc07f"/>
+<line x1="347" x2="394" y1="818" y2="818" stroke="#ffc07f" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M410 802 L426 818 L410 834 L394 818 Z" fill="#1c3543" stroke="#ffc07f" stroke-width="2"/>
+<text x="410" y="822" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">09</text>
+<text x="63" y="812" font-family="Arial,sans-serif" font-size="18.2" font-weight="600" fill="#eef5fa"><tspan x="63" dy="0">Root</tspan></text>
+<path d="M63 848 H347" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<path d="M44 881 H776" fill="none" stroke="#bccedc" stroke-opacity=".25"/><text x="44" y="906" font-family="Consolas,monospace" font-size="12" fill="#bdccd6">RECONSTRUCTED ORDER · NO INVENTED TIMESTAMPS</text></svg>

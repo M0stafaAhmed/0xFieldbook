@@ -203,3 +203,29 @@ jobs:
       - name: Verify IN-01 Root SVG XML structure
         run: |
           python3 -c "import xml.etree.ElementTree as ET; from pathlib import Path; xs=list(Path('dist/diagrams').glob('in-01-root-*.svg')); assert len(xs)==3, len(xs); [ET.parse(p) for p in xs]"
+
+      - name: Verify Exam Timeline milestone rails and branch
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          import re
+          page = Path('dist/timeline/index.html').read_text()
+          expected = {'ve-01':8, 'ea-01':8, 'me-01':9, 'ha-01':9, 'in-01':10}
+          for machine, count in expected.items():
+              for suffix in ('','-mobile'):
+                  name = f'exam-timeline-{machine}{suffix}.svg'
+                  svg = Path('dist/diagrams') / name
+                  assert svg.exists() and svg.stat().st_size > 500, svg
+                  root = ET.parse(svg).getroot()
+                  phases = [g for g in root.iter() if re.fullmatch(r'phase-\d{2}', g.attrib.get('id',''))]
+                  assert len(phases) == count, (name, len(phases))
+                  branches = [g for g in root.iter() if g.attrib.get('id') == 'user-flag-branch']
+                  assert len(branches) == int(machine == 'me-01'), name
+                  content = ''.join(root.itertext())
+                  assert 'NO INVENTED TIMESTAMPS' in content
+                  if machine == 'me-01': assert 'user.txt' in content
+                  assert name in page
+          assert page.count('class="exam-timeline-figure"') == 5
+          print('5 timeline figures, 10 XML assets, 5 exact step counts, and ME-01 branch verified')
+          PY

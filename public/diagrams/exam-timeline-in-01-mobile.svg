@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 940" width="390" height="940" role="img" aria-labelledby="title desc">
+<title id="title">IN-01 · Exam progression timeline</title>
+<desc id="desc">Public URL Preview → SSRF → Loopback Filter Bypass → Internal Admin API :9000 → /admin/exec → Python Pickle Deserialization → Remote Code Execution as web → Sudo Enumeration → LD_PRELOAD Injection → Root. Sequence reconstructed; precise event timestamps not preserved.</desc>
+<defs><linearGradient id="night" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#081521"/><stop offset="1" stop-color="#132431"/></linearGradient><pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0 H0 V28" fill="none" stroke="#adc8d8" stroke-width=".7" stroke-opacity=".08"/></pattern></defs>
+<rect width="390" height="940" rx="18" fill="url(#night)"/><rect width="390" height="940" rx="18" fill="url(#grid)"/><rect width="390" height="5" rx="2.5" fill="#fc93a7"/>
+<text x="23" y="31" font-family="Consolas,monospace" font-size="11" font-weight="700" letter-spacing="2" fill="#fc93a7">FIELD NOTES / EXAM TIMELINE</text>
+<text x="23" y="77" font-family="Arial,sans-serif" font-size="34" font-weight="800" fill="#eef5fa">IN-01</text>
+<text x="23" y="102" font-family="Consolas,monospace" font-size="11" fill="#b1c7d3">CASE 05 / 05 · 10 STEPS</text>
+<path d="M41 128 V852" stroke="#fc93a7" stroke-width="3" opacity=".7" fill="none"/>
+<g id="phase-01">
+<line x1="59" x2="81" y1="128" y2="128" stroke="#fc93a7" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M41 112 L57 128 L41 144 L25 128 Z" fill="#1c3543" stroke="#fc93a7" stroke-width="2"/>
+<text x="41" y="132" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">01</text>
+<text x="84" y="122" font-family="Arial,sans-serif" font-size="15.7" font-weight="600" fill="#eef5fa"><tspan x="84" dy="0">Public URL Preview</tspan></text>
+<path d="M84 158 H367" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<g id="phase-02">
+<path d="M36 188 L46 188 L41 197 Z" fill="#fc93a7"/>
+<line x1="59" x2="81" y1="206" y2="206" stroke="#fc93a7" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M41 190 L57 206 L41 222 L25 206 Z" fill="#1c3543" stroke="#fc93a7" stroke-width="2"/>
+<text x="41" y="210" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">02</text>
+<text x="84" y="200" font-family="Arial,sans-serif" font-size="15.7" font-weight="600" fill="#eef5fa"><tspan x="84" dy="0">SSRF</tspan></text>
+<path d="M84 236 H367" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<g id="phase-03">
+<path d="M36 266 L46 266 L41 275 Z" fill="#fc93a7"/>
+<line x1="59" x2="81" y1="284" y2="284" stroke="#fc93a7" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M41 268 L57 284 L41 300 L25 284 Z" fill="#1c3543" stroke="#fc93a7" stroke-width="2"/>
+<text x="41" y="288" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">03</text>
+<text x="84" y="278" font-family="Arial,sans-serif" font-size="15.7" font-weight="600" fill="#eef5fa"><tspan x="84" dy="0">Loopback Filter Bypass</tspan></text>
+<path d="M84 314 H367" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<g id="phase-04">
+<path d="M36 344 L46 344 L41 353 Z" fill="#fc93a7"/>
+<line x1="59" x2="81" y1="362" y2="362" stroke="#fc93a7" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M41 346 L57 362 L41 378 L25 362 Z" fill="#1c3543" stroke="#fc93a7" stroke-width="2"/>
+<text x="41" y="366" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">04</text>
+<text x="84" y="356" font-family="Arial,sans-serif" font-size="15.7" font-weight="600" fill="#eef5fa"><tspan x="84" dy="0">Internal Admin API :9000</tspan></text>
+<path d="M84 392 H367" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<g id="phase-05">
+<path d="M36 422 L46 422 L41 431 Z" fill="#fc93a7"/>
+<line x1="59" x2="81" y1="440" y2="440" stroke="#fc93a7" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M41 424 L57 440 L41 456 L25 440 Z" fill="#1c3543" stroke="#fc93a7" stroke-width="2"/>
+<text x="41" y="444" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">05</text>
+<text x="84" y="434" font-family="Arial,sans-serif" font-size="15.7" font-weight="600" fill="#eef5fa"><tspan x="84" dy="0">/admin/exec</tspan></text>
+<path d="M84 470 H367" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<g id="phase-06">
+<path d="M36 500 L46 500 L41 509 Z" fill="#fc93a7"/>
+<line x1="59" x2="81" y1="518" y2="518" stroke="#fc93a7" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M41 502 L57 518 L41 534 L25 518 Z" fill="#1c3543" stroke="#fc93a7" stroke-width="2"/>
+<text x="41" y="522" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">06</text>
+<text x="84" y="503" font-family="Arial,sans-serif" font-size="15.7" font-weight="600" fill="#eef5fa"><tspan x="84" dy="0">Python Pickle</tspan><tspan x="84" dy="22">Deserialization</tspan></text>
+<path d="M84 548 H367" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<g id="phase-07">
+<path d="M36 578 L46 578 L41 587 Z" fill="#fc93a7"/>
+<line x1="59" x2="81" y1="596" y2="596" stroke="#fc93a7" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M41 580 L57 596 L41 612 L25 596 Z" fill="#1c3543" stroke="#fc93a7" stroke-width="2"/>
+<text x="41" y="600" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">07</text>
+<text x="84" y="581" font-family="Arial,sans-serif" font-size="15.7" font-weight="600" fill="#eef5fa"><tspan x="84" dy="0">Remote Code Execution as</tspan><tspan x="84" dy="22">web</tspan></text>
+<path d="M84 626 H367" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<g id="phase-08">
+<path d="M36 656 L46 656 L41 665 Z" fill="#fc93a7"/>
+<line x1="59" x2="81" y1="674" y2="674" stroke="#fc93a7" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M41 658 L57 674 L41 690 L25 674 Z" fill="#1c3543" stroke="#fc93a7" stroke-width="2"/>
+<text x="41" y="678" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">08</text>
+<text x="84" y="668" font-family="Arial,sans-serif" font-size="15.7" font-weight="600" fill="#eef5fa"><tspan x="84" dy="0">Sudo Enumeration</tspan></text>
+<path d="M84 704 H367" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<g id="phase-09">
+<path d="M36 734 L46 734 L41 743 Z" fill="#fc93a7"/>
+<line x1="59" x2="81" y1="752" y2="752" stroke="#fc93a7" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M41 736 L57 752 L41 768 L25 752 Z" fill="#1c3543" stroke="#fc93a7" stroke-width="2"/>
+<text x="41" y="756" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">09</text>
+<text x="84" y="746" font-family="Arial,sans-serif" font-size="15.7" font-weight="600" fill="#eef5fa"><tspan x="84" dy="0">LD_PRELOAD Injection</tspan></text>
+<path d="M84 782 H367" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<g id="phase-10">
+<path d="M36 812 L46 812 L41 821 Z" fill="#fc93a7"/>
+<line x1="59" x2="81" y1="830" y2="830" stroke="#fc93a7" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M41 814 L57 830 L41 846 L25 830 Z" fill="#1c3543" stroke="#fc93a7" stroke-width="2"/>
+<text x="41" y="834" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">10</text>
+<text x="84" y="824" font-family="Arial,sans-serif" font-size="15.7" font-weight="600" fill="#eef5fa"><tspan x="84" dy="0">Root</tspan></text>
+<path d="M84 860 H367" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<path d="M23 893 H367" fill="none" stroke="#bccedc" stroke-opacity=".25"/><text x="23" y="918" font-family="Consolas,monospace" font-size="10" fill="#bdccd6">RECONSTRUCTED ORDER · NO INVENTED TIMESTAMPS</text></svg>

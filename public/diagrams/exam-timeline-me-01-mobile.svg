@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 916" width="390" height="916" role="img" aria-labelledby="title desc">
+<title id="title">ME-01 · Exam progression timeline</title>
+<desc id="desc">Public API → Directory Traversal → Application File Read → Application Source / Configuration Discovery → API Key Recovery → Command Injection → svc → CAP_SETUID on pyadmin → Root; Application File Read branches separately to user.txt.. Sequence reconstructed; precise event timestamps not preserved.</desc>
+<defs><linearGradient id="night" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#081521"/><stop offset="1" stop-color="#132431"/></linearGradient><pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0 H0 V28" fill="none" stroke="#adc8d8" stroke-width=".7" stroke-opacity=".08"/></pattern></defs>
+<rect width="390" height="916" rx="18" fill="url(#night)"/><rect width="390" height="916" rx="18" fill="url(#grid)"/><rect width="390" height="5" rx="2.5" fill="#c9a5fb"/>
+<text x="23" y="31" font-family="Consolas,monospace" font-size="11" font-weight="700" letter-spacing="2" fill="#c9a5fb">FIELD NOTES / EXAM TIMELINE</text>
+<text x="23" y="77" font-family="Arial,sans-serif" font-size="34" font-weight="800" fill="#eef5fa">ME-01</text>
+<text x="23" y="102" font-family="Consolas,monospace" font-size="11" fill="#b1c7d3">CASE 03 / 05 · 9 STEPS + USER BRANCH</text>
+<path d="M41 128 V828" stroke="#c9a5fb" stroke-width="3" opacity=".7" fill="none"/>
+<g id="phase-01">
+<line x1="59" x2="81" y1="128" y2="128" stroke="#c9a5fb" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M41 112 L57 128 L41 144 L25 128 Z" fill="#1c3543" stroke="#c9a5fb" stroke-width="2"/>
+<text x="41" y="132" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">01</text>
+<text x="84" y="122" font-family="Arial,sans-serif" font-size="15.7" font-weight="600" fill="#eef5fa"><tspan x="84" dy="0">Public API</tspan></text>
+<path d="M84 158 H367" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<g id="phase-02">
+<path d="M36 188 L46 188 L41 197 Z" fill="#c9a5fb"/>
+<line x1="59" x2="81" y1="206" y2="206" stroke="#c9a5fb" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M41 190 L57 206 L41 222 L25 206 Z" fill="#1c3543" stroke="#c9a5fb" stroke-width="2"/>
+<text x="41" y="210" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">02</text>
+<text x="84" y="200" font-family="Arial,sans-serif" font-size="15.7" font-weight="600" fill="#eef5fa"><tspan x="84" dy="0">Directory Traversal</tspan></text>
+<path d="M84 236 H367" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<g id="phase-03">
+<path d="M36 266 L46 266 L41 275 Z" fill="#c9a5fb"/>
+<line x1="59" x2="81" y1="284" y2="284" stroke="#c9a5fb" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M41 268 L57 284 L41 300 L25 284 Z" fill="#1c3543" stroke="#c9a5fb" stroke-width="2"/>
+<text x="41" y="288" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">03</text>
+<text x="84" y="278" font-family="Arial,sans-serif" font-size="15.7" font-weight="600" fill="#eef5fa"><tspan x="84" dy="0">Application File Read</tspan></text>
+<path d="M84 314 H367" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<g id="phase-04">
+<path d="M36 398 L46 398 L41 407 Z" fill="#c9a5fb"/>
+<line x1="59" x2="81" y1="416" y2="416" stroke="#c9a5fb" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M41 400 L57 416 L41 432 L25 416 Z" fill="#1c3543" stroke="#c9a5fb" stroke-width="2"/>
+<text x="41" y="420" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">04</text>
+<text x="84" y="401" font-family="Arial,sans-serif" font-size="15.7" font-weight="600" fill="#eef5fa"><tspan x="84" dy="0">Application Source /</tspan><tspan x="84" dy="22">Configuration Discovery</tspan></text>
+<path d="M84 446 H367" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<g id="phase-05">
+<path d="M36 476 L46 476 L41 485 Z" fill="#c9a5fb"/>
+<line x1="59" x2="81" y1="494" y2="494" stroke="#c9a5fb" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M41 478 L57 494 L41 510 L25 494 Z" fill="#1c3543" stroke="#c9a5fb" stroke-width="2"/>
+<text x="41" y="498" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">05</text>
+<text x="84" y="488" font-family="Arial,sans-serif" font-size="15.7" font-weight="600" fill="#eef5fa"><tspan x="84" dy="0">API Key Recovery</tspan></text>
+<path d="M84 524 H367" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<g id="phase-06">
+<path d="M36 554 L46 554 L41 563 Z" fill="#c9a5fb"/>
+<line x1="59" x2="81" y1="572" y2="572" stroke="#c9a5fb" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M41 556 L57 572 L41 588 L25 572 Z" fill="#1c3543" stroke="#c9a5fb" stroke-width="2"/>
+<text x="41" y="576" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">06</text>
+<text x="84" y="566" font-family="Arial,sans-serif" font-size="15.7" font-weight="600" fill="#eef5fa"><tspan x="84" dy="0">Command Injection</tspan></text>
+<path d="M84 602 H367" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<g id="phase-07">
+<path d="M36 632 L46 632 L41 641 Z" fill="#c9a5fb"/>
+<line x1="59" x2="81" y1="650" y2="650" stroke="#c9a5fb" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M41 634 L57 650 L41 666 L25 650 Z" fill="#1c3543" stroke="#c9a5fb" stroke-width="2"/>
+<text x="41" y="654" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">07</text>
+<text x="84" y="644" font-family="Arial,sans-serif" font-size="15.7" font-weight="600" fill="#eef5fa"><tspan x="84" dy="0">svc</tspan></text>
+<path d="M84 680 H367" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<g id="phase-08">
+<path d="M36 710 L46 710 L41 719 Z" fill="#c9a5fb"/>
+<line x1="59" x2="81" y1="728" y2="728" stroke="#c9a5fb" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M41 712 L57 728 L41 744 L25 728 Z" fill="#1c3543" stroke="#c9a5fb" stroke-width="2"/>
+<text x="41" y="732" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">08</text>
+<text x="84" y="722" font-family="Arial,sans-serif" font-size="15.7" font-weight="600" fill="#eef5fa"><tspan x="84" dy="0">CAP_SETUID on pyadmin</tspan></text>
+<path d="M84 758 H367" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<g id="phase-09">
+<path d="M36 788 L46 788 L41 797 Z" fill="#c9a5fb"/>
+<line x1="59" x2="81" y1="806" y2="806" stroke="#c9a5fb" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M41 790 L57 806 L41 822 L25 806 Z" fill="#1c3543" stroke="#c9a5fb" stroke-width="2"/>
+<text x="41" y="810" font-size="11" text-anchor="middle" font-family="Consolas,monospace" fill="#f0f5fa">09</text>
+<text x="84" y="800" font-family="Arial,sans-serif" font-size="15.7" font-weight="600" fill="#eef5fa"><tspan x="84" dy="0">Root</tspan></text>
+<path d="M84 836 H367" fill="none" stroke="#c4d3df" stroke-opacity=".18"/>
+</g>
+<g id="user-flag-branch"><path d="M61 286 V327 H124" fill="none" stroke="#ffd18a" stroke-width="2" stroke-dasharray="4 4"/><path d="M120 322 L129 327 L120 332 Z" fill="#ffd18a"/><text x="138" y="331" font-size="15.5" font-family="Consolas,monospace" font-weight="700" fill="#ffd18a">user.txt</text><text x="138" y="350" font-size="10.5" fill="#d5c3a1" font-family="Consolas,monospace">USER FLAG BRANCH</text></g>
+<path d="M23 869 H367" fill="none" stroke="#bccedc" stroke-opacity=".25"/><text x="23" y="894" font-family="Consolas,monospace" font-size="10" fill="#bdccd6">RECONSTRUCTED ORDER · NO INVENTED TIMESTAMPS</text></svg>
