@@ -8,22 +8,22 @@
 <text x="25" y="109" font-family="Consolas,monospace" font-size="11.3" font-weight="700" text-anchor="start" fill="#aeb8c8"><tspan x="25" dy="0">CASE 03 / INTENDED TRAFFIC • FAILED CALLBACK</tspan></text>
 <path d="M25 123H405" stroke="#424957" stroke-width="1"/>
 <text x="26" y="152" font-family="Consolas,monospace" font-size="11.6" font-weight="700" text-anchor="start" fill="#ff9b88"><tspan x="26" dy="0">INTENDED FLOW / NOT ESTABLISHED</tspan></text>
-<g id="lesson-stage-01" aria-label="HA-01 Redis"><desc>HA-01 Redis</desc><path d="M39 172H390" stroke="#424957" stroke-width="1"/></g>
+<g id="lesson-stage-01" aria-label="HA-01 Redis"><desc>HA-01 Redis</desc><path d="M39 172H390" stroke="#424957" stroke-width="1"/><text x="44" y="227" font-family="Arial,Helvetica,sans-serif" font-size="18.5" font-weight="650" fill="#e8e9ec"><tspan x="44" dy="0">HA-01 Redis</tspan></text><text x="44" y="255" fill="#aeb8c8" font-size="10.3" font-family="Consolas,monospace">HA-01 / TARGET CONTEXT</text></g>
 <g id="intended-link-01"><desc>TCP replication connection</desc>
 <path d="M64 271V394" fill="none" stroke="#ff9b88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 7"/><path d="M59 385L64 394L69 385" fill="none" stroke="#ff9b88" stroke-width="2"/>
 <text x="86" y="316" font-family="Arial,Helvetica,sans-serif" font-size="12.6" font-weight="700" text-anchor="start" fill="#f0bd6e"><tspan x="86" dy="0">TCP replication connection</tspan></text>
 </g>
-<g id="lesson-stage-02" aria-label="Kali: 10.144.220.24:6379"><desc>Kali: 10.144.220.24:6379</desc><path d="M39 397H390" stroke="#424957" stroke-width="1"/></g>
+<g id="lesson-stage-02" aria-label="Kali: 10.144.220.24:6379"><desc>Kali: 10.144.220.24:6379</desc><path d="M39 397H390" stroke="#424957" stroke-width="1"/><text x="44" y="452" font-family="Arial,Helvetica,sans-serif" font-size="18.5" font-weight="650" fill="#e8e9ec"><tspan x="44" dy="0">Kali: 10.144.220.24:6379</tspan></text><text x="44" y="480" fill="#aeb8c8" font-size="10.3" font-family="Consolas,monospace">KALI / HISTORICAL VPN</text></g>
 <g id="intended-link-02"><desc>Module transfer and loading</desc>
 <path d="M64 496V619" fill="none" stroke="#f0bd6e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 7"/><path d="M59 610L64 619L69 610" fill="none" stroke="#f0bd6e" stroke-width="2"/>
 <text x="86" y="541" font-family="Arial,Helvetica,sans-serif" font-size="12.6" font-weight="700" text-anchor="start" fill="#f0bd6e"><tspan x="86" dy="0">Module transfer and loading</tspan></text>
 </g>
-<g id="lesson-stage-03" aria-label="Redis command execution"><desc>Redis command execution</desc><path d="M39 622H390" stroke="#424957" stroke-width="1"/></g>
+<g id="lesson-stage-03" aria-label="Redis command execution"><desc>Redis command execution</desc><path d="M39 622H390" stroke="#424957" stroke-width="1"/><text x="44" y="677" font-family="Arial,Helvetica,sans-serif" font-size="18.5" font-weight="650" fill="#e8e9ec"><tspan x="44" dy="0">Redis command execution</tspan></text><text x="44" y="705" fill="#aeb8c8" font-size="10.3" font-family="Consolas,monospace">HA-01 / TARGET CONTEXT</text></g>
 <g id="intended-link-03"><desc>TCP reverse payload callback</desc>
 <path d="M64 721V844" fill="none" stroke="#ff9b88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 7"/><path d="M59 835L64 844L69 835" fill="none" stroke="#ff9b88" stroke-width="2"/>
 <text x="86" y="766" font-family="Arial,Helvetica,sans-serif" font-size="12.6" font-weight="700" text-anchor="start" fill="#f0bd6e"><tspan x="86" dy="0">TCP reverse payload callback</tspan></text>
 </g>
-<g id="lesson-stage-04" aria-label="Kali: 10.144.220.24:4444"><desc>Kali: 10.144.220.24:4444</desc><path d="M39 847H390" stroke="#424957" stroke-width="1"/></g>
+<g id="lesson-stage-04" aria-label="Kali: 10.144.220.24:4444"><desc>Kali: 10.144.220.24:4444</desc><path d="M39 847H390" stroke="#424957" stroke-width="1"/><text x="44" y="902" font-family="Arial,Helvetica,sans-serif" font-size="18.5" font-weight="650" fill="#e8e9ec"><tspan x="44" dy="0">Kali: 10.144.220.24:4444</tspan></text><text x="44" y="930" fill="#aeb8c8" font-size="10.3" font-family="Consolas,monospace">KALI / HISTORICAL VPN</text></g>
 <rect x="26" y="1057" width="378" height="73" fill="#2d2529" stroke="#ff9b88" stroke-opacity=".8"/>
 <text x="39" y="1084" font-family="Arial,Helvetica,sans-serif" font-size="12.3" font-weight="750" text-anchor="start" fill="#ff9b88"><tspan x="39" dy="0">OUTCOME: CONNECTION NOT VERIFIED</tspan></text>
 <text x="39" y="1107" font-family="Arial,Helvetica,sans-serif" font-size="11.8" font-weight="500" text-anchor="start" fill="#e8e9ec"><tspan x="39" dy="0">Link down, 0 packets; no callback.</tspan></text>

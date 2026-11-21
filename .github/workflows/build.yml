@@ -394,6 +394,11 @@ jobs:
                   nodes = [n for n in root.iter() if re.fullmatch(r'lesson-stage-\d{2}', n.attrib.get('id',''))]
                   assert len(nodes) == stages, (svg, len(nodes), stages)
                   assert all(any(t.tag.endswith('desc') and t.text for t in n) for n in nodes), svg
+                  # Compare source labels to VISIBLE text nodes, not aria labels or descriptions.
+                  for node in nodes:
+                      expected_label = next(t.text for t in node if t.tag.endswith('desc') and t.text)
+                      visible = ' '.join(' '.join(t.itertext()) for t in node if t.tag.endswith('text'))
+                      assert expected_label in ' '.join(visible.split()), (svg, expected_label, visible)
                   edge_nodes = [n for n in root.iter() if re.fullmatch(r'intended-link-\d{2}', n.attrib.get('id',''))]
                   assert len(edge_nodes) == links, (svg, len(edge_nodes), links)
                   text = '\n'.join(root.itertext())
