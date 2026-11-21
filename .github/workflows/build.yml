@@ -276,3 +276,51 @@ jobs:
                       assert 'tar ... *' in all_text
           print('6 PoC pages / 12 responsive SVG blueprints / 61 stages / sudo branches / Pickle edge signals PASS')
           PY
+
+      - name: Verify Methodology Atlas responsive diagrams
+        run: |
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          cases = {
+              'deserialization-context': ('deserialization', 11, 'trust-boundary'),
+              'deserialization-user-flow': ('deserialization', 6, 'summary-loop'),
+              'cron-dependencies': ('linux-privilege-escalation', 4, 'dependency'),
+              'reconnaissance-process': ('reconnaissance', 9, 'funnel'),
+              'ssrf-architecture': ('ssrf', 6, 'sequence'),
+              'web-enumeration-decision': ('web-enumeration', 12, 'decision'),
+          }
+          pages = set()
+          for diagram, (slug, count, layout) in cases.items():
+              page = Path(f'dist/methodology/{slug}/index.html').read_text()
+              pages.add(slug)
+              for mobile in ('', '-mobile'):
+                  name = f'methodology-atlas-{diagram}{mobile}.svg'
+                  assert name in page, (slug, name)
+                  p = Path('dist/diagrams') / name
+                  assert p.is_file() and p.stat().st_size > 1200, p
+                  root = ET.parse(p).getroot()
+                  assert root.attrib['data-layout'] == layout, name
+                  stages = [n for n in root.iter() if re.fullmatch(r'stage-\d{2}', n.attrib.get('id', ''))]
+                  assert len(stages) == count, (name, len(stages), count)
+                  assert all((''.join(node.itertext())).strip() for node in stages), name
+                  txt = '\n'.join(root.itertext())
+                  assert 'ORIGINAL SOURCE ORDER & RELATIONSHIPS PRESERVED' in txt
+                  if diagram == 'ssrf-architecture':
+                      assert len([n for n in root.iter() if re.fullmatch(r'message-\d{2}', n.attrib.get('id',''))]) == 5
+                      for label in ('GET /fetch?url=https://example.com', 'Validate supplied URL', 'Request destination', 'Response', 'Return fetched content'):
+                          assert label in txt, label
+                  if diagram == 'web-enumeration-decision':
+                      for label in ('File Operations', 'Database Queries', 'Upload / Download', 'SQL Injection Testing'):
+                          assert label in txt, label
+                  if diagram == 'deserialization-context':
+                      assert 'SSRF Filter Bypass (127.1)' in txt and 'Python Pickle Deserialization' in txt
+                  if diagram == 'cron-dependencies':
+                      assert 'Files, directories, dependencies and arguments' in txt
+          for slug in pages:
+              page = Path(f'dist/methodology/{slug}/index.html').read_text()
+              assert page.count('class="method-atlas-figure"') == (2 if slug == 'deserialization' else 1), slug
+          assert len(pages) == 5
+          print('Methodology Atlas PASS: 6 figures / 12 mobile-desktop XML assets / 48 stage labels / 5 SSRF transfers / Web Enumeration split and join')
+          PY

@@ -65,39 +65,13 @@ data
 
 The resulting attack path was:
 
-```
-External Attacker
-       |
-       v
-Public Link Preview
-       |
-       v
-SSRF Filter Bypass (127.1)
-       |
-       v
-Internal Admin API (127.1:9000)
-       |
-       v
-/admin/exec
-       |
-       v
-data Parameter
-       |
-       v
-Base64 Decoding
-       |
-       v
-Python Pickle Deserialization
-       |
-       v
-Remote Code Execution
-       |
-       v
-Command Execution as web
-       |
-       v
-user.txt
-```
+<figure class="method-atlas-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/methodology-atlas-deserialization-context-mobile.svg" />
+    <img src="/diagrams/methodology-atlas-deserialization-context.svg" alt="Deserialization / full trust-boundary path: External Attacker then Public Link Preview then SSRF Filter Bypass (127.1) then Internal Admin API (127.1:9000) then /admin/exec then data Parameter then Base64 Decoding then Python Pickle Deserialization then Remote Code Execution then Command Execution as web then user.txt." width="960" height="660" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>Cross-boundary context map. All original steps and labels are retained; refer to the surrounding methodology for evidence and limitations.</figcaption>
+</figure>
 
 The SSRF discovery process is documented separately in [[SSRF]].
 
@@ -585,24 +559,13 @@ This avoided assuming a username before verifying it.
 
 The initial-access process was therefore:
 
-```
-SSRF
- |
- v
-Internal API
- |
- v
-Pickle Deserialization
- |
- v
-RCE as web
- |
- v
-Retrieve /home/web/user.txt
- |
- v
-Privilege-Escalation Enumeration
-```
+<figure class="method-atlas-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/methodology-atlas-deserialization-user-flow-mobile.svg" />
+    <img src="/diagrams/methodology-atlas-deserialization-user-flow.svg" alt="Deserialization / user-access sequence: SSRF then Internal API then Pickle Deserialization then RCE as web then Retrieve /home/web/user.txt then Privilege-Escalation Enumeration." width="960" height="490" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>Six-stage objective summary. All original steps and labels are retained; refer to the surrounding methodology for evidence and limitations.</figcaption>
+</figure>
 
 The subsequent privilege-escalation path is documented in [[Linux Privilege Escalation]] and the machine-specific files:
 

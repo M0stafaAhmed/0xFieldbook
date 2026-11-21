@@ -44,29 +44,13 @@ The primary examination example is IN-01.
 
 A typical URL-fetching service follows this pattern:
 
-```
-Attacker
-   |
-   | GET /fetch?url=https://example.com
-   v
-Public Web Application
-   |
-   | Validate supplied URL
-   v
-Server-Side HTTP Client
-   |
-   | Request destination
-   v
-External or Internal Resource
-   |
-   | Response
-   v
-Public Web Application
-   |
-   | Return fetched content
-   v
-Attacker
-```
+<figure class="method-atlas-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/methodology-atlas-ssrf-architecture-mobile.svg" />
+    <img src="/diagrams/methodology-atlas-ssrf-architecture.svg" alt="SSRF / server-side request sequence: Attacker then Public Web Application then Server-Side HTTP Client then External or Internal Resource then Public Web Application then Attacker. Message labels: GET /fetch?url=https://example.com, Validate supplied URL, Request destination, Response, Return fetched content." width="960" height="730" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>Request, validation, destination response and return path. All original steps and labels are retained; refer to the surrounding methodology for evidence and limitations.</figcaption>
+</figure>
 
 The security boundary is the URL validation logic.
 

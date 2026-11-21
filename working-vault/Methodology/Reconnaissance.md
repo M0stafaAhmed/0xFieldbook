@@ -60,33 +60,13 @@ The recommended sequence is:
 9. Record the results and select the next methodology.
     
 
-```
-Academy Machine Information
-          |
-          v
-Target Scope and Instance Details
-          |
-          v
-Targeted Nmap Enumeration
-          |
-          v
-Service and Technology Fingerprinting
-          |
-          v
-Manual Application Inspection
-          |
-          v
-Endpoint and Parameter Mapping
-          |
-          v
-Baseline / Negative-Control Testing
-          |
-          v
-Controlled Discovery
-          |
-          v
-Document Findings and Select Next Step
-```
+<figure class="method-atlas-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/methodology-atlas-reconnaissance-process-mobile.svg" />
+    <img src="/diagrams/methodology-atlas-reconnaissance-process.svg" alt="Reconnaissance / evidence-driven workflow: Academy Machine Information then Target Scope and Instance Details then Targeted Nmap Enumeration then Service and Technology Fingerprinting then Manual Application Inspection then Endpoint and Parameter Mapping then Baseline / Negative-Control Testing then Controlled Discovery then Document Findings and Select Next Step." width="960" height="1040" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>Nine-stage methodology funnel. All original steps and labels are retained; refer to the surrounding methodology for evidence and limitations.</figcaption>
+</figure>
 
 ## 3. Establish Target Scope
 

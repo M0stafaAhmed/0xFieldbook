@@ -65,40 +65,13 @@ Use the following sequence:
 9. Preserve evidence and document the resulting attack path.
     
 
-```
-Landing Page
-     |
-     v
-Application Functionality
-     |
-     v
-Endpoints / Parameters / Methods
-     |
-     v
-Legitimate Baseline Request
-     |
-     v
-Input Validation Analysis
-     |
-     +-------------------+
-     |                   |
-     v                   v
-File Operations      Database Queries
-     |                   |
-     v                   v
-Upload / Download    SQL Injection Testing
-     |                   |
-     +---------+---------+
-               |
-               v
-       Backend Investigation
-               |
-               v
-     Confirmed Security Finding
-               |
-               v
-       Initial Access Strategy
-```
+<figure class="method-atlas-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/methodology-atlas-web-enumeration-decision-mobile.svg" />
+    <img src="/diagrams/methodology-atlas-web-enumeration-decision.svg" alt="Web enumeration / validation decision tree: Landing Page then Application Functionality then Endpoints / Parameters / Methods then Legitimate Baseline Request then Input Validation Analysis then File Operations then Upload / Download then Database Queries then SQL Injection Testing then Backend Investigation then Confirmed Security Finding then Initial Access Strategy." width="960" height="1150" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>File-operation and database-query investigation branches. All original steps and labels are retained; refer to the surrounding methodology for evidence and limitations.</figcaption>
+</figure>
 
 ## 3. Map the Application Before Testing
 

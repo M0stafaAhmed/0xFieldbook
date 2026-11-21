@@ -183,18 +183,13 @@ find /etc/cron* /var/spool/cron -type f -writable -ls 2>/dev/null
 
 For every interesting cron entry, trace the complete execution chain:
 
-```
-Cron configuration
-       |
-       v
-Scheduled command
-       |
-       v
-Script or executable
-       |
-       v
-Files, directories, dependencies and arguments
-```
+<figure class="method-atlas-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/methodology-atlas-cron-dependencies-mobile.svg" />
+    <img src="/diagrams/methodology-atlas-cron-dependencies.svg" alt="Linux privilege escalation / cron dependency map: Cron configuration then Scheduled command then Script or executable then Files, directories, dependencies and arguments." width="960" height="530" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>Inspect the complete scheduled-execution dependency chain. All original steps and labels are retained; refer to the surrounding methodology for evidence and limitations.</figcaption>
+</figure>
 
 Inspect the ownership and permissions of every relevant component. A root-owned cron configuration is not automatically exploitable; the executed script or one of its dependencies must expose a usable weakness.
 
