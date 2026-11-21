@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="780" viewBox="0 0 960 780" data-incident-type="callback-wiretap" role="img" aria-labelledby="incident-title incident-desc">
+<title id="incident-title">Redis replication / callback trace</title>
+<desc id="incident-desc">This illustrates only the intended sequence, not successful execution: HA-01 Redis — TCP replication connection → Kali: 10.144.220.24:6379 — Module transfer and loading → Redis command execution — TCP reverse payload callback → Kali: 10.144.220.24:4444. The report observed Redis master_link_status down, zero captured replication packets, and no interactive callback. Exact failure cause unconfirmed. Historical VPN address in original source.</desc>
+<rect width="960" height="780" rx="12" fill="#15171c"/>
+<path d="M48 28H912" stroke="#f0bd6e" stroke-width="2" opacity=".84"/>
+<text x="48" y="58" fill="#f0bd6e" font-family="Consolas,monospace" font-size="11.5" font-weight="700" letter-spacing="1.8">LESSONS / FORENSIC CASE RECORD</text>
+<text x="48" y="91" font-family="Arial,Helvetica,sans-serif" font-size="28" font-weight="800" text-anchor="start" fill="#e8e9ec"><tspan x="48" dy="0">Redis replication / callback trace</tspan></text>
+<text x="48" y="115" font-family="Consolas,monospace" font-size="11.3" font-weight="700" text-anchor="start" fill="#aeb8c8"><tspan x="48" dy="0">CASE 03 / INTENDED TRAFFIC • FAILED CALLBACK</tspan></text>
+<path d="M48 129H912" stroke="#424957" stroke-width="1"/>
+<rect x="46" y="156" width="410" height="467" fill="#1c1f26" stroke="#424957"/>
+<rect x="504" y="156" width="410" height="467" fill="#1c1f26" stroke="#424957"/>
+<text x="66" y="181" font-family="Consolas,monospace" font-size="12" font-weight="700" text-anchor="start" fill="#89bff1"><tspan x="66" dy="0">TARGET / HA-01</tspan></text>
+<text x="523" y="181" font-family="Consolas,monospace" font-size="12" font-weight="700" text-anchor="start" fill="#70d0c1"><tspan x="523" dy="0">KALI / tun1 (HISTORICAL)</tspan></text>
+<g id="lesson-stage-01" aria-label="HA-01 Redis"><desc>HA-01 Redis</desc><text x="80" y="229" font-family="Consolas,monospace" font-size="12" fill="#89bff1">NODE 01</text></g>
+<g id="lesson-stage-02" aria-label="Kali: 10.144.220.24:6379"><desc>Kali: 10.144.220.24:6379</desc><text x="540" y="229" font-family="Consolas,monospace" font-size="12" fill="#70d0c1">NODE 02</text></g>
+<g id="lesson-stage-03" aria-label="Redis command execution"><desc>Redis command execution</desc><text x="80" y="462" font-family="Consolas,monospace" font-size="12" fill="#89bff1">NODE 03</text></g>
+<g id="lesson-stage-04" aria-label="Kali: 10.144.220.24:4444"><desc>Kali: 10.144.220.24:4444</desc><text x="540" y="462" font-family="Consolas,monospace" font-size="12" fill="#70d0c1">NODE 04</text></g>
+<g id="intended-link-01"><desc>TCP replication connection</desc>
+<path d="M392 328H566" fill="none" stroke="#ff9b88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 7"/><path d="M556 323L566 328L556 333" fill="none" stroke="#ff9b88" stroke-width="2"/>
+<text x="480" y="304" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#f0bd6e"><tspan x="480" dy="0">TCP replication connection</tspan></text>
+</g>
+<g id="intended-link-02"><desc>Module transfer and loading</desc>
+<path d="M726 327V388H262V465" fill="none" stroke="#f0bd6e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 7"/><path d="M257 456L262 465L267 456" fill="none" stroke="#f0bd6e" stroke-width="2"/>
+<text x="490" y="380" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#f0bd6e"><tspan x="490" dy="0">Module transfer and loading</tspan></text>
+</g>
+<g id="intended-link-03"><desc>TCP reverse payload callback</desc>
+<path d="M392 560H566" fill="none" stroke="#ff9b88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 7"/><path d="M556 555L566 560L556 565" fill="none" stroke="#ff9b88" stroke-width="2"/>
+<text x="480" y="542" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#f0bd6e"><tspan x="480" dy="0">TCP reverse payload callback</tspan></text>
+</g>
+<rect x="68" y="651" width="824" height="59" fill="#2d2529" stroke="#ff9b88" stroke-width="1" stroke-opacity=".72"/>
+<text x="84" y="676" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="750" text-anchor="start" fill="#ff9b88"><tspan x="84" dy="0">NOT AN OBSERVED SUCCESSFUL CHAIN</tspan></text>
+<text x="84" y="697" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="550" text-anchor="start" fill="#e8e9ec"><tspan x="84" dy="0">Replication link DOWN; 0 packets captured; no interactive callback. Cause unconfirmed.</tspan></text>
+<path d="M48 735H912" stroke="#424957" stroke-width="1"/>
+<text x="48" y="757" font-family="Consolas,monospace" font-size="10.2" font-weight="500" text-anchor="start" fill="#aeb8c8"><tspan x="48" dy="0">RECONSTRUCTED FROM DOCUMENTED EVIDENCE  /  ORIGINAL REPORT BELOW</tspan></text>
+</svg>

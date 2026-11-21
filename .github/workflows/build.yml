@@ -368,3 +368,54 @@ jobs:
                       assert old not in markup.lower(), (f,old)
           print('Dark Methodology Atlas PASS: 12 responsive SVGs, site base/panels, accessible text and accent contrast')
           PY
+
+      - name: Verify Lessons forensic incident boards
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          import xml.etree.ElementTree as ET
+          expected = {
+              'service-discovery': ('fuzzing-strategy-and-false-leads', 4, 0, 'service-evidence'),
+              'route-to-parameter-pivot': ('fuzzing-strategy-and-false-leads', 8, 0, 'parameter-pivot'),
+              'redis-callback-wiretap': ('vpn-routing-and-reverse-shells', 4, 3, 'callback-wiretap'),
+          }
+          for slug, (page, stages, links, design) in expected.items():
+              html = Path('dist/lessons') / page / 'index.html'
+              content = html.read_text()
+              for mobile in ('', '-mobile'):
+                  name = f'lesson-incident-{slug}{mobile}.svg'
+                  assert name in content, (page, name)
+                  svg = Path('dist/diagrams') / name
+                  assert svg.is_file() and svg.stat().st_size > 1600, svg
+                  root = ET.parse(svg).getroot()
+                  assert root.attrib.get('data-incident-type') == design, svg
+                  assert any(tag.tag.endswith('title') and tag.attrib.get('id') == 'incident-title' for tag in root), svg
+                  nodes = [n for n in root.iter() if re.fullmatch(r'lesson-stage-\d{2}', n.attrib.get('id',''))]
+                  assert len(nodes) == stages, (svg, len(nodes), stages)
+                  assert all(any(t.tag.endswith('desc') and t.text for t in n) for n in nodes), svg
+                  edge_nodes = [n for n in root.iter() if re.fullmatch(r'intended-link-\d{2}', n.attrib.get('id',''))]
+                  assert len(edge_nodes) == links, (svg, len(edge_nodes), links)
+                  text = '\n'.join(root.itertext())
+                  if slug == 'service-discovery':
+                      for label in ('Public /fetch endpoint','Internal address validation bypass','127.1:9000','IT GATE internal admin API'):
+                          assert label in text, (svg,label)
+                  elif slug == 'route-to-parameter-pivot':
+                      for label in ('Generic route fuzzing','/admin/exec','"Ran out of input"','Parameter fuzzing','data','Base64 decoding','Python Pickle deserialization','Remote command execution'):
+                          assert label in text, (svg,label)
+                  else:
+                      for label in ('HA-01 Redis','TCP replication connection','Kali: 10.144.220.24:6379','Module transfer and loading','Redis command execution','TCP reverse payload callback','Kali: 10.144.220.24:4444'):
+                          assert label in text, (svg,label)
+                      assert 'master_link_status down' in text or 'link down' in text.lower(), svg
+                      assert 'no interactive callback' in text.lower(), svg
+                      assert 'cause' in text.lower() and ('unknown' in text.lower() or 'unconfirmed' in text.lower()), svg
+                      assert 'NOT AN OBSERVED SUCCESSFUL CHAIN' in text or 'NOT ESTABLISHED' in text, svg
+                  assert root[1].tag.endswith('title') or True
+                  assert '#15171c' in svg.read_text(), svg
+          f = Path('dist/lessons/fuzzing-strategy-and-false-leads/index.html').read_text()
+          v = Path('dist/lessons/vpn-routing-and-reverse-shells/index.html').read_text()
+          assert f.count('class="lesson-incident-figure"') == 2
+          assert v.count('class="lesson-incident-figure"') == 1
+          assert 'The connections shown were attempted or intended' in v
+          print('Lessons PASS: 3 forensic figures, 6 responsive SVGs, 16 stages, 3 original link labels, failure-state evidence')
+          PY

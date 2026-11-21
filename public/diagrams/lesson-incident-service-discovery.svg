@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="580" viewBox="0 0 960 580" data-incident-type="service-evidence" role="img" aria-labelledby="incident-title incident-desc">
+<title id="incident-title">The service was the real finding</title>
+<desc id="incident-desc">Documented confirmed SSRF service path: Public /fetch endpoint → Internal address validation bypass → 127.1:9000 → IT GATE internal admin API. Port 8080 was a false lead; port 9000 returned the internal administration API identity.</desc>
+<rect width="960" height="580" rx="12" fill="#15171c"/>
+<path d="M48 28H912" stroke="#f0bd6e" stroke-width="2" opacity=".84"/>
+<text x="48" y="58" fill="#f0bd6e" font-family="Consolas,monospace" font-size="11.5" font-weight="700" letter-spacing="1.8">LESSONS / FORENSIC CASE RECORD</text>
+<text x="48" y="91" font-family="Arial,Helvetica,sans-serif" font-size="28" font-weight="800" text-anchor="start" fill="#e8e9ec"><tspan x="48" dy="0">The service was the real finding</tspan></text>
+<text x="48" y="115" font-family="Consolas,monospace" font-size="11.3" font-weight="700" text-anchor="start" fill="#aeb8c8"><tspan x="48" dy="0">CASE 01 / VERIFIED SERVICE DISCOVERY</tspan></text>
+<path d="M48 129H912" stroke="#424957" stroke-width="1"/>
+<text x="46" y="165" fill="#70d0c1" font-size="11" letter-spacing="1.3" font-family="Consolas,monospace">LEAD / FILTER BYPASS</text>
+<text x="46" y="196" fill="#aeb8c8" font-size="13" font-family="Arial,Helvetica,sans-serif">Objective: identify the actual</text>
+<text x="46" y="215" fill="#aeb8c8" font-size="13" font-family="Arial,Helvetica,sans-serif">internal service, not more paths.</text>
+<path d="M267 147V499" stroke="#424957" stroke-dasharray="3 8"/>
+<g id="lesson-stage-01" aria-label="Public /fetch endpoint"><desc>Public /fetch endpoint</desc><text x="298" y="173" fill="#70d0c1" font-family="Consolas,monospace" font-size="13">E01</text></g>
+<path d="M316 196V237" fill="none" stroke="#70d0c1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M311 228L316 237L321 228" fill="none" stroke="#70d0c1" stroke-width="2"/>
+<g id="lesson-stage-02" aria-label="Internal address validation bypass"><desc>Internal address validation bypass</desc><text x="298" y="265" fill="#70d0c1" font-family="Consolas,monospace" font-size="13">E02</text></g>
+<path d="M316 288V329" fill="none" stroke="#70d0c1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M311 320L316 329L321 320" fill="none" stroke="#70d0c1" stroke-width="2"/>
+<g id="lesson-stage-03" aria-label="127.1:9000"><desc>127.1:9000</desc><text x="298" y="357" fill="#70d0c1" font-family="Consolas,monospace" font-size="13">E03</text></g>
+<path d="M316 380V421" fill="none" stroke="#70d0c1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M311 412L316 421L321 412" fill="none" stroke="#70d0c1" stroke-width="2"/>
+<g id="lesson-stage-04" aria-label="IT GATE internal admin API"><desc>IT GATE internal admin API</desc><text x="298" y="449" fill="#70d0c1" font-family="Consolas,monospace" font-size="13">E04</text></g>
+<text x="48" y="486" fill="#f0bd6e" font-family="Consolas,monospace" font-size="12">OUTCOME:</text>
+<text x="48" y="506" fill="#e8e9ec" font-family="Arial,Helvetica,sans-serif" font-size="12.5">CONFIRMED INTERNAL API</text>
+<path d="M48 535H912" stroke="#424957" stroke-width="1"/>
+<text x="48" y="557" font-family="Consolas,monospace" font-size="10.2" font-weight="500" text-anchor="start" fill="#aeb8c8"><tspan x="48" dy="0">RECONSTRUCTED FROM DOCUMENTED EVIDENCE  /  ORIGINAL REPORT BELOW</tspan></text>
+</svg>

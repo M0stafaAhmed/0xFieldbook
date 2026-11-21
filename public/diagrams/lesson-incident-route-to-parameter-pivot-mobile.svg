@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="430" height="1320" viewBox="0 0 430 1320" data-incident-type="parameter-pivot" role="img" aria-labelledby="incident-title incident-desc">
+<title id="incident-title">From false lead to input contract</title>
+<desc id="incident-desc">Eight original investigation stages, exactly in order: Generic route fuzzing → /admin/exec → &quot;Ran out of input&quot; → Parameter fuzzing → data → Base64 decoding → Python Pickle deserialization → Remote command execution. An error signaled a pivot from route enumeration to fuzzing the data parameter and investigating decoding and deserialization.</desc>
+<rect width="430" height="1320" rx="12" fill="#15171c"/>
+<path d="M25 22H405" stroke="#f0bd6e" stroke-width="2" opacity=".84"/>
+<text x="25" y="52" fill="#f0bd6e" font-family="Consolas,monospace" font-size="11.5" font-weight="700" letter-spacing="1.8">LESSONS / FORENSIC CASE RECORD</text>
+<text x="25" y="85" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="800" text-anchor="start" fill="#e8e9ec"><tspan x="25" dy="0">From false lead to input contract</tspan></text>
+<text x="25" y="109" font-family="Consolas,monospace" font-size="11.3" font-weight="700" text-anchor="start" fill="#aeb8c8"><tspan x="25" dy="0">CASE 02 / ROUTE DISCOVERY → PARAMETER PIVOT</tspan></text>
+<path d="M25 123H405" stroke="#424957" stroke-width="1"/>
+<path d="M25 144H405V497H25Z" fill="#1c1f26" stroke="#424957"/>
+<path d="M25 544H405V1162H25Z" fill="#1c1f26" stroke="#424957"/>
+<text x="40" y="160" font-family="Consolas,monospace" font-size="11" font-weight="700" text-anchor="start" fill="#89bff1"><tspan x="40" dy="0">01 / ROUTE DISCOVERY</tspan></text>
+<text x="40" y="560" font-family="Consolas,monospace" font-size="11" font-weight="700" text-anchor="start" fill="#70d0c1"><tspan x="40" dy="0">02 / INPUT CONTRACT</tspan></text>
+<g id="lesson-stage-01" aria-label="Generic route fuzzing"><desc>Generic route fuzzing</desc><text x="46" y="183" fill="#89bff1" font-family="Consolas,monospace" font-size="12">F01</text></g>
+<path d="M62 212V276" fill="none" stroke="#89bff1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M57 267L62 276L67 267" fill="none" stroke="#89bff1" stroke-width="2"/>
+<g id="lesson-stage-02" aria-label="/admin/exec"><desc>/admin/exec</desc><text x="46" y="300" fill="#89bff1" font-family="Consolas,monospace" font-size="12">F02</text></g>
+<path d="M62 329V393" fill="none" stroke="#89bff1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M57 384L62 393L67 384" fill="none" stroke="#89bff1" stroke-width="2"/>
+<g id="lesson-stage-03" aria-label="&quot;Ran out of input&quot;"><desc>&quot;Ran out of input&quot;</desc><text x="46" y="417" fill="#f0bd6e" font-family="Consolas,monospace" font-size="12">F03</text></g>
+<g id="lesson-stage-04" aria-label="Parameter fuzzing"><desc>Parameter fuzzing</desc><text x="46" y="579" fill="#70d0c1" font-family="Consolas,monospace" font-size="12">F04</text></g>
+<path d="M62 608V670" fill="none" stroke="#70d0c1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M57 661L62 670L67 661" fill="none" stroke="#70d0c1" stroke-width="2"/>
+<g id="lesson-stage-05" aria-label="data"><desc>data</desc><text x="46" y="694" fill="#70d0c1" font-family="Consolas,monospace" font-size="12">F05</text></g>
+<path d="M62 723V785" fill="none" stroke="#70d0c1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M57 776L62 785L67 776" fill="none" stroke="#70d0c1" stroke-width="2"/>
+<g id="lesson-stage-06" aria-label="Base64 decoding"><desc>Base64 decoding</desc><text x="46" y="809" fill="#70d0c1" font-family="Consolas,monospace" font-size="12">F06</text></g>
+<path d="M62 838V900" fill="none" stroke="#70d0c1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M57 891L62 900L67 891" fill="none" stroke="#70d0c1" stroke-width="2"/>
+<g id="lesson-stage-07" aria-label="Python Pickle deserialization"><desc>Python Pickle deserialization</desc><text x="46" y="924" fill="#70d0c1" font-family="Consolas,monospace" font-size="12">F07</text></g>
+<path d="M62 953V1015" fill="none" stroke="#70d0c1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M57 1006L62 1015L67 1006" fill="none" stroke="#70d0c1" stroke-width="2"/>
+<g id="lesson-stage-08" aria-label="Remote command execution"><desc>Remote command execution</desc><text x="46" y="1039" fill="#70d0c1" font-family="Consolas,monospace" font-size="12">F08</text></g>
+<path d="M63 476V517H63V541" stroke="#f0bd6e" stroke-width="2" stroke-dasharray="6 6" fill="none"/>
+<text x="104" y="515" font-family="Consolas,monospace" font-size="11" font-weight="700" text-anchor="start" fill="#f0bd6e"><tspan x="104" dy="0">PIVOT: ROUTE → PARAMETER</tspan></text>
+<path d="M58 532L63 541L68 532" stroke="#f0bd6e" stroke-width="2" fill="none"/>
+<text x="36" y="1214" font-family="Consolas,monospace" font-size="11.4" font-weight="700" text-anchor="start" fill="#f0bd6e"><tspan x="36" dy="0">ANOMALOUS ERROR → INPUT DISCOVERY</tspan></text>
+<path d="M25 1275H405" stroke="#424957" stroke-width="1"/>
+<text x="25" y="1297" font-family="Consolas,monospace" font-size="9.1" font-weight="500" text-anchor="start" fill="#aeb8c8"><tspan x="25" dy="0">RECONSTRUCTED FROM DOCUMENTED EVIDENCE  /  ORIGINAL REPORT BELOW</tspan></text>
+</svg>

@@ -144,18 +144,13 @@ This was a materially better lead than port 8080 because the service identified 
 
 The confirmed SSRF path was:
 
-```
-Public /fetch endpoint
-        |
-        v
-Internal address validation bypass
-        |
-        v
-127.1:9000
-        |
-        v
-IT GATE internal admin API
-```
+<figure class="lesson-incident-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/lesson-incident-service-discovery-mobile.svg" />
+    <img src="/diagrams/lesson-incident-service-discovery.svg" alt="Internal service discovery: confirmed SSRF route: Public /fetch endpoint then Internal address validation bypass then 127.1:9000 then IT GATE internal admin API." width="960" height="580" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>Internal service discovery: confirmed SSRF route. The full evidence and interpretive qualifications remain in the report.</figcaption>
+</figure>
 
 **Lesson:** Discovering the correct service is more valuable than exhaustively fuzzing paths on an unidentified service.
 
@@ -517,30 +512,13 @@ Once a route has been identified, stop guessing route names and investigate its 
 
 That was the decisive pivot in IN-01:
 
-```
-Generic route fuzzing
-        |
-        v
-/admin/exec
-        |
-        v
-"Ran out of input"
-        |
-        v
-Parameter fuzzing
-        |
-        v
-data
-        |
-        v
-Base64 decoding
-        |
-        v
-Python Pickle deserialization
-        |
-        v
-Remote command execution
-```
+<figure class="lesson-incident-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/lesson-incident-route-to-parameter-pivot-mobile.svg" />
+    <img src="/diagrams/lesson-incident-route-to-parameter-pivot.svg" alt="Route-to-parameter pivot: preserve input-contract clues: Generic route fuzzing then /admin/exec then &quot;Ran out of input&quot; then Parameter fuzzing then data then Base64 decoding then Python Pickle deserialization then Remote command execution." width="960" height="780" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>Route-to-parameter pivot: preserve input-contract clues. The full evidence and interpretive qualifications remain in the report.</figcaption>
+</figure>
 
 ## 8. Lessons
 

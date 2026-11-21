@@ -73,21 +73,13 @@ The Metasploit module used Redis replication to transfer and load a module on th
 
 Two separate target-to-Kali connections were involved:
 
-```
-HA-01 Redis
-     |
-     | TCP replication connection
-     v
-Kali: 10.144.220.24:6379
-     |
-     | Module transfer and loading
-     v
-Redis command execution
-     |
-     | TCP reverse payload callback
-     v
-Kali: 10.144.220.24:4444
-```
+<figure class="lesson-incident-figure">
+  <picture>
+    <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/lesson-incident-redis-callback-wiretap-mobile.svg" />
+    <img src="/diagrams/lesson-incident-redis-callback-wiretap.svg" alt="Intended, unconfirmed flow: HA-01 Redis, TCP replication connection to Kali: 10.144.220.24:6379, module transfer and loading to Redis command execution, TCP reverse payload callback to Kali: 10.144.220.24:4444. Recorded outcome: replication link down, zero incoming packets, no interactive callback; cause unknown." width="960" height="780" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption>HA-01 Redis replication and callback: intended flow only. The connections shown were attempted or intended; they did not establish an interactive session, and the cause remains unverified.</figcaption>
+</figure>
 
 Both connections depended on HA-01 being able to reach the advertised Kali address.
 
