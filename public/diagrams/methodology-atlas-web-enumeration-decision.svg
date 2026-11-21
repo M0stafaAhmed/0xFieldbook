@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="960" height="1150" viewBox="0 0 960 1150" data-layout="decision" role="img" aria-labelledby="atlas-title atlas-desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="1240" viewBox="0 0 960 1240" data-layout="decision" role="img" aria-labelledby="atlas-title atlas-desc">
 <title id="atlas-title">Web enumeration / validation decision tree</title>
 <desc id="atlas-desc">Original source stages: Landing Page → Application Functionality → Endpoints / Parameters / Methods → Legitimate Baseline Request → Input Validation Analysis → File Operations → Upload / Download → Database Queries → SQL Injection Testing → Backend Investigation → Confirmed Security Finding → Initial Access Strategy.  Methodological diagram; follow supporting evidence and limitations in page text.</desc>
 <defs><pattern id="atlas-dot" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".8" fill="#8d9693" opacity=".19"/></pattern></defs>
-<rect width="960" height="1150" rx="10" fill="#f5f3eb"/>
-<rect width="960" height="1150" rx="10" fill="url(#atlas-dot)"/>
+<rect width="960" height="1240" rx="10" fill="#f5f3eb"/>
+<rect width="960" height="1240" rx="10" fill="url(#atlas-dot)"/>
 <path d="M36 19H924" stroke="#1c658c" stroke-width="3"/>
 <text x="38" y="48" font-family="Consolas,monospace" fill="#1c658c" font-size="11" letter-spacing="1.6" font-weight="700">0XFIELD  /  METHODOLOGY ATLAS</text>
 <text x="38" y="82" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="29" fill="#142e3c">Web enumeration — validation decision tree</text>
@@ -25,14 +25,14 @@
 <path d="M480 323V326" stroke="#1c658c" stroke-width="1.8" stroke-linejoin="round" fill="none" opacity=".85"/><path d="M475 319L480 326L485 319" stroke="#1c658c" stroke-width="1.8" fill="none"/>
 <path d="M480 407V410" stroke="#1c658c" stroke-width="1.8" stroke-linejoin="round" fill="none" opacity=".85"/><path d="M475 403L480 410L485 403" stroke="#1c658c" stroke-width="1.8" fill="none"/>
 <path d="M480 491V494" stroke="#1c658c" stroke-width="1.8" stroke-linejoin="round" fill="none" opacity=".85"/><path d="M475 487L480 494L485 487" stroke="#1c658c" stroke-width="1.8" fill="none"/>
-<path d="M480 575V619H230V660M480 619H732V660" stroke="#1c658c" stroke-width="2" fill="none"/>
+<path id="decision-split" d="M480 575V619H230V660M480 619H732V660" stroke="#1c658c" stroke-width="2" fill="none"/>
 <path d="M225 651L230 660L235 651M727 651L732 660L737 651" stroke="#1c658c" stroke-width="2" fill="none"/>
 <path d="M230 747V766" stroke="#1c658c" stroke-width="1.8" stroke-linejoin="round" fill="none" opacity=".85"/><path d="M225 759L230 766L235 759" stroke="#1c658c" stroke-width="1.8" fill="none"/>
 <path d="M732 747V766" stroke="#1c658c" stroke-width="1.8" stroke-linejoin="round" fill="none" opacity=".85"/><path d="M727 759L732 766L737 759" stroke="#1c658c" stroke-width="1.8" fill="none"/>
-<path d="M230 849V868H480V888M732 849V868H480" stroke="#1c658c" stroke-width="2" fill="none"/>
+<path id="decision-join" d="M230 849V868H480V888M732 849V868H480" stroke="#1c658c" stroke-width="2" fill="none"/>
 <path d="M475 879L480 888L485 879" stroke="#1c658c" stroke-width="2" fill="none"/>
 <path d="M480 974V975" stroke="#1c658c" stroke-width="1.8" stroke-linejoin="round" fill="none" opacity=".85"/><path d="M475 968L480 975L485 968" stroke="#1c658c" stroke-width="1.8" fill="none"/>
 <path d="M480 1057V1059" stroke="#1c658c" stroke-width="1.8" stroke-linejoin="round" fill="none" opacity=".85"/><path d="M475 1052L480 1059L485 1052" stroke="#1c658c" stroke-width="1.8" fill="none"/>
-<path d="M38 1106H922" stroke="#91a0a0" stroke-width="1" opacity=".65"/>
-<text x="38" y="1128" fill="#52636a" font-family="Consolas,monospace" font-size="10.8">ORIGINAL SOURCE ORDER &amp; RELATIONSHIPS PRESERVED</text>
+<path d="M38 1196H922" stroke="#91a0a0" stroke-width="1" opacity=".65"/>
+<text x="38" y="1218" fill="#52636a" font-family="Consolas,monospace" font-size="10.8">ORIGINAL SOURCE ORDER &amp; RELATIONSHIPS PRESERVED</text>
 </svg>

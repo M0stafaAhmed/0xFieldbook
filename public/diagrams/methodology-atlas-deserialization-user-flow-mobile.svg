@@ -1,12 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="430" height="750" viewBox="0 0 430 750" data-layout="summary-loop" role="img" aria-labelledby="atlas-title atlas-desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="430" height="780" viewBox="0 0 430 780" data-layout="summary-loop" role="img" aria-labelledby="atlas-title atlas-desc">
 <title id="atlas-title">Deserialization / user-access sequence</title>
 <desc id="atlas-desc">Original source stages: SSRF → Internal API → Pickle Deserialization → RCE as web → Retrieve /home/web/user.txt → Privilege-Escalation Enumeration.  Methodological diagram; follow supporting evidence and limitations in page text.</desc>
 <defs><pattern id="atlas-dot" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".8" fill="#8d9693" opacity=".19"/></pattern></defs>
-<rect width="430" height="750" rx="10" fill="#f5f3eb"/>
-<rect width="430" height="750" rx="10" fill="url(#atlas-dot)"/>
+<rect width="430" height="780" rx="10" fill="#f5f3eb"/>
+<rect width="430" height="780" rx="10" fill="url(#atlas-dot)"/>
 <path d="M24 19H406" stroke="#6b558f" stroke-width="3"/>
 <text x="25" y="48" font-family="Consolas,monospace" fill="#6b558f" font-size="11" letter-spacing="1.6" font-weight="700">0XFIELD  /  METHODOLOGY ATLAS</text>
-<text x="25" y="82" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="19.7" fill="#142e3c">Deserialization — user-access sequence</text>
+<text x="25" y="82" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="19.7" fill="#142e3c">Deserialization / user access</text>
 <text x="25" y="110" font-family="Consolas,monospace" font-size="11.5" font-weight="700" fill="#6b558f">OBJECTIVE PATH  ·  6 ORIGINAL STAGES</text>
 <path d="M25 132H405" stroke="#91a0a0" stroke-width="1" opacity=".68"/>
 <g id="stage-01" aria-label="SSRF"><desc>SSRF</desc><text x="43" y="168" font-family="Consolas,monospace" font-size="10" font-weight="700" text-anchor="start" fill="#6b558f">STEP 01</text><text x="43" y="193" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="600" text-anchor="start" fill="#1e3440"><tspan x="43" dy="0">SSRF</tspan></text><path d="M40 229H390" stroke="#6b558f" stroke-width="1" stroke-opacity=".3"/></g>
@@ -20,6 +20,6 @@
 <g id="stage-05" aria-label="Retrieve /home/web/user.txt"><desc>Retrieve /home/web/user.txt</desc><text x="43" y="544" font-family="Consolas,monospace" font-size="10" font-weight="700" text-anchor="start" fill="#6b558f">STEP 05</text><text x="43" y="569" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="600" text-anchor="start" fill="#1e3440"><tspan x="43" dy="0">Retrieve /home/web/user.txt</tspan></text><path d="M40 605H390" stroke="#6b558f" stroke-width="1" stroke-opacity=".3"/></g>
 <path d="M215 607V617" stroke="#6b558f" stroke-width="1.8" stroke-linejoin="round" fill="none" opacity=".85"/><path d="M210 610L215 617L220 610" stroke="#6b558f" stroke-width="1.8" fill="none"/>
 <g id="stage-06" aria-label="Privilege-Escalation Enumeration"><desc>Privilege-Escalation Enumeration</desc><text x="43" y="638" font-family="Consolas,monospace" font-size="10" font-weight="700" text-anchor="start" fill="#6b558f">STEP 06</text><text x="43" y="663" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="600" text-anchor="start" fill="#1e3440"><tspan x="43" dy="0">Privilege-Escalation Enumeration</tspan></text><path d="M40 699H390" stroke="#6b558f" stroke-width="1" stroke-opacity=".3"/></g>
-<path d="M25 706H405" stroke="#91a0a0" stroke-width="1" opacity=".65"/>
-<text x="25" y="728" fill="#52636a" font-family="Consolas,monospace" font-size="9.4">ORIGINAL SOURCE ORDER &amp; RELATIONSHIPS PRESERVED</text>
+<path d="M25 736H405" stroke="#91a0a0" stroke-width="1" opacity=".65"/>
+<text x="25" y="758" fill="#52636a" font-family="Consolas,monospace" font-size="9.4">ORIGINAL SOURCE ORDER &amp; RELATIONSHIPS PRESERVED</text>
 </svg>

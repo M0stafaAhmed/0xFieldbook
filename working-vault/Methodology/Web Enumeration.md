@@ -68,7 +68,7 @@ Use the following sequence:
 <figure class="method-atlas-figure">
   <picture>
     <source media="(max-width: 520px)" type="image/svg+xml" srcset="/diagrams/methodology-atlas-web-enumeration-decision-mobile.svg" />
-    <img src="/diagrams/methodology-atlas-web-enumeration-decision.svg" alt="Web enumeration / validation decision tree: Landing Page then Application Functionality then Endpoints / Parameters / Methods then Legitimate Baseline Request then Input Validation Analysis then File Operations then Upload / Download then Database Queries then SQL Injection Testing then Backend Investigation then Confirmed Security Finding then Initial Access Strategy." width="960" height="1150" loading="lazy" decoding="async" />
+    <img src="/diagrams/methodology-atlas-web-enumeration-decision.svg" alt="Web enumeration decision tree: Landing Page, Application Functionality, Endpoints / Parameters / Methods, Legitimate Baseline Request, and Input Validation Analysis; two parallel paths split into File Operations then Upload / Download, and Database Queries then SQL Injection Testing; both paths rejoin at Backend Investigation, Confirmed Security Finding, and Initial Access Strategy." width="960" height="1240" loading="lazy" decoding="async" />
   </picture>
   <figcaption>File-operation and database-query investigation branches. All original steps and labels are retained; refer to the surrounding methodology for evidence and limitations.</figcaption>
 </figure>

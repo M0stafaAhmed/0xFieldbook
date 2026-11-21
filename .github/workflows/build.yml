@@ -312,6 +312,8 @@ jobs:
                       for label in ('GET /fetch?url=https://example.com', 'Validate supplied URL', 'Request destination', 'Response', 'Return fetched content'):
                           assert label in txt, label
                   if diagram == 'web-enumeration-decision':
+                      for group_id in ('decision-split', 'decision-join'):
+                          assert sum(n.attrib.get('id') == group_id for n in root.iter()) == 1, (p, group_id)
                       for label in ('File Operations', 'Database Queries', 'Upload / Download', 'SQL Injection Testing'):
                           assert label in txt, label
                   if diagram == 'deserialization-context':
