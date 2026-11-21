@@ -326,3 +326,45 @@ jobs:
           assert len(pages) == 5
           print('Methodology Atlas PASS: 6 figures / 12 mobile-desktop XML assets / 48 stage labels / 5 SSRF transfers / Web Enumeration split and join')
           PY
+
+      - name: Verify dark Methodology Atlas follows site theme
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          from math import isclose
+
+          expected = {
+              'deserialization-context': '#74cdda',
+              'deserialization-user-flow': '#c0aeff',
+              'cron-dependencies': '#e6b275',
+              'reconnaissance-process': '#77d5c6',
+              'ssrf-architecture': '#ffa08e',
+              'web-enumeration-decision': '#88c4fa',
+          }
+          def luminance(h):
+              v = [int(h[i:i+2],16)/255 for i in (1,3,5)]
+              v = [z/12.92 if z <= 0.04045 else ((z+.055)/1.055)**2.4 for z in v]
+              return sum(a*b for a,b in zip(v, (.2126,.7152,.0722)))
+          def contrast(a,b):
+              x,y = luminance(a),luminance(b)
+              return (max(x,y)+.05)/(min(x,y)+.05)
+          site_bg = '#15171c'
+          panel_bg = '#29343f'
+          text = '#e8e9ec'
+          assert contrast(text,panel_bg) >= 7
+          for slug,accent in expected.items():
+              assert contrast(accent, panel_bg) >= 4.5, slug
+              for mobile in ('','-mobile'):
+                  f = Path('dist/diagrams') / f'methodology-atlas-{slug}{mobile}.svg'
+                  assert f.is_file(), f
+                  tree = ET.parse(f)
+                  root = tree.getroot()
+                  rects = [n for n in root.iter() if n.tag.endswith('rect')]
+                  assert rects[0].attrib.get('fill') == site_bg, f
+                  markup = f.read_text()
+                  assert '#e8e9ec' in markup and accent in markup, f
+                  for old in ('#f5f3eb','#f5f3ea','#1e3440','#142e3c','#52636a'):
+                      assert old not in markup.lower(), (f,old)
+          print('Dark Methodology Atlas PASS: 12 responsive SVGs, site base/panels, accessible text and accent contrast')
+          PY
